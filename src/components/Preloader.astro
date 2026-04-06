@@ -1,0 +1,263 @@
+<div id="preloader" aria-label="Loading animation">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" preserveAspectRatio="xMidYMid meet" width="100%" height="100%" role="img" aria-hidden="true">
+    <defs>
+      <mask id="flightPathMask">
+        <rect width="100%" height="100%" fill="black" />
+        <path
+          id="flightPathReveal"
+          class="flight-path-reveal"
+          d="
+            M -950,420
+            C -820,420 -700,400 -560,380
+            C -420,360 -300,365 -180,388
+            C -120,399 -70,395 -10,390
+            C 50,390 100,460 50,460
+            C 0,460 10,400 60,410
+            C 100,420 110,360 115,330
+            C 120,280 120,210 125,160
+            C 130,110 180,100 230,100
+            C 280,100 290,150 250,150
+            C 210,150 220,95 260,100
+            C 290,105 315,115 340,115
+            C 365,116 395,128 425,148"
+        />
+      </mask>
+    </defs>
+
+    <rect width="100%" height="100%" fill="#050505" />
+
+    <path
+      id="flightPath"
+      class="flight-path"
+      mask="url(#flightPathMask)"
+      d="
+        M -950,420
+        C -820,420 -700,400 -560,380
+        C -420,360 -300,365 -180,388
+        C -120,399 -70,395 -10,390
+        C 50,390 100,460 50,460
+        C 0,460 10,400 60,410
+        C 100,420 110,360 115,330
+        C 120,280 120,210 125,160
+        C 130,110 180,100 230,100
+        C 280,100 290,150 250,150
+        C 210,150 220,95 260,100
+        C 290,105 315,115 340,115
+        C 365,116 395,128 425,148"
+    />
+
+    <g class="red-shape">
+      <path d="M 230,160 L 135,160 A 45,45 0 0 0 90,205 L 230,205 Z" />
+      <rect x="90" y="220" width="140" height="45" />
+      <path d="M 420,280 L 90,280 A 45,45 0 0 0 135,325 L 420,325 Z" />
+    </g>
+
+    <text id="cellText" x="240" y="265" class="text-cell">CELL</text>
+    <text id="vjitText" x="325" y="312" class="text-vjit" text-anchor="middle">VJIT</text>
+
+    <g id="rocket" transform="translate(340, 75)">
+      <polygon points="0,40 55,0 40,45 15,35" fill="#FFFFFF" />
+      <polygon points="15,35 40,45 20,55" fill="#FFFFFF" />
+      <polygon points="15,35 55,0 25,38" fill="#E0E0E0" />
+    </g>
+  </svg>
+</div>
+
+<style>
+  #preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: grid;
+    place-items: center;
+    background: #050505;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  #preloader svg {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+  }
+
+  .flight-path {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-dasharray: 4 6;
+    stroke-dashoffset: 0;
+  }
+
+  .flight-path-reveal {
+    fill: none;
+    stroke: white;
+    stroke-width: 10;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 0;
+    stroke-dashoffset: 0;
+  }
+
+  .red-shape {
+    fill: #da2128;
+  }
+
+  .text-cell {
+    font-family: "Arial Black", Impact, sans-serif;
+    font-weight: 900;
+    font-size: 80px;
+    fill: #ffffff;
+    letter-spacing: 2px;
+    opacity: 0;
+    transform: translateY(14px);
+    transform-box: fill-box;
+  }
+
+  .text-vjit {
+    font-family: Georgia, serif;
+    font-weight: bold;
+    font-size: 24px;
+    fill: #ffffff;
+    letter-spacing: 6px;
+    opacity: 0;
+    transform: translateY(14px);
+    transform-box: fill-box;
+  }
+
+  #rocket {
+    transform-box: fill-box;
+    transform-origin: center;
+    will-change: transform;
+  }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" is:inline></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/MotionPathPlugin.min.js" is:inline></script>
+
+<script is:client>
+  (() => {
+    const gsapGlobal = window.gsap;
+    const MotionPathPluginGlobal = window.MotionPathPlugin;
+
+    if (!gsapGlobal || !MotionPathPluginGlobal) {
+      document.body.classList.remove("loading");
+      return;
+    }
+
+    gsapGlobal.registerPlugin(MotionPathPluginGlobal);
+
+    const preloader = document.getElementById("preloader");
+    const flightPath = document.getElementById("flightPath");
+    const flightPathReveal = document.getElementById("flightPathReveal");
+    const rocket = document.getElementById("rocket");
+    const revealTargets = ["#cellText", "#vjitText"];
+    const ROCKET_ROTATION_OFFSET = 36;
+    const FLIGHT_MIDPOINT = 0.68;
+    const FLIGHT_PHASE_ONE_DURATION = 4.2;
+    const FLIGHT_PHASE_TWO_DURATION = 1.25;
+
+    if (!preloader || !flightPath || !flightPathReveal || !rocket) {
+      document.body.classList.remove("loading");
+      return;
+    }
+
+    const totalLength = flightPathReveal.getTotalLength();
+
+    gsapGlobal.set(flightPathReveal, {
+      strokeDasharray: totalLength,
+      strokeDashoffset: totalLength
+    });
+    gsapGlobal.set(revealTargets, { autoAlpha: 0, y: 14 });
+    gsapGlobal.set(rocket, { transformOrigin: "50% 50%" });
+    gsapGlobal.set(rocket, {
+      motionPath: {
+        path: "#flightPath",
+        align: "#flightPath",
+        alignOrigin: [0.5, 0.5],
+        autoRotate: ROCKET_ROTATION_OFFSET,
+        start: 0,
+        end: 0
+      }
+    });
+
+    gsapGlobal
+      .timeline({
+        defaults: { ease: "power2.out" },
+        onComplete: () => {
+          preloader.style.display = "none";
+          document.body.classList.remove("loading");
+        }
+      })
+      .to(
+        flightPathReveal,
+        {
+          duration: FLIGHT_PHASE_ONE_DURATION,
+          ease: "sine.inOut",
+          strokeDashoffset: totalLength * (1 - FLIGHT_MIDPOINT)
+        },
+        0
+      )
+      .to(
+        rocket,
+        {
+          duration: FLIGHT_PHASE_ONE_DURATION,
+          ease: "sine.inOut",
+          motionPath: {
+            path: "#flightPath",
+            align: "#flightPath",
+            alignOrigin: [0.5, 0.5],
+            autoRotate: ROCKET_ROTATION_OFFSET,
+            start: 0,
+            end: FLIGHT_MIDPOINT
+          }
+        },
+        0
+      )
+      .to(
+        flightPathReveal,
+        {
+          duration: FLIGHT_PHASE_TWO_DURATION,
+          ease: "power2.inOut",
+          strokeDashoffset: 0
+        },
+        ">"
+      )
+      .to(
+        rocket,
+        {
+          duration: FLIGHT_PHASE_TWO_DURATION,
+          ease: "power2.inOut",
+          motionPath: {
+            path: "#flightPath",
+            align: "#flightPath",
+            alignOrigin: [0.5, 0.5],
+            autoRotate: ROCKET_ROTATION_OFFSET,
+            start: FLIGHT_MIDPOINT,
+            end: 1
+          }
+        },
+        "<"
+      )
+      .to(
+        revealTargets,
+        {
+          duration: 0.55,
+          autoAlpha: 1,
+          y: 0,
+          stagger: 0.1
+        },
+        ">0.2"
+      )
+      .to(
+        preloader,
+        {
+          duration: 0.45,
+          autoAlpha: 0,
+          ease: "power1.out"
+        },
+        ">0.2"
+      );
+  })();
+</script>
