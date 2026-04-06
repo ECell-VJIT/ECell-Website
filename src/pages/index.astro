@@ -1,0 +1,50 @@
+---
+import About from "../components/About.astro";
+import CTA from "../components/CTA.astro";
+import Events from "../components/Events.astro";
+import Footer from "../components/Footer.astro";
+import Hero from "../components/Hero.astro";
+import Navbar from "../components/Navbar.astro";
+import Stats from "../components/Stats.astro";
+import Team from "../components/Team.astro";
+import TeamShowcase from "../components/TeamShowcase.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+  <Navbar />
+  <Hero />
+
+  <section class="relative bg-white text-black py-20 -skew-y-2 transform origin-top-left border-y-8 border-black overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-full bg-halftone-white opacity-50 pointer-events-none skew-y-2"></div>
+
+    <div class="container mx-auto px-4 transform skew-y-2">
+      <div class="flex flex-col md:flex-row gap-8 justify-center items-stretch">
+        <About />
+        <Events />
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 relative overflow-hidden">
+    <div class="absolute inset-0 bg-neutral-900"></div>
+    <div class="absolute top-20 left-10 w-64 h-64 bg-red-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
+    <div class="absolute bottom-20 right-10 w-96 h-96 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style="animation-delay: 1s;"></div>
+
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[20vw] font-anton text-white opacity-5 whitespace-nowrap select-none rotate-12">
+      IDEATHON
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10">
+      <CTA />
+
+      <div class="grid md:grid-cols-12 gap-6 items-center">
+        <Team />
+        <TeamShowcase />
+        <Stats />
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
