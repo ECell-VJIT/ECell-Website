@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600" role="img" aria-labelledby="title desc">
+  <title id="title">Team Member Placeholder</title>
+  <desc id="desc">Fallback avatar used when team member image is unavailable.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2b0803" />
+      <stop offset="100%" stop-color="#140402" />
+    </linearGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f87171" />
+      <stop offset="100%" stop-color="#b91c1c" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg)" />
+  <circle cx="300" cy="230" r="120" fill="none" stroke="url(#ring)" stroke-width="18" opacity="0.9" />
+  <circle cx="300" cy="230" r="84" fill="#2a0a06" />
+  <path d="M140 510c16-100 88-152 160-152s144 52 160 152" fill="none" stroke="url(#ring)" stroke-width="18" stroke-linecap="round" />
+  <text x="300" y="560" text-anchor="middle" fill="#f8d1d1" font-size="34" font-family="Inter, Arial, sans-serif" letter-spacing="2">E-CELL VJIT</text>
+</svg>
