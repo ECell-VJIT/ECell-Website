@@ -1,0 +1,54 @@
+---
+interface DomainItem {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  domains?: DomainItem[];
+}
+
+const { domains = [
+  {
+    icon: 'solar:rocket-2-linear',
+    title: 'Startup Support',
+    description: 'Guided idea validation, mentorship touchpoints, and execution support for early-stage student founders.'
+  },
+  {
+    icon: 'solar:code-square-linear',
+    title: 'Hackathons',
+    description: 'Challenge-driven events where teams build rapid prototypes and convert concepts into workable solutions.'
+  },
+  {
+    icon: 'solar:notebook-linear',
+    title: 'Workshops',
+    description: 'Focused learning sessions on entrepreneurship, product strategy, pitching, and problem-solving frameworks.'
+  },
+  {
+    icon: 'solar:microphone-3-linear',
+    title: 'Speaker Sessions',
+    description: 'Conversations with founders and industry experts to share practical startup lessons and career insights.'
+  }
+] } = Astro.props as Props;
+---
+
+<section id="domains" class="container mx-auto px-6 py-16 md:py-24 relative z-10">
+  <div class="max-w-3xl mb-10">
+    <p class="text-xs uppercase tracking-[0.3em] text-red-200/80 mb-4">What We Do</p>
+    <h2 class="text-3xl md:text-5xl font-jakarta font-semibold tracking-tight mb-4">Programs designed for builders and future founders</h2>
+    <p class="text-gray-300 font-inter text-base md:text-lg leading-relaxed">E-Cell VJIT creates practical opportunities for students to learn entrepreneurship by doing, collaborating, and shipping ideas.</p>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    {domains.map((domain) => (
+      <article class="glass rounded-lg p-6 group hover:border-red-500/30 transition-colors">
+        <div class="mb-4 text-red-400">
+          <iconify-icon icon={domain.icon} width="30" height="30"></iconify-icon>
+        </div>
+        <h3 class="text-xl font-jakarta font-semibold mb-2">{domain.title}</h3>
+        <p class="text-gray-300 font-inter leading-relaxed">{domain.description}</p>
+      </article>
+    ))}
+  </div>
+</section>
