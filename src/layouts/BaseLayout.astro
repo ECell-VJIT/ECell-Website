@@ -4,9 +4,13 @@ import Preloader from '../components/Preloader.astro';
 
 interface Props {
   title?: string;
+  showPreloader?: boolean;
 }
 
-const { title = 'E-Cell VJIT' } = Astro.props as Props;
+const {
+  title = 'E-Cell VJIT',
+  showPreloader = false
+} = Astro.props as Props;
 ---
 
 <html lang="en">
@@ -17,8 +21,8 @@ const { title = 'E-Cell VJIT' } = Astro.props as Props;
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   </head>
-  <body class="bg-black text-white font-inter selection:bg-red-600/30 loading">
-    <Preloader />
+  <body class:list={["bg-black text-white font-inter selection:bg-red-600/30", { loading: showPreloader }] }>
+    {showPreloader && <Preloader />}
     <slot />
   </body>
 </html>
