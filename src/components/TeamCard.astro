@@ -1,0 +1,100 @@
+---
+interface Socials {
+  github?: string;
+  linkedin?: string;
+  instagram?: string;
+}
+
+interface Props {
+  name: string;
+  role: string;
+  image?: string;
+  branch?: string;
+  year?: string;
+  tagline?: string;
+  socials?: Socials;
+}
+
+const {
+  name,
+  role,
+  image = '',
+  branch = '',
+  year = '',
+  tagline = '',
+  socials = {}
+} = Astro.props as Props;
+
+const normalizeYear = (value: string) => value.replace(/\s*Year\s*Year$/i, ' Year').trim();
+
+const branchYear = [branch.trim(), normalizeYear(year)]
+  .filter(Boolean)
+  .join(' • ');
+
+const normalizeSocialUrl = (url: string | undefined, platform: 'github' | 'linkedin' | 'instagram') => {
+  const trimmed = (url ?? '').trim();
+  if (!trimmed) {
+    return '';
+  }
+
+  if (/^https?:\/\//i.test(trimmed)) {
+    return trimmed;
+  }
+
+  if (platform === 'instagram') {
+    return `https://instagram.com/${trimmed.replace(/^@/, '')}`;
+  }
+
+  return `https://${trimmed}`;
+};
+
+const socialLinks = {
+  github: normalizeSocialUrl(socials.github, 'github'),
+  linkedin: normalizeSocialUrl(socials.linkedin, 'linkedin'),
+  instagram: normalizeSocialUrl(socials.instagram, 'instagram')
+};
+
+const hasSocialLinks = Object.values(socialLinks).some(Boolean);
+const imageSource = image.trim() || '/images/team-placeholder.svg';
+---
+
+<article class="glass rounded-lg p-6 h-full flex flex-col transition-all hover:border-red-500/30 hover:shadow-[0_0_20px_rgba(220,38,38,0.2)]">
+  <div class="w-full aspect-square mb-5 overflow-hidden rounded-md border border-white/10 bg-black/20">
+    <img
+      src={imageSource}
+      alt={`${name} profile`}
+      loading="lazy"
+      class="h-full w-full object-cover"
+      onerror="this.onerror=null;this.src='/images/team-placeholder.svg';"
+    />
+  </div>
+
+  <h3 class="text-xl font-jakarta font-semibold mb-1 text-white">{name}</h3>
+  <p class="text-red-200 font-inter text-sm mb-2">{role}</p>
+
+  {branchYear && <p class="text-gray-400 font-inter text-sm mb-3">{branchYear}</p>}
+
+  {tagline.trim() && (
+    <p class="text-gray-300 font-inter text-sm leading-relaxed mb-4">{tagline}</p>
+  )}
+
+  {hasSocialLinks && (
+    <div class="mt-auto flex items-center gap-3 pt-2">
+      {socialLinks.github && (
+        <a href={socialLinks.github} target="_blank" rel="noopener noreferrer" aria-label={`${name} GitHub`} class="text-gray-300 hover:text-red-300 transition-colors">
+          <iconify-icon icon="mdi:github" width="20" height="20"></iconify-icon>
+        </a>
+      )}
+      {socialLinks.linkedin && (
+        <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${name} LinkedIn`} class="text-gray-300 hover:text-red-300 transition-colors">
+          <iconify-icon icon="mdi:linkedin" width="20" height="20"></iconify-icon>
+        </a>
+      )}
+      {socialLinks.instagram && (
+        <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" aria-label={`${name} Instagram`} class="text-gray-300 hover:text-red-300 transition-colors">
+          <iconify-icon icon="mdi:instagram" width="20" height="20"></iconify-icon>
+        </a>
+      )}
+    </div>
+  )}
+</article>

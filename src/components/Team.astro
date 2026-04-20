@@ -1,21 +1,8 @@
 ---
-interface TeamMember {
-  name: string;
-  role: string;
-}
+import teamData from '../data/team.json';
+import TeamCard from './TeamCard.astro';
 
-interface Props {
-  members?: TeamMember[];
-}
-
-const { members = [
-  { name: 'Core Team Member', role: 'Strategy and Partnerships' },
-  { name: 'Core Team Member', role: 'Events and Operations' },
-  { name: 'Tech Team Member', role: 'Product and Platform Support' },
-  { name: 'Design Team Member', role: 'Brand and Experience Design' },
-  { name: 'Outreach Team Member', role: 'Community and Campus Engagement' },
-  { name: 'Content Team Member', role: 'Storytelling and Media' },
-] } = Astro.props as Props;
+const members = teamData.core.slice(0, 4);
 ---
 
 <section id="team" class="container mx-auto px-6 py-16 md:py-24 relative z-10">
@@ -24,13 +11,24 @@ const { members = [
     <h2 class="text-3xl md:text-5xl font-jakarta font-semibold tracking-tight mb-4">Driven by students, powered by collaboration</h2>
     <p class="text-gray-300 font-inter text-base md:text-lg leading-relaxed">Our multidisciplinary team brings together operations, technology, design, and outreach to execute every initiative with intent.</p>
   </div>
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
     {members.map((member) => (
-      <div class="glass rounded-lg p-6">
-        <h3 class="text-xl font-jakarta font-semibold mb-1">{member.name}</h3>
-        <p class="text-gray-300 font-inter">{member.role}</p>
-      </div>
+      <TeamCard
+        name={member.name}
+        role={member.role}
+        image={member.image}
+        branch={member.branch}
+        year={member.year}
+        tagline={member.tagline}
+        socials={member.socials}
+      />
     ))}
+  </div>
+  <div class="mt-8">
+    <a href="/team" class="inline-flex items-center gap-2 text-sm font-inter glass rounded-md px-4 py-2 hover:bg-red-900/20 hover:border-red-500/30 text-gray-200 transition-all">
+      View Full Team
+      <iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon>
+    </a>
   </div>
   <slot />
 </section>

@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BackgroundShader from '../../components/BackgroundShader.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import TeamCard from '../../components/TeamCard.astro';
+import teamData from '../../data/team.json';
+
+export async function getStaticPaths() {
+  return Object.keys(teamData.teams).map((team) => ({
+    params: {
+      slug: team === 'event_management' ? 'event-management' : team
+    }
+  }));
+}
+
+const { slug = '' } = Astro.params;
+
+const normalizedSlug =
+  slug === 'event-management' ? 'event_management' : slug;
+
+type TeamKey = keyof typeof teamData.teams;
+
+const teams = teamData.teams;
+const members = teams[normalizedSlug as TeamKey] ?? [];
+
+const teamTitles: Record<TeamKey, string> = {
+  tech: 'Tech Team',
+  digital: 'Digital Team',
+  creative: 'Creative Team',
+  documentation: 'HR and Documentation Team',
+  marketing: 'Marketing Team',
+  event_management: 'Event Management Team'
+};
+
+const pageTitle = teamTitles[normalizedSlug as TeamKey] ?? 'Team';
+---
+
+<BaseLayout title={`E-Cell VJIT | ${pageTitle}`}>
+  <BackgroundShader />
+  <Navbar />
+
+  <section class="container mx-auto px-6 py-16 md:py-24 relative z-10">
+    <a href="/team" class="inline-flex items-center gap-2 glass rounded-md px-4 py-2 text-sm font-inter text-gray-200 hover:text-white hover:border-red-500/30 transition-all mb-8">
+      <iconify-icon icon="solar:arrow-left-linear" width="16" height="16"></iconify-icon>
+      Back to Core Team
+    </a>
+
+    <div class="max-w-3xl mb-10 md:mb-12">
+      <p class="text-xs uppercase tracking-[0.3em] text-red-200/80 mb-4">Team Directory</p>
+      <h1 class="text-4xl md:text-6xl font-jakarta font-semibold tracking-tight mb-4">{pageTitle}</h1>
+      <p class="text-gray-300 font-inter text-base md:text-lg leading-relaxed">
+        Meet the students contributing to this domain through execution, collaboration, and entrepreneurial thinking.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
+      {members.map((member) => (
+        <TeamCard
+          name={member.name}
+          role={member.role}
+          image={member.image}
+          branch={member.branch}
+          year={member.year}
+          tagline={member.tagline}
+          socials={member.socials}
+        />
+      ))}
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>

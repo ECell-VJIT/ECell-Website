@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BackgroundShader from '../../components/BackgroundShader.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import TeamCard from '../../components/TeamCard.astro';
+import teamData from '../../data/team.json';
+
+const core = teamData.core;
+
+const teamLinks = [
+  { label: 'Tech', href: '/team/tech' },
+  { label: 'Digital', href: '/team/digital' },
+  { label: 'Creative', href: '/team/creative' },
+  { label: 'HR and Documentation', href: '/team/documentation' },
+  { label: 'Marketing', href: '/team/marketing' },
+  { label: 'Event Management', href: '/team/event-management' }
+];
+---
+
+<BaseLayout title="E-Cell VJIT | Core Team">
+  <BackgroundShader />
+  <Navbar />
+
+  <section class="container mx-auto px-6 py-16 md:py-24 relative z-10">
+    <div class="max-w-3xl mb-10 md:mb-12">
+      <p class="text-xs uppercase tracking-[0.3em] text-red-200/80 mb-4">Core Team</p>
+      <h1 class="text-4xl md:text-6xl font-jakarta font-semibold tracking-tight mb-4">The leadership behind E-Cell VJIT</h1>
+      <p class="text-gray-300 font-inter text-base md:text-lg leading-relaxed">
+        Meet the core team driving entrepreneurship programs, campus innovation, and community growth.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-7">
+      {core.map((member) => (
+        <TeamCard
+          name={member.name}
+          role={member.role}
+          image={member.image}
+          branch={member.branch}
+          year={member.year}
+          tagline={member.tagline}
+          socials={member.socials}
+        />
+      ))}
+    </div>
+  </section>
+
+  <section class="container mx-auto px-6 pb-16 md:pb-24 relative z-10">
+    <div class="glass rounded-2xl p-8 md:p-10">
+      <p class="text-xs uppercase tracking-[0.3em] text-red-200/80 mb-4">Explore Teams</p>
+      <h2 class="text-2xl md:text-4xl font-jakarta font-semibold tracking-tight mb-6">Browse members by domain</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {teamLinks.map((teamLink) => (
+          <a href={teamLink.href} class="glass rounded-lg px-5 py-4 font-inter text-gray-200 hover:text-white hover:border-red-500/30 transition-all">
+            {teamLink.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>

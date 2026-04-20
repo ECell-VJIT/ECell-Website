@@ -1,0 +1,722 @@
+{
+  "core": [
+    {
+      "id": "core-1",
+      "name": "Tania Viquar",
+      "role": "President",
+      "team": "core",
+      "branch": "",
+      "year": "",
+      "roll_number": "",
+      "image": "",
+      "socials": {
+        "github": "",
+        "linkedin": "",
+        "instagram": ""
+      },
+      "tagline": ""
+    },
+    {
+      "id": "core-2",
+      "name": "Kashyap",
+      "role": "Associate President",
+      "team": "core",
+      "branch": "",
+      "year": "",
+      "roll_number": "",
+      "image": "",
+      "socials": {
+        "github": "",
+        "linkedin": "",
+        "instagram": ""
+      },
+      "tagline": ""
+    },
+    {
+      "id": "core-3",
+      "name": "Sai Srujan",
+      "role": "Tech Lead",
+      "team": "tech",
+      "branch": "",
+      "year": "",
+      "roll_number": "",
+      "image": "",
+      "socials": {
+        "github": "",
+        "linkedin": "",
+        "instagram": ""
+      },
+      "tagline": ""
+    },
+    {
+      "id": "core-4",
+      "name": "Iliyaz",
+      "role": "Digital Lead",
+      "team": "digital",
+      "branch": "",
+      "year": "",
+      "roll_number": "",
+      "image": "",
+      "socials": {
+        "github": "",
+        "linkedin": "",
+        "instagram": ""
+      },
+      "tagline": ""
+    },
+    {
+      "id": "core-5",
+      "name": "Shashank",
+      "role": "Creative Lead",
+      "team": "creative",
+      "branch": "",
+      "year": "",
+      "roll_number": "",
+      "image": "",
+      "socials": {
+        "github": "",
+        "linkedin": "",
+        "instagram": ""
+      },
+      "tagline": ""
+    },
+    {
+      "id": "core-6",
+      "name": "Tanvi Gorge",
+      "role": "HR & Documentation Lead",
+      "team": "documentation",
+      "branch": "",
+      "year": "",
+      "roll_number": "",
+      "image": "",
+      "socials": {
+        "github": "",
+        "linkedin": "",
+        "instagram": ""
+      },
+      "tagline": ""
+    },
+    {
+      "id": "core-7",
+      "name": "Sameera",
+      "role": "Marketing Lead",
+      "team": "marketing",
+      "branch": "",
+      "year": "",
+      "roll_number": "",
+      "image": "",
+      "socials": {
+        "github": "",
+        "linkedin": "",
+        "instagram": ""
+      },
+      "tagline": ""
+    },
+    {
+      "id": "core-8",
+      "name": "Aldrin Paul",
+      "role": "Event Management Lead",
+      "team": "event_management",
+      "branch": "",
+      "year": "",
+      "roll_number": "",
+      "image": "",
+      "socials": {
+        "github": "",
+        "linkedin": "",
+        "instagram": ""
+      },
+      "tagline": ""
+    }
+  ],
+  "teams": {
+    "tech": [
+      {
+        "id": "r-jaswanth-reddy",
+        "name": "R Jaswanth Reddy",
+        "role": "Tech Team Member",
+        "team": "tech",
+        "branch": "CSE",
+        "year": "2 Year Year",
+        "roll_number": "24911A05A9",
+        "image": "",
+        "socials": {
+          "github": "https://github.com/Jaswanth-Reddy-2006",
+          "linkedin": "https://www.linkedin.com/in/jasreaug/",
+          "instagram": ""
+        },
+        "tagline": "Part of E-Cell VJIT 🚀"
+      },
+      {
+        "id": "mohammed-mohiuddin",
+        "name": "MOHAMMED MOHIUDDIN",
+        "role": "Tech Team Member",
+        "team": "tech",
+        "branch": "AIML",
+        "year": "1 Year Year",
+        "roll_number": "25911A66G7 ",
+        "image": "",
+        "socials": {
+          "github": "https://github.com/mohi2006august",
+          "linkedin": "https://www.linkedin.com/in/mohammed-mohi-uddin-aa4ba934b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+          "instagram": ""
+        },
+        "tagline": "Code. Create. Disrupt."
+      },
+      {
+        "id": "b.chandrakiran",
+        "name": "B.Chandrakiran",
+        "role": "Tech Team Member",
+        "team": "tech",
+        "branch": "CSE",
+        "year": "2 Year Year",
+        "roll_number": "24911A05E0",
+        "image": "",
+        "socials": {
+          "github": "https://github.com/chandu0302",
+          "linkedin": "https://www.linkedin.com/in/chandrakiran-budige-377ab9313/https://www.linkedin.com/in/chandrakiran-budige-377ab9313/",
+          "instagram": ""
+        },
+        "tagline": "Part of E-Cell VJIT 🚀"
+      }
+    ],
+    "digital": [
+      {
+        "id": "saad-saleem",
+        "name": "Saad saleem",
+        "role": "Digital Team Member",
+        "team": "digital",
+        "branch": "CSE",
+        "year": "1 Year Year",
+        "roll_number": "25911A05B7",
+        "image": "",
+        "socials": {
+          "github": "https://github.com/saadsaleem-glitch",
+          "linkedin": "https://www.linkedin.com/in/saad-saleem-00a355400?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+          "instagram": "https://www.instagram.com/w_.saad?igsh=MWdqb2Z5bjA1bjZuZQ=="
+        },
+        "tagline": "Video Editor | Turning ideas into visual stories"
+      },
+      {
+        "id": "n-hema-sathvika",
+        "name": "N Hema Sathvika",
+        "role": "Digital Team Member",
+        "team": "digital",
+        "branch": "AIML",
+        "year": "2 Year Year",
+        "roll_number": "24911A66G6",
+        "image": "",
+        "socials": {
+          "github": "",
+          "linkedin": "",
+          "instagram": ""
+        },
+        "tagline": "Visual storyteller in the digital world"
+      },
+      {
+        "id": "mohammed-nehan-shiraz-ali",
+        "name": "Mohammed Nehan Shiraz Ali",
+        "role": "Digital Team Member",
+        "team": "digital",
+        "branch": "AIML",
+        "year": "1 Year Year",
+        "roll_number": "25911A66A3",
+        "image": "",
+        "socials": {
+          "github": "",
+          "linkedin": "",
+          "instagram": ""
+        },
+        "tagline": "Growing with Purpose, Learning with Intention."
+      },
+      {
+        "id": "vellore-anupender-lakshmi-narasimha",
+        "name": "Vellore Anupender Lakshmi Narasimha",
+        "role": "Digital Team Member",
+        "team": "digital",
+        "branch": "Mechanical ",
+        "year": "1 Year Year",
+        "roll_number": "25911A0330 ",
+        "image": "",
+        "socials": {
+          "github": "",
+          "linkedin": "",
+          "instagram": ""
+        },
+        "tagline": "Part of E-Cell VJIT 🚀"
+      },
+      {
+        "id": "pulugu-ruthika",
+        "name": "Pulugu Ruthika",
+        "role": "Digital Team Member",
+        "team": "digital",
+        "branch": "CSE",
+        "year": "2 Year Year",
+        "roll_number": "24911A05A6",
+        "image": "",
+        "socials": {
+          "github": "",
+          "linkedin": "",
+          "instagram": "Ruthikaa._"
+        },
+        "tagline": "Turning creativity into content"
+      },
+      {
+        "id": "bora-brijesh",
+        "name": "Bora Brijesh",
+        "role": "Digital Team Member",
+        "team": "digital",
+        "branch": "CSE",
+        "year": "1 Year Year",
+        "roll_number": "25911A0509",
+        "image": "",
+        "socials": {
+          "github": "",
+          "linkedin": "",
+          "instagram": ""
+        },
+        "tagline": "\"Turning moments into memories.”"
+      },
+      {
+        "id": "manasvi-neerudi",
+        "name": "Manasvi Neerudi",
+        "role": "Digital Team Member",
+        "team": "digital",
+        "branch": "CSE",
+        "year": "1 Year Year",
+        "roll_number": "25911A05N6",
+        "image": "",
+        "socials": {
+          "github": "",
+          "linkedin": "https://www.linkedin.com/in/manasvi-n-651479387?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+          "instagram": "https://www.instagram.com/_manasvi_.13?igsh=MWI2cmwxaDJrczlsYw=="
+        },
+        "tagline": "Part of E-Cell VJIT 🚀"
+      }
+    ],
+    "creative": [
+      {
+        "id": "himani-jaydeep-patel",
+        "name": "Himani Jaydeep Patel",
+        "role": "Creative Team Member",
+        "team": "creative",
+        "branch": "CSE",
+        "year": "2 Year Year",
+        "roll_number": "24911A0588",
+        "image": "",
+        "socials": {
+          "github": "",
+          "linkedin": "https://www.linkedin.com/in/himani-patel-198a39324?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+          "instagram": "https://www.instagram.com/_himanii0348_?igsh=MTVsaXAxNzFtdGdyMw=="
+        },
+        "tagline": "Part of E-Cell VJIT 🚀"
+      },
+      {
+        "id": "ananya-lingusgur",
+        "name": "Ananya Lingusgur",
+        "role": "Creative Team Member",
+        "team": "creative",
+        "branch": "CSE",
+        "year": "1 Year Year",
+        "roll_number": "25911A05D3",
+        "image": "",
+        "socials": {
+          "github": "",
+          "linkedin": "https://www.linkedin.com/in/ananya-l-72889539b?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+          "instagram": ""
+        },
+        "tagline": "Where creativity meets code and ideas come to life."
+      },
+      {
+        "id": "j.-divya-swara",
+        "name": "J. Divya Swara",
+        "role": "Creative Team Member",
+        "team": "creative",
+        "branch": "CSE",
+        "year": "1 Year Year",
+        "roll_number": "25911A0565",
+        "image": "",
+        "socials": {
+          "github": "",
+          "linkedin": "https://www.linkedin.com/in/divya-swara-josyabhatla-07742a385?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+          "instagram": "https://www.instagram.com/swara_illustrates?igsh=dGZmd244b3lja3No"
+        },
+        "tagline": "Part of E-Cell VJIT 🚀"
+      },
+      {
+        "id": "aakaram-akshitha",
+        "name": "Aakaram Akshitha",
+        "role": "Creative Team Member",
+        "team": "creative",
+        "branch": "IT",
+        "year": "1 Year Year",
+        "roll_number": "25911A12D1",
+        "image": "",
+        "socials": {
+          "github": "",
+          "linkedin": "https://www.linkedin.com/in/akshitha-a-381117392?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+          "instagram": "https://www.instagram.com/akshithaa_016?igsh=MTE0dzU1djRhOXo0dg=="
+        },
+        "tagline": "Letting my work speak "
+      },
+      {
+        "id": "aitha-sathvika",
+        "name": "Aitha Sathvika",
+        "role": "Creative Team Member",
+        "team": "creative",
+        "branch": "AIML",
+        "year": "1 Year Year",
+        "roll_number": "25911A66D3",
+        "image": "",
+        "socials": {
+          "github": "",
+          "linkedin": "https://www.linkedin.com/in/aitha-sathvika-58216032b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+          "instagram": "https://www.instagram.com/sathviiiiika_03?igsh=MTB6MmE0M3RiYTBvNg=="
+        },
+        "tagline": "Part of E-Cell VJIT 🚀"
+      },
+      {
+        "id": "humayrah-nuzhat",
+        "name": "Humayrah Nuzhat",
+        "role": "Creative Team Member",
+        "team": "creative",
+        "branch": "AIML",
+        "year": "2 Year Year",
+        "roll_number": "24911A66H8",
+        "image": "",
+        "socials": {
+          "github": "https://github.com/humayrahnuzhat-ctrl",
+          "linkedin": "https://www.linkedin.com/in/humayrah-nuzhat-0504a0356?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+          "instagram": ""
+        },
+        "tagline": "Thoughtfully creating what matters."
+      },
+      {
+        "id": "polikepad-manogna",
+        "name": "Polikepad Manogna",
+        "role": "Creative Team Member",
+        "team": "creative",
+        "branch": "CSE",
+        "year": "1 Year Year",
+        "roll_number": "25911A05H3",
+        "image": "",
+        "socials": {
+          "github": "",
+          "linkedin": "https://www.linkedin.com/in/manogna-polikepad-160158391/",
+          "instagram": ""
+        },
+        "tagline": "Built different. Still building."
+      }
+    ],
+    "documentation": [
+      {
+        "id": "k.-t-akshitha",
+        "name": "K. T Akshitha",
+        "role": "HR & Documentation Team Member",
+        "team": "documentation",
+        "branch": "CSE",
+        "year": "1 Year Year",
+        "roll_number": "25911A0590",
+        "image": "",
+        "socials": {
+          "github": "",
+          "linkedin": "",
+          "instagram": ""
+        },
+        "tagline": "“Not perfect, just consistent.”"
+      },
+      {
+        "id": "ashle-seby",
+        "name": "Ashle Seby",
+        "role": "HR & Documentation Team Member",
+        "team": "documentation",
+        "branch": "CSE",
+        "year": "1 Year Year",
+        "roll_number": "25911A05K9",
+        "image": "",
+        "socials": {
+          "github": "",
+          "linkedin": "https://www.linkedin.com/in/ashle-seby-414378388?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+          "instagram": ""
+        },
+        "tagline": "Chaos coordinator with a business plan"
+      },
+      {
+        "id": "beesu-siri",
+        "name": "Beesu Siri",
+        "role": "HR & Documentation Team Member",
+        "team": "documentation",
+        "branch": "CSE",
+        "year": "2 Year Year",
+        "roll_number": "24911A0573",
+        "image": "",
+        "socials": {
+          "github": "https://github.com/siribeesu/",
+          "linkedin": "https://www.linkedin.com/in/siri-beesu-96a6b730a/",
+          "instagram": "https://www.instagram.com/siri_s95?igsh=MXM1N3NxeHduMzNycg=="
+        },
+        "tagline": "Part of E-Cell VJIT 🚀"
+      },
+      {
+        "id": "mannem-yashasvi",
+        "name": "MANNEM YASHASVI",
+        "role": "HR & Documentation Team Member",
+        "team": "documentation",
+        "branch": "IT",
+        "year": "1 Year Year",
+        "roll_number": "25911A1235 ",
+        "image": "",
+        "socials": {
+          "github": "https://github.com/mannemyashasvi-ai",
+          "linkedin": "https://www.linkedin.com/in/mannem-yashasvi-443b59355?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+          "instagram": "https://www.instagram.com/yash.asvi0406?igsh=a3N4d3llaWdrcXE1"
+        },
+        "tagline": "Trying, learning, improving."
+      },
+      {
+        "id": "thadisina-shreyas-reddy",
+        "name": "Thadisina Shreyas Reddy",
+        "role": "HR & Documentation Team Member",
+        "team": "documentation",
+        "branch": "CSE",
+        "year": "1 Year Year",
+        "roll_number": "25911A05R6",
+        "image": "",
+        "socials": {
+          "github": "",
+          "linkedin": "https://www.linkedin.com/in/shreyas-tadisina?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+          "instagram": "https://www.instagram.com/shreyas__200829?igsh=MW54ZjZ3ZW93em9lNA=="
+        },
+        "tagline": "Part of E-Cell VJIT 🚀"
+      }
+    ],
+    "marketing": [
+      {
+        "id": "lokshita-grace-nannepamula",
+        "name": "Lokshita Grace Nannepamula",
+        "role": "Marketing Team Member",
+        "team": "marketing",
+        "branch": "DS",
+        "year": "1 Year Year",
+        "roll_number": "25911A67A5",
+        "image": "",
+        "socials": {
+          "github": "https://github.com/graacenanne-dotcom",
+          "linkedin": "https://www.linkedin.com/in/lokshita-grace-nannepamula-1623b6351",
+          "instagram": ""
+        },
+        "tagline": "Part of E-Cell VJIT 🚀"
+      },
+      {
+        "id": "nishtha-gaur",
+        "name": "Nishtha Gaur",
+        "role": "Marketing Team Member",
+        "team": "marketing",
+        "branch": "CSE",
+        "year": "2 Year Year",
+        "roll_number": "24911A05P9 ",
+        "image": "",
+        "socials": {
+          "github": "",
+          "linkedin": "",
+          "instagram": ""
+        },
+        "tagline": "Part of E-Cell VJIT 🚀"
+      },
+      {
+        "id": "chiluveri-varshith",
+        "name": "Chiluveri Varshith",
+        "role": "Marketing Team Member",
+        "team": "marketing",
+        "branch": "CSE",
+        "year": "1 Year Year",
+        "roll_number": "25911A0511",
+        "image": "",
+        "socials": {
+          "github": "",
+          "linkedin": "https://www.linkedin.com/in/chiluveri-varshith-a98bb3365?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+          "instagram": "https://www.instagram.com/varshith_chiluveri?igsh=OGhmcHJ0dzhvdjdv"
+        },
+        "tagline": "Trust the process"
+      }
+    ],
+    "event_management": [
+      {
+        "id": "arrolla-harika",
+        "name": "Arrolla Harika",
+        "role": "Event Management Team Member",
+        "team": "event_management",
+        "branch": "IT",
+        "year": "1 Year Year",
+        "roll_number": "25911A1205",
+        "image": "",
+        "socials": {
+          "github": "",
+          "linkedin": "",
+          "instagram": "https://www.instagram.com/arrolla_harika?igsh=MW55OTFpaGkzeXB1aw=="
+        },
+        "tagline": "Turning ideas into impact"
+      },
+      {
+        "id": "d-plintoff",
+        "name": "D Plintoff",
+        "role": "Event Management Team Member",
+        "team": "event_management",
+        "branch": "CSE",
+        "year": "2 Year Year",
+        "roll_number": "24911a0578",
+        "image": "",
+        "socials": {
+          "github": "",
+          "linkedin": "",
+          "instagram": ""
+        },
+        "tagline": "Logic in mind, innovation in action."
+      },
+      {
+        "id": "sangam-singh",
+        "name": "Sangam Singh",
+        "role": "Event Management Team Member",
+        "team": "event_management",
+        "branch": "CSE",
+        "year": "1 Year Year",
+        "roll_number": "25911A05C0",
+        "image": "",
+        "socials": {
+          "github": "",
+          "linkedin": "",
+          "instagram": ""
+        },
+        "tagline": "Exceeding event Expectations "
+      },
+      {
+        "id": "sameeksha-thakur",
+        "name": "Sameeksha Thakur",
+        "role": "Event Management Team Member",
+        "team": "event_management",
+        "branch": "ECE",
+        "year": "2 Year Year",
+        "roll_number": "24911A04B7",
+        "image": "",
+        "socials": {
+          "github": "",
+          "linkedin": "",
+          "instagram": ""
+        },
+        "tagline": "Part of E-Cell VJIT 🚀"
+      },
+      {
+        "id": "sai-pranathi",
+        "name": "Sai Pranathi",
+        "role": "Event Management Team Member",
+        "team": "event_management",
+        "branch": "CSE",
+        "year": "1 Year Year",
+        "roll_number": "25911A0587",
+        "image": "",
+        "socials": {
+          "github": "https://github.com/pranathiikankati",
+          "linkedin": "https://www.linkedin.com/in/sai-pranathi-71405037b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+          "instagram": ""
+        },
+        "tagline": "just vibes and vision "
+      },
+      {
+        "id": "p.rushitha",
+        "name": "P.Rushitha",
+        "role": "Event Management Team Member",
+        "team": "event_management",
+        "branch": "ECE",
+        "year": "2 Year Year",
+        "roll_number": "24911A04A9",
+        "image": "",
+        "socials": {
+          "github": "",
+          "linkedin": "https://www.linkedin.com/in/rushitha-pasam-55074b319/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3Bdk5HAIXtSo2xrcLW7HP5IA%3D%3D",
+          "instagram": ""
+        },
+        "tagline": "Rushitha"
+      },
+      {
+        "id": "yashwanth-rasala",
+        "name": "YASHWANTH RASALA",
+        "role": "Event Management Team Member",
+        "team": "event_management",
+        "branch": "ECE",
+        "year": "2 Year Year",
+        "roll_number": "24911A0452",
+        "image": "",
+        "socials": {
+          "github": "",
+          "linkedin": "https://www.linkedin.com/in/yashwanth-rasala-bb4058332?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+          "instagram": "https://www.instagram.com/____yashwanth0911?igsh=MWpweXRxOGcxMmZ5Mw=="
+        },
+        "tagline": "Part of E-Cell VJIT 🚀"
+      },
+      {
+        "id": "manish-nethi",
+        "name": "Manish Nethi",
+        "role": "Event Management Team Member",
+        "team": "event_management",
+        "branch": "DS",
+        "year": "1 Year Year",
+        "roll_number": "25911A67A7",
+        "image": "",
+        "socials": {
+          "github": "",
+          "linkedin": "",
+          "instagram": "https://www.instagram.com/manishnethii?igsh=MXN2ZHkxMm5zaDNzMQ=="
+        },
+        "tagline": "Part of E-Cell VJIT 🚀"
+      },
+      {
+        "id": "pulla-kruthi",
+        "name": "Pulla Kruthi",
+        "role": "Event Management Team Member",
+        "team": "event_management",
+        "branch": "CSE",
+        "year": "1 Year Year",
+        "roll_number": "25911A05H5",
+        "image": "",
+        "socials": {
+          "github": "https://github.com/KruthiPulla",
+          "linkedin": "https://www.linkedin.com/in/pulla-kruthi-b21361380/",
+          "instagram": ""
+        },
+        "tagline": "Ideas. Action. Impact."
+      },
+      {
+        "id": "mohammed-abdul-muqtadir",
+        "name": "Mohammed Abdul Muqtadir",
+        "role": "Event Management Team Member",
+        "team": "event_management",
+        "branch": "AIML",
+        "year": "1 Year Year",
+        "roll_number": "25911A66G6 ",
+        "image": "",
+        "socials": {
+          "github": "",
+          "linkedin": "https://www.linkedin.com/in/abdul-muqtadir-631489378?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+          "instagram": "https://www.instagram.com/abdulmuqtadir80?igsh=MzJrczUzbHV0cWM1"
+        },
+        "tagline": "Dreams don’t work unless we do"
+      },
+      {
+        "id": "venkata-sai-bhavya-koduri",
+        "name": "Venkata sai bhavya koduri",
+        "role": "Event Management Team Member",
+        "team": "event_management",
+        "branch": "CSE",
+        "year": "2 Year Year",
+        "roll_number": "24911A05R6",
+        "image": "",
+        "socials": {
+          "github": "",
+          "linkedin": "https://www.linkedin.com/in/bhavya-koduri?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
+          "instagram": ""
+        },
+        "tagline": "Part of E-Cell VJIT 🚀"
+      }
+    ]
+  }
+}
