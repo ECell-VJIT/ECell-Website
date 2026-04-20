@@ -8,10 +8,28 @@ interface Props {
   events?: EventItem[];
 }
 
-const { events = [] } = Astro.props as Props;
+const { events = [
+  {
+    title: 'Startup Hackathon',
+    description: 'A fast-paced build sprint where students validate ideas, prototype solutions, and pitch to a review panel.'
+  },
+  {
+    title: 'Innovation Workshop Series',
+    description: 'Hands-on sessions on design thinking, problem discovery, product planning, and founder fundamentals.'
+  },
+  {
+    title: 'Founder Speaker Session',
+    description: 'Interactive talks with startup leaders sharing practical lessons on execution, resilience, and growth.'
+  }
+] } = Astro.props as Props;
 ---
 
-<section class="container mx-auto px-6 py-16 md:py-24 relative z-10">
+<section id="events" class="container mx-auto px-6 py-16 md:py-24 relative z-10">
+  <div class="max-w-3xl mb-10">
+    <p class="text-xs uppercase tracking-[0.3em] text-red-200/80 mb-4">Events and Initiatives</p>
+    <h2 class="text-3xl md:text-5xl font-jakarta font-semibold tracking-tight mb-4">Learning by building, competing, and collaborating</h2>
+    <p class="text-gray-300 font-inter text-base md:text-lg leading-relaxed">Our event lineup is designed to help students explore entrepreneurship through practical experiences and community-driven execution.</p>
+  </div>
   <div class="grid gap-4 md:gap-6">
     {events.map((event) => (
       <article class="glass rounded-lg p-6">

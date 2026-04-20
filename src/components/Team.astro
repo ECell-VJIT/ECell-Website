@@ -8,10 +8,22 @@ interface Props {
   members?: TeamMember[];
 }
 
-const { members = [] } = Astro.props as Props;
+const { members = [
+  { name: 'Core Team Member', role: 'Strategy and Partnerships' },
+  { name: 'Core Team Member', role: 'Events and Operations' },
+  { name: 'Tech Team Member', role: 'Product and Platform Support' },
+  { name: 'Design Team Member', role: 'Brand and Experience Design' },
+  { name: 'Outreach Team Member', role: 'Community and Campus Engagement' },
+  { name: 'Content Team Member', role: 'Storytelling and Media' },
+] } = Astro.props as Props;
 ---
 
-<section class="container mx-auto px-6 py-16 md:py-24 relative z-10">
+<section id="team" class="container mx-auto px-6 py-16 md:py-24 relative z-10">
+  <div class="max-w-3xl mb-10">
+    <p class="text-xs uppercase tracking-[0.3em] text-red-200/80 mb-4">Team Preview</p>
+    <h2 class="text-3xl md:text-5xl font-jakarta font-semibold tracking-tight mb-4">Driven by students, powered by collaboration</h2>
+    <p class="text-gray-300 font-inter text-base md:text-lg leading-relaxed">Our multidisciplinary team brings together operations, technology, design, and outreach to execute every initiative with intent.</p>
+  </div>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     {members.map((member) => (
       <div class="glass rounded-lg p-6">
