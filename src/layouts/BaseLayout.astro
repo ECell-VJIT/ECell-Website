@@ -1,48 +1,22 @@
 ---
-import Preloader from "../components/Preloader.astro";
-import "../styles/global.css";
+import '../styles/global.css';
 
 interface Props {
   title?: string;
 }
 
-const { title = "E-Cell VJIT — Where ideas turn into ventures" } = Astro.props;
+const { title = 'Modern Fire Hero' } = Astro.props as Props;
 ---
 
 <html lang="en">
   <head>
-    <script is:inline>
-      try {
-        if (window.parent && window.parent !== window) {
-          window.parent.promotekit_referral = "1fd2949a-d22c-431b-92bf-02d4ad04ee24";
-          window.parent.document.cookie =
-            "promotekit_referral=1fd2949a-d22c-431b-92bf-02d4ad04ee24;path=/;domain=.aura.build;max-age=31536000";
-        }
-      } catch (e) {}
-    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
-    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js" is:inline></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <script src="https://cdn.tailwindcss.com" is:inline></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   </head>
-  <body class="loading antialiased text-white selection:bg-red-600 selection:text-white">
-    <Preloader />
-    <div id="site-content">
-      <slot />
-    </div>
-
-    <style is:global>
-      body.loading {
-        overflow: hidden;
-      }
-
-      body.loading #site-content {
-        opacity: 0;
-        visibility: hidden;
-      }
-    </style>
+  <body class="bg-black text-white font-inter selection:bg-red-600/30">
+    <slot />
   </body>
 </html>
