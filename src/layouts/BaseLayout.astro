@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import Preloader from '../components/Preloader.astro';
 
 interface Props {
   title?: string;
@@ -16,7 +17,8 @@ const { title = 'Modern Fire Hero' } = Astro.props as Props;
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   </head>
-  <body class="bg-black text-white font-inter selection:bg-red-600/30">
+  <body class="bg-black text-white font-inter selection:bg-red-600/30 loading">
+    <Preloader />
     <slot />
   </body>
 </html>
