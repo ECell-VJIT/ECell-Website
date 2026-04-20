@@ -1,20 +1,24 @@
-<div class="md:col-span-4 space-y-4">
-  <div class="bg-black border-2 border-red-600 p-4 transform -skew-x-6 hover:translate-x-2 transition-transform cursor-pointer group">
-    <div class="flex justify-between items-center text-white">
-      <span class="font-anton text-2xl tracking-wide group-hover:text-red-500">PRESIDENT</span>
-      <iconify-icon icon="solar:user-circle-linear" width="24" class="text-red-600"></iconify-icon>
-    </div>
+---
+interface TeamMember {
+  name: string;
+  role: string;
+}
+
+interface Props {
+  members?: TeamMember[];
+}
+
+const { members = [] } = Astro.props as Props;
+---
+
+<section class="container mx-auto px-6 py-16 md:py-24 relative z-10">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {members.map((member) => (
+      <div class="glass rounded-lg p-6">
+        <h3 class="text-xl font-jakarta font-semibold mb-1">{member.name}</h3>
+        <p class="text-gray-300 font-inter">{member.role}</p>
+      </div>
+    ))}
   </div>
-  <div class="bg-white border-2 border-black p-4 transform skew-x-3 hover:translate-x-2 transition-transform cursor-pointer group ml-8">
-    <div class="flex justify-between items-center text-black">
-      <span class="font-anton text-2xl tracking-wide group-hover:text-red-600">VICE PRESIDENT</span>
-      <iconify-icon icon="solar:list-bold" width="24"></iconify-icon>
-    </div>
-  </div>
-  <div class="bg-black border-2 border-gray-500 p-4 transform -skew-x-3 hover:translate-x-2 transition-transform cursor-pointer group ml-4">
-    <div class="flex justify-between items-center text-gray-300">
-      <span class="font-anton text-2xl tracking-wide group-hover:text-white">TECH LEAD</span>
-      <iconify-icon icon="solar:settings-linear" width="24"></iconify-icon>
-    </div>
-  </div>
-</div>
+  <slot />
+</section>
