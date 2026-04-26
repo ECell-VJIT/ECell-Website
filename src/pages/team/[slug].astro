@@ -54,8 +54,8 @@ const pageTitle = teamTitles[normalizedSlug as TeamKey] ?? 'Team';
       </p>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
-      {members.map((member) => (
+    <div class="team-grid-optimized grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
+      {members.map((member, index) => (
         <TeamCard
           name={member.name}
           role={member.role}
@@ -64,6 +64,7 @@ const pageTitle = teamTitles[normalizedSlug as TeamKey] ?? 'Team';
           year={member.year}
           tagline={member.tagline}
           socials={member.socials}
+          index={index}
         />
       ))}
     </div>
