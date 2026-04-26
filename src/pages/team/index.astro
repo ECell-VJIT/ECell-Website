@@ -6,7 +6,13 @@ import Footer from '../../components/Footer.astro';
 import TeamCard from '../../components/TeamCard.astro';
 import teamData from '../../data/team.json';
 
+const administration = teamData.administration ?? [];
 const core = teamData.core;
+const president = core.find((member) => member.role.toLowerCase() === 'president');
+const associatePresident = core.find((member) => member.role.toLowerCase() === 'associate president');
+const topLeadership = [president, associatePresident].filter(Boolean);
+const leadIds = new Set(topLeadership.map((member) => member.id));
+const otherLeads = core.filter((member) => !leadIds.has(member.id));
 
 const teamLinks = [
   { label: 'Tech', href: '/team/tech' },
@@ -31,23 +37,67 @@ const teamLinks = [
       </p>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-7">
-      {core.map((member) => (
-        <TeamCard
-          name={member.name}
-          role={member.role}
-          image={member.image}
-          branch={member.branch}
-          year={member.year}
-          tagline={member.tagline}
-          socials={member.socials}
-        />
-      ))}
+    <div class="flex flex-wrap items-center gap-3 mb-8 md:mb-10">
+      <span class="glass rounded-full px-4 py-2 text-xs uppercase tracking-[0.2em] text-red-200/90">Core Members {core.length}</span>
+      <span class="glass rounded-full px-4 py-2 text-xs uppercase tracking-[0.2em] text-red-200/90">Domain Leads {otherLeads.length}</span>
+    </div>
+
+    <div class="glass noise-overlay rounded-2xl p-6 md:p-8 mb-8 md:mb-10">
+      <p class="text-xs uppercase tracking-[0.3em] text-red-200/80 mb-4">Institutional Leadership</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-7">
+        {administration.map((member) => (
+          <TeamCard
+            name={member.name}
+            role={member.role}
+            image={member.image}
+            branch={member.branch}
+            year={member.year}
+            tagline={member.tagline}
+            socials={member.socials}
+          />
+        ))}
+      </div>
+    </div>
+
+    <div class="glass noise-overlay rounded-2xl p-6 md:p-8 mb-8 md:mb-10">
+      <p class="text-xs uppercase tracking-[0.3em] text-red-200/80 mb-4 text-center">Core Leadership</p>
+      <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-7 place-items-center">
+        {topLeadership.map((member) => (
+          <div class="w-full max-w-sm">
+            <TeamCard
+              name={member.name}
+              role={member.role}
+              image={member.image}
+              branch={member.branch}
+              year={member.year}
+              tagline={member.tagline}
+              socials={member.socials}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="glass noise-overlay rounded-2xl p-6 md:p-8">
+      <p class="text-xs uppercase tracking-[0.3em] text-red-200/80 mb-4">Domain Leads</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
+        {otherLeads.map((member) => (
+          <TeamCard
+            name={member.name}
+            role={member.role}
+            image={member.image}
+            branch={member.branch}
+            year={member.year}
+            tagline={member.tagline}
+            socials={member.socials}
+          />
+        ))}
+      </div>
     </div>
   </section>
 
   <section class="container mx-auto px-6 pb-16 md:pb-24 relative z-10">
-    <div class="glass rounded-2xl p-8 md:p-10">
+    <div class="glass noise-overlay rounded-2xl p-8 md:p-10">
       <p class="text-xs uppercase tracking-[0.3em] text-red-200/80 mb-4">Explore Teams</p>
       <h2 class="text-2xl md:text-4xl font-jakarta font-semibold tracking-tight mb-6">Browse members by domain</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
