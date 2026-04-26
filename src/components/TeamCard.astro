@@ -13,6 +13,7 @@ interface Props {
   year?: string;
   tagline?: string;
   socials?: Socials;
+  index?: number;
 }
 
 const {
@@ -22,7 +23,8 @@ const {
   branch = '',
   year = '',
   tagline = '',
-  socials = {}
+  socials = {},
+  index = 0
 } = Astro.props as Props;
 
 const normalizeYear = (value: string) => value.replace(/\s*Year\s*Year$/i, ' Year').trim();
@@ -56,10 +58,59 @@ const socialLinks = {
 
 const hasSocialLinks = Object.values(socialLinks).some(Boolean);
 const imageSource = image.trim() || '/images/team-placeholder.svg';
+const roleLower = role.toLowerCase();
+
+const isPresident = roleLower === 'president';
+const isLead = !isPresident && (roleLower.includes('lead') || roleLower.includes('associate president'));
+
+const accentClass = isPresident
+  ? 'team-card-president'
+  : isLead
+    ? 'team-card-lead'
+    : 'team-card-member';
+
+const roleBadgeIcon = isPresident
+  ? 'solar:crown-minimalistic-linear'
+  : isLead
+    ? 'solar:medal-ribbons-star-linear'
+    : 'solar:user-circle-linear';
+
+const crestLabel = isPresident
+  ? 'Top Office'
+  : isLead
+    ? 'Leadership'
+    : 'Member';
+
+const badgeClass = isPresident
+  ? 'role-crest-president'
+  : isLead
+    ? 'role-crest-lead'
+    : 'role-crest-member';
 ---
 
-<article class="glass rounded-lg p-6 h-full flex flex-col transition-all hover:border-red-500/30 hover:shadow-[0_0_20px_rgba(220,38,38,0.2)]">
-  <div class="w-full aspect-square mb-5 overflow-hidden rounded-md border border-white/10 bg-black/20">
+<article
+  class:list={[
+    'team-card-reveal team-card-tilt team-card-shell rounded-lg p-6 h-full flex flex-col transition-all duration-300 relative',
+    accentClass
+  ]}
+  style={`--card-delay:${Math.max(index, 0) * 85}ms;`}
+>
+  <span class="team-accent-ring" aria-hidden="true"></span>
+  <span class="team-corner team-corner-tl" aria-hidden="true"></span>
+  <span class="team-corner team-corner-br" aria-hidden="true"></span>
+
+  <div class="flex items-center justify-between mb-4 gap-3">
+    <span class:list={['team-role-badge', badgeClass]}>
+      <iconify-icon icon={roleBadgeIcon} width="16" height="16"></iconify-icon>
+      <span class="role-crest-copy">
+        <span>{role}</span>
+        <small>{crestLabel}</small>
+      </span>
+    </span>
+  </div>
+
+  <div class="team-portrait-wrap w-full aspect-square mb-5 overflow-hidden rounded-md border border-white/10 bg-black/20">
+    <span class="team-portrait-arc" aria-hidden="true"></span>
     <img
       src={imageSource}
       alt={`${name} profile`}
@@ -70,7 +121,6 @@ const imageSource = image.trim() || '/images/team-placeholder.svg';
   </div>
 
   <h3 class="text-xl font-jakarta font-semibold mb-1 text-white">{name}</h3>
-  <p class="text-red-200 font-inter text-sm mb-2">{role}</p>
 
   {branchYear && <p class="text-gray-400 font-inter text-sm mb-3">{branchYear}</p>}
 
@@ -81,20 +131,218 @@ const imageSource = image.trim() || '/images/team-placeholder.svg';
   {hasSocialLinks && (
     <div class="mt-auto flex items-center gap-3 pt-2">
       {socialLinks.github && (
-        <a href={socialLinks.github} target="_blank" rel="noopener noreferrer" aria-label={`${name} GitHub`} class="text-gray-300 hover:text-red-300 transition-colors">
+        <a href={socialLinks.github} target="_blank" rel="noopener noreferrer" aria-label={`${name} GitHub`} class="social-icon-button text-gray-300 hover:text-red-200 transition-colors">
           <iconify-icon icon="mdi:github" width="20" height="20"></iconify-icon>
         </a>
       )}
       {socialLinks.linkedin && (
-        <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${name} LinkedIn`} class="text-gray-300 hover:text-red-300 transition-colors">
+        <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${name} LinkedIn`} class="social-icon-button text-gray-300 hover:text-red-200 transition-colors">
           <iconify-icon icon="mdi:linkedin" width="20" height="20"></iconify-icon>
         </a>
       )}
       {socialLinks.instagram && (
-        <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" aria-label={`${name} Instagram`} class="text-gray-300 hover:text-red-300 transition-colors">
+        <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" aria-label={`${name} Instagram`} class="social-icon-button text-gray-300 hover:text-red-200 transition-colors">
           <iconify-icon icon="mdi:instagram" width="20" height="20"></iconify-icon>
         </a>
       )}
     </div>
   )}
 </article>
+
+<style>
+  .team-card-shell {
+    background: linear-gradient(165deg, rgba(30, 6, 4, 0.92), rgba(16, 3, 2, 0.88));
+    border: 1px solid rgba(255, 100, 60, 0.2);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    content-visibility: auto;
+    contain-intrinsic-size: 430px;
+    contain: layout paint style;
+  }
+
+  .team-card-reveal {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0) scale(0.988);
+    animation: teamCardIn 500ms ease-out forwards;
+    animation-delay: var(--card-delay, 0ms);
+    will-change: transform;
+  }
+
+  .team-card-tilt {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+  }
+
+  .team-role-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.73rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgb(254 226 226 / 0.95);
+    border: 1px solid rgb(248 113 113 / 0.22);
+    background: linear-gradient(135deg, rgb(110 24 24 / 0.34), rgb(9 9 11 / 0.3));
+    border-radius: 999px;
+    padding: 0.28rem 0.62rem;
+  }
+
+  .role-crest-copy {
+    display: inline-flex;
+    flex-direction: column;
+    line-height: 1.05;
+  }
+
+  .role-crest-copy small {
+    font-size: 0.58rem;
+    letter-spacing: 0.16em;
+    color: rgb(252 165 165 / 0.9);
+  }
+
+  .role-crest-member {
+    border-color: rgb(248 113 113 / 0.16);
+  }
+
+  .role-crest-lead {
+    border-color: rgb(248 113 113 / 0.34);
+    background: linear-gradient(135deg, rgb(127 29 29 / 0.42), rgb(38 10 8 / 0.4));
+  }
+
+  .role-crest-president {
+    border-color: rgb(254 202 202 / 0.55);
+    background: linear-gradient(135deg, rgb(185 28 28 / 0.55), rgb(60 12 9 / 0.45));
+    box-shadow: inset 0 0 0 1px rgb(255 237 213 / 0.18);
+  }
+
+  .team-accent-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 1px solid rgba(248, 113, 113, 0.18);
+    pointer-events: none;
+    transition: border-color 260ms ease, box-shadow 260ms ease;
+    animation: auroraEdgeShift 10s ease-in-out infinite;
+  }
+
+  .team-card-member .team-accent-ring {
+    box-shadow: inset 0 0 0 1px rgb(248 113 113 / 0.08);
+  }
+
+  .team-card-lead .team-accent-ring {
+    box-shadow: inset 0 0 0 1px rgb(248 113 113 / 0.16), 0 0 18px rgb(220 38 38 / 0.16);
+  }
+
+  .team-card-president .team-accent-ring {
+    border-color: rgb(254 202 202 / 0.56);
+    box-shadow: inset 0 0 0 1px rgb(254 202 202 / 0.24), 0 0 30px rgb(239 68 68 / 0.24);
+  }
+
+  .team-corner {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-color: rgba(248, 113, 113, 0.38);
+    pointer-events: none;
+    opacity: 0.8;
+  }
+
+  .team-corner-tl {
+    top: 0.6rem;
+    left: 0.6rem;
+    border-top: 1px solid;
+    border-left: 1px solid;
+  }
+
+  .team-corner-br {
+    right: 0.6rem;
+    bottom: 0.6rem;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+  }
+
+  .team-portrait-wrap {
+    position: relative;
+  }
+
+  .team-portrait-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 8%;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(239, 68, 68, 0.1), transparent 70%);
+    pointer-events: none;
+  }
+
+  .team-portrait-arc {
+    position: absolute;
+    inset: 8% 14%;
+    border-radius: 999px;
+    border-top: 2px solid rgba(248, 113, 113, 0.62);
+    border-left: 2px solid rgba(248, 113, 113, 0.38);
+    border-right: 2px solid rgba(251, 146, 60, 0.34);
+    border-bottom: 0;
+    pointer-events: none;
+    z-index: 2;
+    transform: rotate(-8deg);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .team-card-tilt:hover {
+      transform: translate3d(0, -5px, 0) rotateX(2deg) rotateY(-2deg);
+      border-color: rgb(248 113 113 / 0.36);
+      box-shadow: 0 10px 24px rgb(0 0 0 / 0.3), 0 0 16px rgb(220 38 38 / 0.14);
+    }
+  }
+
+  .social-icon-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.02);
+    border: 1px solid rgb(255 255 255 / 0.08);
+    transition: transform 170ms ease, box-shadow 180ms ease, border-color 170ms ease;
+  }
+
+  .social-icon-button:hover {
+    transform: translate3d(0, -1px, 0) scale(1.08);
+    border-color: rgb(248 113 113 / 0.45);
+    box-shadow: 0 0 10px rgb(248 113 113 / 0.24);
+  }
+
+  @keyframes auroraEdgeShift {
+    0%,
+    100% {
+      border-color: rgba(248, 113, 113, 0.34);
+    }
+    50% {
+      border-color: rgba(251, 146, 60, 0.42);
+    }
+  }
+
+  @keyframes teamCardIn {
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .team-card-reveal {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
+
+    .team-accent-ring {
+      animation: none;
+    }
+
+    .team-card-tilt:hover,
+    .social-icon-button:hover {
+      transform: none;
+    }
+  }
+</style>

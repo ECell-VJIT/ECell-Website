@@ -1,4 +1,54 @@
 {
+  "administration": [
+    {
+      "id": "admin-1",
+      "name": "Principal",
+      "role": "Institutional Patron",
+      "team": "administration",
+      "branch": "",
+      "year": "",
+      "roll_number": "",
+      "image": "",
+      "socials": {
+        "github": "",
+        "linkedin": "",
+        "instagram": ""
+      },
+      "tagline": "Enabling innovation and entrepreneurship culture across campus."
+    },
+    {
+      "id": "admin-2",
+      "name": "Faculty Coordinator",
+      "role": "Academic Mentor",
+      "team": "administration",
+      "branch": "",
+      "year": "",
+      "roll_number": "",
+      "image": "",
+      "socials": {
+        "github": "",
+        "linkedin": "",
+        "instagram": ""
+      },
+      "tagline": "Bridging student initiatives with mentorship and execution guidance."
+    },
+    {
+      "id": "admin-3",
+      "name": "Sr. Administrative Officer",
+      "role": "Operational Support",
+      "team": "administration",
+      "branch": "",
+      "year": "",
+      "roll_number": "",
+      "image": "",
+      "socials": {
+        "github": "",
+        "linkedin": "",
+        "instagram": ""
+      },
+      "tagline": "Supporting seamless execution of events and institutional initiatives."
+    }
+  ],
   "core": [
     {
       "id": "core-1",
