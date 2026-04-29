@@ -11,18 +11,18 @@ const {
 
 const footerLinks = [
   {
-    title: 'About E-Cell',
+    title: 'About',
     links: [
-      { label: 'Our Mission', href: '#about' },
-      { label: 'Leadership Team', href: '/team' },
-      { label: 'Initiatives', href: '#events' }
+      { label: 'Mission', href: '/#about' },
+      { label: 'What We Do', href: '/#domains' },
+      { label: 'Core Team', href: '/team' }
     ]
   },
   {
     title: 'Explore',
     links: [
-      { label: 'What We Do', href: '#domains' },
-      { label: 'Join Community', href: '#join' },
+      { label: 'Events', href: '/events' },
+      { label: 'Join', href: '/#join' },
       { label: 'Team Directory', href: '/team' }
     ]
   }
@@ -48,7 +48,6 @@ const contactInfo = [
 const socialLinks = [
   { icon: 'mdi:instagram', label: 'Instagram', href: '#' },
   { icon: 'mdi:linkedin', label: 'LinkedIn', href: '#' },
-  { icon: 'mdi:twitter', label: 'Twitter', href: '#' },
   { icon: 'mdi:github', label: 'GitHub', href: '#' }
 ];
 ---
@@ -101,31 +100,30 @@ const socialLinks = [
             ))}
           </ul>
         </div>
+
+        <div>
+          <h4 class="text-white text-lg font-semibold mb-5 font-jakarta">Connect</h4>
+          <div class="flex flex-wrap gap-3">
+            {socialLinks.map(({ icon, label, href }) => (
+              <a href={href} aria-label={label} class="footer-social-link">
+                <iconify-icon icon={icon} width="19" height="19"></iconify-icon>
+              </a>
+            ))}
+          </div>
+        </div>
       </div>
 
       <div class="fire-line-divider" aria-hidden="true"></div>
 
       <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-        <div class="flex items-center gap-3 text-gray-300">
-          {socialLinks.map(({ icon, label, href }) => (
-            <a href={href} aria-label={label} class="footer-social-link">
-              <iconify-icon icon={icon} width="19" height="19"></iconify-icon>
-            </a>
-          ))}
-        </div>
         <p class="text-center md:text-left text-gray-400">
           Copyright {copyright} {brand}. All rights reserved.
         </p>
+        <span class="footer-badge">Built for student founders</span>
       </div>
 
-      <div class="hidden lg:flex h-52 -mb-20 pointer-events-none select-none" data-footer-hover>
-        <svg
-          width="100%"
-          height="100%"
-          viewBox="0 0 1200 220"
-          xmlns="http://www.w3.org/2000/svg"
-          class="w-full h-full"
-        >
+      <div class="hidden lg:flex h-44 -mb-16 pointer-events-none select-none mt-6" data-footer-hover>
+        <svg width="100%" height="100%" viewBox="0 0 1200 220" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
           <defs>
             <linearGradient id="footerTextGradient" x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stop-color="#fb7185" />
@@ -143,37 +141,9 @@ const socialLinks = [
             </mask>
           </defs>
 
-          <text
-            x="50%"
-            y="56%"
-            text-anchor="middle"
-            dominant-baseline="middle"
-            class="footer-hover-outline"
-          >
-            E-CELL VJIT
-          </text>
-
-          <text
-            x="50%"
-            y="56%"
-            text-anchor="middle"
-            dominant-baseline="middle"
-            class="footer-hover-stroke"
-          >
-            E-CELL VJIT
-          </text>
-
-          <text
-            x="50%"
-            y="56%"
-            text-anchor="middle"
-            dominant-baseline="middle"
-            stroke="url(#footerTextGradient)"
-            mask="url(#footerTextMask)"
-            class="footer-hover-reveal"
-          >
-            E-CELL VJIT
-          </text>
+          <text x="50%" y="56%" text-anchor="middle" dominant-baseline="middle" class="footer-hover-outline">E-CELL VJIT</text>
+          <text x="50%" y="56%" text-anchor="middle" dominant-baseline="middle" class="footer-hover-stroke">E-CELL VJIT</text>
+          <text x="50%" y="56%" text-anchor="middle" dominant-baseline="middle" stroke="url(#footerTextGradient)" mask="url(#footerTextMask)" class="footer-hover-reveal">E-CELL VJIT</text>
         </svg>
       </div>
     </div>
@@ -187,7 +157,6 @@ const socialLinks = [
 
     const svg = root.querySelector('svg');
     const revealGradient = root.querySelector('#footerRevealMaskGradient');
-
     if (!(svg instanceof SVGSVGElement) || !(revealGradient instanceof SVGRadialGradientElement)) return;
 
     let targetX = 50;
@@ -199,10 +168,8 @@ const socialLinks = [
     const animate = () => {
       currentX += (targetX - currentX) * 0.16;
       currentY += (targetY - currentY) * 0.16;
-
       revealGradient.setAttribute('cx', `${currentX}%`);
       revealGradient.setAttribute('cy', `${currentY}%`);
-
       if (Math.abs(targetX - currentX) > 0.02 || Math.abs(targetY - currentY) > 0.02) {
         requestAnimationFrame(animate);
       } else {
@@ -256,7 +223,7 @@ const socialLinks = [
     justify-content: center;
     color: rgb(254 202 202);
     border: 1px solid rgba(248, 113, 113, 0.38);
-    background: linear-gradient(135deg, rgba(127, 29, 29, 0.45), rgba(17, 24, 39, 0.1));
+    background: linear-gradient(135deg, rgba(127, 29, 29, 0.45), rgba(17, 24, 39, 0.08));
   }
 
   .footer-link {
@@ -289,6 +256,19 @@ const socialLinks = [
     transform: translateY(-1px);
     color: rgb(254 226 226);
     border-color: rgba(248, 113, 113, 0.4);
+  }
+
+  .footer-badge {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 0.45rem 0.75rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: rgb(254 202 202);
+    border: 1px solid rgba(248, 113, 113, 0.24);
+    background: rgba(127, 29, 29, 0.18);
   }
 
   .footer-hover-outline,
