@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import Preloader from '../components/Preloader.astro';
+import Footer from '../components/Footer.astro';
 
 interface Props {
   title?: string;
@@ -21,8 +22,11 @@ const {
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   </head>
-  <body class:list={["bg-black text-white font-inter selection:bg-red-600/30", { loading: showPreloader }] }>
+  <body class:list={["min-h-screen flex flex-col bg-black text-white font-inter selection:bg-red-600/30", { loading: showPreloader }] }>
     {showPreloader && <Preloader />}
-    <slot />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>
