@@ -109,14 +109,19 @@ const badgeClass = isPresident
     </span>
   </div>
 
-  <div class="team-portrait-wrap w-full aspect-square mb-5 overflow-hidden rounded-md border border-white/10 bg-black/20">
-    <span class="team-portrait-arc" aria-hidden="true"></span>
+  <div class="team-portrait-wrap w-full mb-5 bg-transparent">
+    <div class="team-portrait-window" aria-hidden="true">
+      <div class="team-portrait-loader"></div>
+      <div class="team-portrait-window-glow"></div>
+    </div>
     <img
       src={imageSource}
       alt={`${name} profile`}
       loading="lazy"
-      class="h-full w-full object-cover"
-      onerror="this.onerror=null;this.src='/images/team-placeholder.svg';"
+      decoding="async"
+      class="team-portrait-image"
+      onload="this.closest('.team-portrait-window')?.classList.add('is-loaded');"
+      onerror="this.closest('.team-portrait-window')?.classList.add('is-loaded');this.onerror=null;this.src='/images/team-placeholder.svg';"
     />
   </div>
 
@@ -262,28 +267,78 @@ const badgeClass = isPresident
 
   .team-portrait-wrap {
     position: relative;
+    aspect-ratio: 0.92;
+    display: grid;
+    place-items: center;
   }
 
-  .team-portrait-wrap::before {
-    content: '';
+  .team-portrait-window {
     position: absolute;
-    inset: 8%;
-    border-radius: 999px;
-    background: radial-gradient(circle, rgba(239, 68, 68, 0.1), transparent 70%);
-    pointer-events: none;
-  }
-
-  .team-portrait-arc {
-    position: absolute;
-    inset: 8% 14%;
-    border-radius: 999px;
-    border-top: 2px solid rgba(248, 113, 113, 0.62);
-    border-left: 2px solid rgba(248, 113, 113, 0.38);
-    border-right: 2px solid rgba(251, 146, 60, 0.34);
-    border-bottom: 0;
+    inset: 7.5% 10%;
+    border-radius: 1.55rem;
+    overflow: hidden;
+    transform: rotate(-4.5deg);
+    transform-origin: center;
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.05), transparent 28%),
+      radial-gradient(circle at 50% 38%, rgba(239, 68, 68, 0.08), rgba(0, 0, 0, 0.12) 66%, rgba(0, 0, 0, 0.26) 100%);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+      inset 0 0 0 10px rgba(0, 0, 0, 0.08),
+      0 0 0 1px rgba(248, 113, 113, 0.14),
+      0 0 18px rgba(239, 68, 68, 0.12);
     pointer-events: none;
     z-index: 2;
-    transform: rotate(-8deg);
+  }
+
+  .team-portrait-loader {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background:
+      linear-gradient(110deg, rgba(255, 255, 255, 0.03) 8%, rgba(255, 255, 255, 0.1) 18%, rgba(255, 255, 255, 0.03) 33%),
+      radial-gradient(circle at 50% 50%, rgba(239, 68, 68, 0.14), rgba(0, 0, 0, 0.08) 68%, rgba(0, 0, 0, 0.18) 100%);
+    background-size: 220% 100%, 100% 100%;
+    animation: portraitShimmer 1.65s linear infinite;
+    transition: opacity 220ms ease;
+    z-index: 0;
+  }
+
+  .team-portrait-window.is-loaded .team-portrait-loader {
+    opacity: 0;
+  }
+
+  .team-portrait-window-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent 26%, transparent 74%, rgba(255, 255, 255, 0.08)),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 18%, transparent 82%, rgba(0, 0, 0, 0.18));
+    opacity: 0.78;
+    filter: blur(0.15px);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .team-portrait-image {
+    position: absolute;
+    inset: 7.5% 10%;
+    width: 80%;
+    height: 85%;
+    object-fit: cover;
+    object-position: center 18%;
+    border-radius: 1.15rem;
+    transform: rotate(4.5deg) scale(1.01);
+    transform-origin: center;
+    opacity: 0;
+    transition: opacity 260ms ease, transform 260ms ease;
+    z-index: 1;
+    filter: saturate(1.03) contrast(1.03) brightness(1.02);
+  }
+
+  .team-portrait-window.is-loaded .team-portrait-image {
+    opacity: 1;
   }
 
   @media (hover: hover) and (pointer: fine) {
@@ -319,6 +374,15 @@ const badgeClass = isPresident
     }
     50% {
       border-color: rgba(251, 146, 60, 0.42);
+    }
+  }
+
+  @keyframes portraitShimmer {
+    0% {
+      background-position: 220% 0, center;
+    }
+    100% {
+      background-position: -220% 0, center;
     }
   }
 
