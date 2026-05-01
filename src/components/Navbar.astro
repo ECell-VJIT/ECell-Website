@@ -10,10 +10,10 @@ interface Props {
 
 const { navLinks = [
   { label: 'About', href: '#about' },
-  { label: 'What We Do', href: '#domains' },
-  { label: 'Events', href: '#events' },
+  { label: 'Opportunities', href: '#domains' },
+  { label: 'Traction', href: '#traction' },
   { label: 'Team', href: '/team' },
-  { label: 'Join', href: '#join' },
+  { label: 'Launch', href: '/events' },
 ] } = Astro.props as Props;
 ---
 
@@ -31,10 +31,10 @@ const { navLinks = [
       ))}
     </div>
     <div>
-      <button class="text-sm font-inter glass rounded-md px-4 py-2 hover:bg-red-900/20 hover:border-red-500/30 text-gray-200 transition-all flex items-center gap-2">
-        <span>Join Community</span>
+      <a href="/events" class="text-sm font-inter glass rounded-md px-4 py-2 hover:bg-red-900/20 hover:border-red-500/30 text-gray-200 transition-all flex items-center gap-2">
+        <span>View Events</span>
         <iconify-icon icon="solar:arrow-right-linear" width="16" height="16"></iconify-icon>
-      </button>
+      </a>
     </div>
   </div>
 </nav>

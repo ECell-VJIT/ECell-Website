@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BackgroundShader from '../components/BackgroundShader.astro';
+import Navbar from '../components/Navbar.astro';
+import Events from '../components/Events.astro';
+import CTA from '../components/CTA.astro';
+---
+
+<BaseLayout title="E-Cell VJIT | Events" showPreloader={true}>
+  <BackgroundShader />
+  <Navbar />
+
+  <section class="container mx-auto px-6 py-16 md:py-24 relative z-10">
+    <div class="max-w-3xl mb-10 md:mb-12">
+      <p class="text-xs uppercase tracking-[0.3em] text-red-200/80 mb-4">Events</p>
+      <h1 class="text-4xl md:text-6xl font-jakarta font-semibold tracking-tight mb-4">Upcoming events and student experiences</h1>
+      <p class="text-gray-300 font-inter text-base md:text-lg leading-relaxed">
+        Hands-on opportunities, hackathons, workshops, and founder-facing sessions designed to help students learn by building.
+      </p>
+    </div>
+
+    <Events />
+  </section>
+
+  <section id="register" class="container mx-auto px-6 pb-16 md:pb-24 relative z-10">
+    <div class="glass rounded-2xl p-8 md:p-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+      <div class="max-w-2xl">
+        <p class="text-xs uppercase tracking-[0.3em] text-red-200/80 mb-4">Registrations</p>
+        <h2 class="text-3xl md:text-5xl font-jakarta font-semibold tracking-tight mb-4">Stay updated through official announcements.</h2>
+        <p class="text-gray-300 font-inter text-base md:text-lg leading-relaxed">
+          For registrations and event updates, follow our official announcements or write to ecell@vjit.ac.in.
+        </p>
+      </div>
+      <a href="mailto:ecell@vjit.ac.in?subject=E-Cell%20VJIT%20Event%20Registration" class="bg-gradient-to-r from-red-700 to-orange-600 text-white font-inter font-medium text-base rounded-md px-8 py-4 hover:shadow-[0_0_30px_rgba(220,38,38,0.4)] transition-all shadow-lg shadow-red-900/20 text-center">
+        Contact E-Cell
+      </a>
+    </div>
+  </section>
+
+  <CTA title="Start your journey with us." description="Explore upcoming events, join hands-on programs, and register to build with the E-Cell VJIT community." primaryAction="View Upcoming Events" secondaryAction="Register for Events" primaryHref="/events" secondaryHref="/events#register" />
+</BaseLayout>

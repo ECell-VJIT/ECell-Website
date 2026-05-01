@@ -18,8 +18,8 @@
     },
     {
       "id": "core-2",
-      "name": "Kashyap",
-      "role": "Associate President",
+      "name": "Kashyap Devulapalli",
+      "role": "Vice-President",
       "team": "core",
       "branch": "",
       "year": "",
@@ -34,8 +34,8 @@
     },
     {
       "id": "core-3",
-      "name": "Sai Srujan",
-      "role": "Tech Lead",
+      "name": "Sai Srujan Punati",
+      "role": "Technical Lead",
       "team": "tech",
       "branch": "",
       "year": "",
@@ -50,8 +50,8 @@
     },
     {
       "id": "core-4",
-      "name": "Iliyaz",
-      "role": "Digital Lead",
+      "name": "Syed Iliyaz",
+      "role": "Digital Media Lead",
       "team": "digital",
       "branch": "",
       "year": "",
@@ -66,7 +66,7 @@
     },
     {
       "id": "core-5",
-      "name": "Shashank",
+      "name": "Shashank Madishetty",
       "role": "Creative Lead",
       "team": "creative",
       "branch": "",
@@ -83,7 +83,7 @@
     {
       "id": "core-6",
       "name": "Tanvi Gorge",
-      "role": "HR & Documentation Lead",
+      "role": "Head of Documentation & HR",
       "team": "documentation",
       "branch": "",
       "year": "",
@@ -98,8 +98,8 @@
     },
     {
       "id": "core-7",
-      "name": "Sameera",
-      "role": "Marketing Lead",
+      "name": "Sameera Shaik",
+      "role": "Head of Marketing",
       "team": "marketing",
       "branch": "",
       "year": "",
@@ -115,7 +115,7 @@
     {
       "id": "core-8",
       "name": "Aldrin Paul",
-      "role": "Event Management Lead",
+      "role": "Head of Event Management",
       "team": "event_management",
       "branch": "",
       "year": "",

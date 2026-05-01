@@ -2,7 +2,6 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BackgroundShader from '../../components/BackgroundShader.astro';
 import Navbar from '../../components/Navbar.astro';
-import Footer from '../../components/Footer.astro';
 import TeamCard from '../../components/TeamCard.astro';
 import teamData from '../../../team.json';
 
@@ -70,5 +69,4 @@ const pageTitle = teamTitles[normalizedSlug as TeamKey] ?? 'Team';
     </div>
   </section>
 
-  <Footer />
 </BaseLayout>
