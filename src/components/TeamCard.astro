@@ -61,7 +61,13 @@ const imageSource = image.trim() || '/images/team-placeholder.svg';
 const roleLower = role.toLowerCase();
 
 const isPresident = roleLower === 'president';
-const isLead = !isPresident && (roleLower.includes('lead') || roleLower.includes('associate president'));
+const isLead = !isPresident && (
+  roleLower.includes('lead') ||
+  roleLower.includes('vice-president') ||
+  roleLower.includes('vice president') ||
+  roleLower.includes('head of') ||
+  roleLower.includes('associate president')
+);
 
 const accentClass = isPresident
   ? 'team-card-president'
@@ -110,7 +116,7 @@ const badgeClass = isPresident
   </div>
 
   <div class="team-portrait-wrap w-full mb-5 bg-transparent">
-    <div class="team-portrait-window" aria-hidden="true">
+    <div class="team-portrait-window">
       <img
         src={imageSource}
         alt={`${name} profile`}
@@ -120,8 +126,8 @@ const badgeClass = isPresident
         onload="this.closest('.team-portrait-window')?.classList.add('is-loaded');"
         onerror="this.closest('.team-portrait-window')?.classList.add('is-loaded');this.onerror=null;this.src='/images/team-placeholder.svg';"
       />
-      <div class="team-portrait-loader"></div>
-      <div class="team-portrait-window-glow"></div>
+      <div class="team-portrait-loader" aria-hidden="true"></div>
+      <div class="team-portrait-window-glow" aria-hidden="true"></div>
     </div>
   </div>
 

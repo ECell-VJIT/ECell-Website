@@ -7,13 +7,13 @@ const outputFile = "team.json";
 const result = {
   core: [
     { id: "core-1", name: "Tania Viquar", role: "President", team: "core", branch: "", year: "", roll_number: "", image: "", socials: { github: "", linkedin: "", instagram: "" }, tagline: "" },
-    { id: "core-2", name: "Kashyap", role: "Associate President", team: "core", branch: "", year: "", roll_number: "", image: "", socials: { github: "", linkedin: "", instagram: "" }, tagline: "" },
-    { id: "core-3", name: "Sai Srujan", role: "Tech Lead", team: "tech", branch: "", year: "", roll_number: "", image: "", socials: { github: "", linkedin: "", instagram: "" }, tagline: "" },
-    { id: "core-4", name: "Iliyaz", role: "Digital Lead", team: "digital", branch: "", year: "", roll_number: "", image: "", socials: { github: "", linkedin: "", instagram: "" }, tagline: "" },
-    { id: "core-5", name: "Shashank", role: "Creative Lead", team: "creative", branch: "", year: "", roll_number: "", image: "", socials: { github: "", linkedin: "", instagram: "" }, tagline: "" },
-    { id: "core-6", name: "Tanvi Gorge", role: "HR & Documentation Lead", team: "documentation", branch: "", year: "", roll_number: "", image: "", socials: { github: "", linkedin: "", instagram: "" }, tagline: "" },
-    { id: "core-7", name: "Sameera", role: "Marketing Lead", team: "marketing", branch: "", year: "", roll_number: "", image: "", socials: { github: "", linkedin: "", instagram: "" }, tagline: "" },
-    { id: "core-8", name: "Aldrin Paul", role: "Event Management Lead", team: "event_management", branch: "", year: "", roll_number: "", image: "", socials: { github: "", linkedin: "", instagram: "" }, tagline: "" }
+    { id: "core-2", name: "Kashyap Devulapalli", role: "Vice-President", team: "core", branch: "", year: "", roll_number: "", image: "", socials: { github: "", linkedin: "", instagram: "" }, tagline: "" },
+    { id: "core-3", name: "Sai Srujan Punati", role: "Technical Lead", team: "tech", branch: "", year: "", roll_number: "", image: "", socials: { github: "", linkedin: "", instagram: "" }, tagline: "" },
+    { id: "core-4", name: "Syed Iliyaz", role: "Digital Media Lead", team: "digital", branch: "", year: "", roll_number: "", image: "", socials: { github: "", linkedin: "", instagram: "" }, tagline: "" },
+    { id: "core-5", name: "Shashank Madishetty", role: "Creative Lead", team: "creative", branch: "", year: "", roll_number: "", image: "", socials: { github: "", linkedin: "", instagram: "" }, tagline: "" },
+    { id: "core-6", name: "Tanvi Gorge", role: "Head of Documentation & HR", team: "documentation", branch: "", year: "", roll_number: "", image: "", socials: { github: "", linkedin: "", instagram: "" }, tagline: "" },
+    { id: "core-7", name: "Sameera Shaik", role: "Head of Marketing", team: "marketing", branch: "", year: "", roll_number: "", image: "", socials: { github: "", linkedin: "", instagram: "" }, tagline: "" },
+    { id: "core-8", name: "Aldrin Paul", role: "Head of Event Management", team: "event_management", branch: "", year: "", roll_number: "", image: "", socials: { github: "", linkedin: "", instagram: "" }, tagline: "" }
   ],
   teams: {
     tech: [],
