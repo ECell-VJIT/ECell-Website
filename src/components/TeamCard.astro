@@ -111,19 +111,18 @@ const badgeClass = isPresident
 
   <div class="team-portrait-wrap w-full mb-5 bg-transparent">
     <div class="team-portrait-window" aria-hidden="true">
+      <img
+        src={imageSource}
+        alt={`${name} profile`}
+        loading="lazy"
+        decoding="async"
+        class="team-portrait-image"
+        onload="this.closest('.team-portrait-window')?.classList.add('is-loaded');"
+        onerror="this.closest('.team-portrait-window')?.classList.add('is-loaded');this.onerror=null;this.src='/images/team-placeholder.svg';"
+      />
       <div class="team-portrait-loader"></div>
       <div class="team-portrait-window-glow"></div>
     </div>
-    <img
-      src={imageSource}
-      alt={`${name} profile`}
-      loading="lazy"
-      decoding="async"
-      class="team-portrait-image"
-      data-portrait-image
-      onload="this.parentElement?.querySelector('.team-portrait-window')?.classList.add('is-loaded');"
-      onerror="this.parentElement?.querySelector('.team-portrait-window')?.classList.add('is-loaded');this.onerror=null;this.src='/images/team-placeholder.svg';"
-    />
   </div>
 
   <h3 class="text-xl font-jakarta font-semibold mb-1 text-white">{name}</h3>
@@ -293,9 +292,12 @@ const badgeClass = isPresident
     z-index: 2;
   }
 
-  .team-portrait-loader {
+  .team-portrait-window > * {
     position: absolute;
     inset: 0;
+  }
+
+  .team-portrait-loader {
     border-radius: inherit;
     background:
       linear-gradient(110deg, rgba(255, 255, 255, 0.03) 8%, rgba(255, 255, 255, 0.1) 18%, rgba(255, 255, 255, 0.03) 33%),
@@ -311,8 +313,6 @@ const badgeClass = isPresident
   }
 
   .team-portrait-window-glow {
-    position: absolute;
-    inset: 0;
     border-radius: inherit;
     background:
       linear-gradient(135deg, rgba(255, 255, 255, 0.18), transparent 28%, transparent 72%, rgba(255, 255, 255, 0.08)),
@@ -324,14 +324,12 @@ const badgeClass = isPresident
   }
 
   .team-portrait-image {
-    position: absolute;
-    inset: 7% 10%;
-    width: 80%;
-    height: 86%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     object-position: center 18%;
-    border-radius: 1rem;
-    transform: rotate(5deg) scale(1.01);
+    border-radius: inherit;
+    transform: none;
     transform-origin: center;
     opacity: 0;
     transition: opacity 260ms ease, transform 260ms ease;
