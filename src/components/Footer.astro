@@ -51,17 +51,6 @@ const socialLinks = [
   { icon: 'mdi:instagram', label: 'Instagram', href: 'https://www.instagram.com/ecell_vjit?igsh=MTM3c3ExdXVwaXBreg==' },
   { icon: 'mdi:linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/company/e-cell-vjit/about/' }
 ];
-
-const coreContacts = [
-  { role: 'President', name: 'Tania Viquar', email: 'taniaviquar@gmail.com' },
-  { role: 'Vice-President', name: 'Kashyap Devulapalli', email: 'kashyapdevulapalli12@gmail.com' },
-  { role: 'Documentation & HR', name: 'Tanvi Gorge', email: 'tanvi.gorge25@gmail.com' },
-  { role: 'Marketing', name: 'Sameera Shaik', email: 'meerashail0429@gmail.com' },
-  { role: 'Event Management', name: 'Aldrin Paul', email: 'aldrinpaul2506@gmail.com' },
-  { role: 'Digital Media', name: 'Syed Iliyaz', email: 'syediliyaz803@gmail.com' },
-  { role: 'Technical', name: 'Sai Srujan Punati', email: 'saisrujanpunati@gmail.com' },
-  { role: 'Creative', name: 'Shashank Madishetty', email: 'madishettyshashank10@gmail.com' }
-];
 ---
 
 <footer class="container mx-auto px-6 pt-8 pb-10 relative z-10 text-sm text-gray-300 font-inter">
@@ -69,7 +58,7 @@ const coreContacts = [
     <div class="footer-bg" aria-hidden="true"></div>
 
     <div class="relative z-10 p-8 md:p-10 lg:p-12">
-      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-10 md:gap-8 lg:gap-12 pb-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8 lg:gap-12 pb-10">
         <div class="space-y-4">
           <div class="flex items-center gap-3">
             <span class="footer-brand-icon">
@@ -118,19 +107,6 @@ const coreContacts = [
               </a>
             ))}
           </div>
-        </div>
-
-        <div>
-          <h4 class="text-white text-lg font-semibold mb-5 font-jakarta">Core Contacts</h4>
-          <ul class="space-y-4">
-            {coreContacts.map((contact) => (
-              <li class="space-y-1">
-                <p class="text-sm font-semibold text-white">{contact.role}</p>
-                <p class="text-xs uppercase tracking-[0.18em] text-red-200/70">{contact.name}</p>
-                <a href={`mailto:${contact.email}`} class="footer-link text-sm break-all">{contact.email}</a>
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
 
