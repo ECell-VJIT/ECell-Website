@@ -120,8 +120,9 @@ const badgeClass = isPresident
       loading="lazy"
       decoding="async"
       class="team-portrait-image"
-      onload="this.closest('.team-portrait-window')?.classList.add('is-loaded');"
-      onerror="this.closest('.team-portrait-window')?.classList.add('is-loaded');this.onerror=null;this.src='/images/team-placeholder.svg';"
+      data-portrait-image
+      onload="this.parentElement?.querySelector('.team-portrait-window')?.classList.add('is-loaded');"
+      onerror="this.parentElement?.querySelector('.team-portrait-window')?.classList.add('is-loaded');this.onerror=null;this.src='/images/team-placeholder.svg';"
     />
   </div>
 
@@ -391,6 +392,15 @@ const badgeClass = isPresident
     to {
       opacity: 1;
       transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+
+  @keyframes portraitShimmer {
+    0% {
+      background-position: 220% 0, center;
+    }
+    100% {
+      background-position: -220% 0, center;
     }
   }
 
