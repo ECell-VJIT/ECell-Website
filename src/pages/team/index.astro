@@ -8,8 +8,11 @@ import teamData from '../../../team.json';
 const administration = teamData.administration ?? [];
 const core = teamData.core;
 const president = core.find((member) => member.role.toLowerCase() === 'president');
-const associatePresident = core.find((member) => member.role.toLowerCase() === 'associate president');
-const topLeadership = [president, associatePresident].filter(Boolean);
+const vicePresident = core.find((member) => {
+  const role = member.role.toLowerCase();
+  return role.includes('vice-president') || role.includes('vice president') || role.includes('associate president');
+});
+const topLeadership = [president, vicePresident].filter(Boolean);
 const leadIds = new Set(topLeadership.map((member) => member.id));
 const otherLeads = core.filter((member) => !leadIds.has(member.id));
 
