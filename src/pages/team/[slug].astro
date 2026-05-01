@@ -39,28 +39,34 @@ const pageTitle = teamTitles[normalizedSlug as TeamKey] ?? 'Team';
   <BackgroundShader />
   <Navbar />
 
-  <section class="container mx-auto px-6 py-16 md:py-24 relative z-10">
+  <section class="container mx-auto px-6 py-12 md:py-16 relative z-10">
     <a href="/team" class="inline-flex items-center gap-2 glass rounded-md px-4 py-2 text-sm font-inter text-gray-200 hover:text-white hover:border-red-500/30 transition-all mb-8">
       <iconify-icon icon="solar:arrow-left-linear" width="16" height="16"></iconify-icon>
       Back to Core Team
     </a>
 
-    <div class="max-w-3xl mb-10 md:mb-12">
+    <div class="max-w-4xl mx-auto mb-10 md:mb-12 text-center">
       <p class="text-xs uppercase tracking-[0.3em] text-red-200/80 mb-4">Team Directory</p>
       <h1 class="text-4xl md:text-6xl font-jakarta font-semibold tracking-tight mb-4">{pageTitle}</h1>
+      <p class="text-gray-300 font-inter text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
+        Meet the students contributing to this domain through execution, collaboration, and entrepreneurial thinking.
+      </p>
+    </div>
 
-    <div class="team-grid-optimized grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-7">
+    <div class="max-w-7xl mx-auto team-grid-optimized grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-7 justify-items-center">
       {members.map((member, index) => (
-        <TeamCard
-          name={member.name}
-          role={member.role}
-          image={member.image}
-          branch={member.branch}
-          year={member.year}
-          tagline={member.tagline}
-          socials={member.socials}
-          index={index}
-        />
+        <div class="w-full max-w-sm">
+          <TeamCard
+            name={member.name}
+            role={member.role}
+            image={member.image}
+            branch={member.branch}
+            year={member.year}
+            tagline={member.tagline}
+            socials={member.socials}
+            index={index}
+          />
+        </div>
       ))}
     </div>
   </section>
