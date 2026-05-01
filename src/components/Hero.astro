@@ -130,10 +130,10 @@ const {
 
 <style>
   .hero-shell {
-    min-height: calc(88vh - 6rem);
+    min-height: calc(84vh - 6rem);
     display: flex;
     align-items: flex-start;
-    padding-top: 2.5rem;
+    padding-top: 1.5rem;
   }
 
   .hero-grid {
@@ -143,9 +143,9 @@ const {
   .hero-title-stage {
     width: min(100%, 1600px);
     margin: 0 auto;
-    height: clamp(180px, 28vw, 360px);
+    height: clamp(160px, 26vw, 340px);
     position: relative;
-    transform: translateY(-0.5rem);
+    transform: translateY(-1rem);
   }
 
   .hero-title-svg {
@@ -158,7 +158,7 @@ const {
   .hero-hover-stroke,
   .hero-hover-reveal {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: clamp(120px, 17vw, 210px);
+    font-size: clamp(132px, 18vw, 220px);
     font-weight: 700;
     fill: transparent;
     letter-spacing: 4px;
@@ -166,49 +166,44 @@ const {
   }
 
   .hero-hover-outline {
-    stroke: rgba(255, 235, 235, 0.38);
-    stroke-width: 0.85;
+    stroke: rgba(255, 237, 237, 0.45);
+    stroke-width: 0.95;
   }
 
   .hero-hover-stroke {
-    stroke: rgba(255, 133, 122, 1);
+    stroke: rgba(255, 140, 125, 0.98);
     stroke-width: 1.15;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-dasharray: 70 24;
-    stroke-dashoffset: 0;
-    filter: drop-shadow(0 0 10px rgba(255, 92, 82, 0.35));
-    animation: heroStrokeFlow 7s linear infinite;
+    stroke-dasharray: 980;
+    stroke-dashoffset: 980;
+    filter: drop-shadow(0 0 14px rgba(255, 92, 82, 0.45));
+    animation: heroStrokeDraw 5s ease-in-out infinite alternate;
   }
 
   .hero-hover-reveal {
-    stroke-width: 0.95;
+    stroke-width: 1.05;
+    filter: drop-shadow(0 0 16px rgba(255, 107, 90, 0.42));
   }
 
   .hero-copy {
     text-wrap: balance;
   }
 
-  @keyframes heroStrokeFlow {
-    from {
-      stroke-dashoffset: 0;
-    }
-
+  @keyframes heroStrokeDraw {
     to {
-      stroke-dashoffset: -94;
+      stroke-dashoffset: 0;
     }
   }
 
   @media (max-width: 768px) {
     .hero-shell {
       min-height: auto;
-      padding-top: 2.25rem;
+      padding-top: 1.5rem;
       padding-bottom: 2rem;
     }
 
     .hero-title-stage {
-      height: clamp(130px, 34vw, 220px);
-      transform: translateY(-0.25rem);
+      height: clamp(120px, 32vw, 210px);
+      transform: translateY(-0.6rem);
     }
   }
 </style>
