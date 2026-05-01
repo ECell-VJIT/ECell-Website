@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import BackgroundShader from '../../components/BackgroundShader.astro';
 import Navbar from '../../components/Navbar.astro';
 import TeamCard from '../../components/TeamCard.astro';
-import teamData from '../../data/team.json';
+import teamData from '../../../team.json';
 
 export async function getStaticPaths() {
   return Object.keys(teamData.teams).map((team) => ({
