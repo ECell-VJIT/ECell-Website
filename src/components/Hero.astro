@@ -21,10 +21,10 @@ const {
 ---
 
 <div id="home" class="relative overflow-hidden">
-  <div class="hero-shell container mx-auto px-6 py-16 md:py-20 relative z-10">
+  <div class="hero-shell container mx-auto px-6 py-12 md:py-14 relative z-10">
     <div class="hero-grid flex flex-col items-center text-center">
       <div class="hero-intro max-w-5xl w-full">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass border border-red-500/20 mb-8">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass border border-red-500/20 mb-6">
           <span class="flex h-2 w-2 rounded-full bg-red-600 animate-pulse"></span>
           <span class="text-xs font-medium text-red-200 uppercase tracking-wider">{badge}</span>
         </div>
@@ -56,7 +56,7 @@ const {
           </svg>
         </div>
 
-        <p class="hero-copy text-gray-300 text-lg md:text-xl mt-8 mb-8 max-w-3xl mx-auto font-inter font-light tracking-normal leading-relaxed">
+        <p class="hero-copy text-gray-300 text-lg md:text-xl mt-5 mb-7 max-w-3xl mx-auto font-inter font-light tracking-normal leading-relaxed">
           {description}
         </p>
 
@@ -73,7 +73,7 @@ const {
       </div>
     </div>
 
-    <div class="hero-divider h-px glass-divider mt-16 opacity-50"></div>
+    <div class="hero-divider h-px glass-divider mt-10 opacity-50"></div>
   </div>
 </div>
 
@@ -130,9 +130,10 @@ const {
 
 <style>
   .hero-shell {
-    min-height: calc(100vh - 6rem);
+    min-height: calc(88vh - 6rem);
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    padding-top: 2.5rem;
   }
 
   .hero-grid {
@@ -144,6 +145,7 @@ const {
     margin: 0 auto;
     height: clamp(180px, 28vw, 360px);
     position: relative;
+    transform: translateY(-0.5rem);
   }
 
   .hero-title-svg {
@@ -160,44 +162,53 @@ const {
     font-weight: 700;
     fill: transparent;
     letter-spacing: 4px;
+    paint-order: stroke fill;
   }
 
   .hero-hover-outline {
-    stroke: rgba(255, 226, 226, 0.24);
-    stroke-width: 0.5;
+    stroke: rgba(255, 235, 235, 0.38);
+    stroke-width: 0.85;
   }
 
   .hero-hover-stroke {
-    stroke: rgba(255, 120, 110, 0.92);
-    stroke-width: 0.6;
-    stroke-dasharray: 1200;
-    stroke-dashoffset: 1200;
-    animation: heroStrokeDraw 5s ease-in-out infinite alternate;
+    stroke: rgba(255, 133, 122, 1);
+    stroke-width: 1.15;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 70 24;
+    stroke-dashoffset: 0;
+    filter: drop-shadow(0 0 10px rgba(255, 92, 82, 0.35));
+    animation: heroStrokeFlow 7s linear infinite;
   }
 
   .hero-hover-reveal {
-    stroke-width: 0.42;
+    stroke-width: 0.95;
   }
 
   .hero-copy {
     text-wrap: balance;
   }
 
-  @keyframes heroStrokeDraw {
-    to {
+  @keyframes heroStrokeFlow {
+    from {
       stroke-dashoffset: 0;
+    }
+
+    to {
+      stroke-dashoffset: -94;
     }
   }
 
   @media (max-width: 768px) {
     .hero-shell {
       min-height: auto;
-      padding-top: 3rem;
+      padding-top: 2.25rem;
       padding-bottom: 2rem;
     }
 
     .hero-title-stage {
       height: clamp(130px, 34vw, 220px);
+      transform: translateY(-0.25rem);
     }
   }
 </style>
