@@ -60,12 +60,14 @@ const {
           {description}
         </p>
 
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href={primaryHref} class="bg-gradient-to-r from-red-700 to-orange-600 text-white font-inter font-medium text-base rounded-md px-8 py-4 hover:shadow-[0_0_30px_rgba(220,38,38,0.4)] transition-all flex items-center justify-center gap-2 shadow-lg shadow-red-900/20">
+        <div class="hero-actions flex flex-col sm:flex-row gap-4 justify-center">
+          <a href={primaryHref} class="hero-action hero-action-primary text-white font-inter font-medium text-base rounded-full px-8 py-4 transition-all flex items-center justify-center gap-2 shadow-lg shadow-red-900/20">
+            <span class="hero-action-ring" aria-hidden="true"></span>
             <iconify-icon icon="solar:rocket-linear" width="20" height="20"></iconify-icon>
             {primaryAction}
           </a>
-          <a href={secondaryHref} class="glass font-inter text-base rounded-md px-8 py-4 hover:bg-white/5 transition-all flex items-center justify-center gap-2">
+          <a href={secondaryHref} class="hero-action hero-action-secondary font-inter text-base rounded-full px-8 py-4 transition-all flex items-center justify-center gap-2">
+            <span class="hero-action-ring" aria-hidden="true"></span>
             <iconify-icon icon="solar:play-circle-linear" width="20" height="20"></iconify-icon>
             {secondaryAction}
           </a>
@@ -186,6 +188,96 @@ const {
 
   .hero-copy {
     text-wrap: balance;
+  }
+
+  .hero-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .hero-action {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    min-width: min(100%, 17rem);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.06),
+      0 12px 28px rgba(0, 0, 0, 0.22);
+  }
+
+  .hero-action::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(254, 202, 202, 0.7), rgba(239, 68, 68, 0.45), rgba(251, 146, 60, 0.8));
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    opacity: 0.85;
+    transition: opacity 180ms ease, filter 180ms ease;
+    pointer-events: none;
+  }
+
+  .hero-action::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.18) 18%, transparent 36%);
+    transform: translateX(-130%);
+    transition: transform 520ms ease;
+    pointer-events: none;
+    mix-blend-mode: screen;
+  }
+
+  .hero-action:hover::after {
+    transform: translateX(130%);
+  }
+
+  .hero-action:hover::before {
+    opacity: 1;
+    filter: drop-shadow(0 0 10px rgba(255, 92, 82, 0.35));
+  }
+
+  .hero-action-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  .hero-action-primary {
+    background: linear-gradient(135deg, rgba(185, 28, 28, 0.96), rgba(249, 115, 22, 0.95));
+    color: white;
+  }
+
+  .hero-action-primary:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      0 0 0 1px rgba(254, 202, 202, 0.12),
+      0 16px 32px rgba(220, 38, 38, 0.22),
+      0 0 24px rgba(248, 113, 113, 0.18);
+  }
+
+  .hero-action-secondary {
+    background: rgba(40, 5, 0, 0.28);
+    color: rgb(254 226 226);
+  }
+
+  .hero-action-secondary:hover {
+    transform: translateY(-1px);
+    background: rgba(40, 5, 0, 0.4);
+    box-shadow:
+      0 0 0 1px rgba(254, 202, 202, 0.14),
+      0 12px 28px rgba(0, 0, 0, 0.26),
+      0 0 18px rgba(248, 113, 113, 0.12);
   }
 
   @keyframes heroStrokeDraw {
