@@ -28,6 +28,23 @@ const footerLinks = [
   }
 ];
 
+const contactInfo = [
+  {
+    icon: 'solar:letter-linear',
+    text: 'hello@ecellvjit.in',
+    href: 'mailto:hello@ecellvjit.in'
+  },
+  {
+    icon: 'solar:phone-linear',
+    text: '+91 90000 00000',
+    href: 'tel:+919000000000'
+  },
+  {
+    icon: 'solar:map-point-linear',
+    text: 'VJIT Campus, Hyderabad'
+  }
+];
+
 const socialLinks = [
   { icon: 'mdi:instagram', label: 'Instagram', href: '#' },
   { icon: 'mdi:linkedin', label: 'LinkedIn', href: '#' },
@@ -65,6 +82,24 @@ const socialLinks = [
             </ul>
           </div>
         ))}
+
+        <div>
+          <h4 class="text-white text-lg font-semibold mb-5 font-jakarta">Contact</h4>
+          <ul class="space-y-4">
+            {contactInfo.map((item) => (
+              <li class="flex items-center gap-3 text-gray-300">
+                <span class="footer-contact-icon">
+                  <iconify-icon icon={item.icon} width="18" height="18"></iconify-icon>
+                </span>
+                {item.href ? (
+                  <a href={item.href} class="footer-link">{item.text}</a>
+                ) : (
+                  <span>{item.text}</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
 
         <div>
           <h4 class="text-white text-lg font-semibold mb-5 font-jakarta">Connect</h4>
@@ -200,6 +235,10 @@ const socialLinks = [
     color: rgb(254 226 226);
   }
 
+  .footer-contact-icon {
+    color: rgb(252 165 165);
+  }
+
   .footer-social-link {
     width: 2rem;
     height: 2rem;
@@ -248,8 +287,8 @@ const socialLinks = [
   }
 
   .footer-hover-stroke {
-    stroke: rgba(248, 113, 113, 0.5);
-    stroke-width: 0.45;
+    stroke: rgba(255, 120, 110, 0.92);
+    stroke-width: 0.6;
     stroke-dasharray: 950;
     stroke-dashoffset: 950;
     animation: footerStrokeDraw 5s ease-in-out infinite alternate;
