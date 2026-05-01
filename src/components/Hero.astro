@@ -40,7 +40,7 @@ const {
                 <stop offset="100%" stop-color="#fb923c" />
               </linearGradient>
 
-              <radialGradient id="heroRevealMaskGradient" cx="50%" cy="50%" r="22%">
+              <radialGradient id="heroRevealMaskGradient" cx="50%" cy="42%" r="20%">
                 <stop offset="0%" stop-color="white" />
                 <stop offset="100%" stop-color="black" />
               </radialGradient>
@@ -87,9 +87,9 @@ const {
     if (!(svg instanceof SVGSVGElement) || !(revealGradient instanceof SVGRadialGradientElement)) return;
 
     let targetX = 50;
-    let targetY = 50;
+    let targetY = 42;
     let currentX = 50;
-    let currentY = 50;
+    let currentY = 42;
     let ticking = false;
 
     const animate = () => {
@@ -122,7 +122,7 @@ const {
     root.addEventListener('mouseenter', queueAnimation, { passive: true });
     root.addEventListener('mouseleave', () => {
       targetX = 50;
-      targetY = 50;
+      targetY = 42;
       queueAnimation();
     }, { passive: true });
   })();
@@ -130,10 +130,10 @@ const {
 
 <style>
   .hero-shell {
-    min-height: calc(84vh - 6rem);
+    min-height: calc(82vh - 6rem);
     display: flex;
     align-items: flex-start;
-    padding-top: 1.5rem;
+    padding-top: 1.25rem;
   }
 
   .hero-grid {
@@ -143,9 +143,9 @@ const {
   .hero-title-stage {
     width: min(100%, 1600px);
     margin: 0 auto;
-    height: clamp(160px, 26vw, 340px);
+    height: clamp(150px, 25vw, 320px);
     position: relative;
-    transform: translateY(-1rem);
+    transform: translateY(-0.85rem);
   }
 
   .hero-title-svg {
@@ -158,30 +158,30 @@ const {
   .hero-hover-stroke,
   .hero-hover-reveal {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: clamp(132px, 18vw, 220px);
+    font-size: clamp(126px, 16vw, 205px);
     font-weight: 700;
     fill: transparent;
-    letter-spacing: 4px;
+    letter-spacing: 2px;
     paint-order: stroke fill;
   }
 
   .hero-hover-outline {
-    stroke: rgba(255, 237, 237, 0.45);
-    stroke-width: 0.95;
+    stroke: rgba(255, 240, 240, 0.52);
+    stroke-width: 0.8;
   }
 
   .hero-hover-stroke {
-    stroke: rgba(255, 140, 125, 0.98);
-    stroke-width: 1.15;
-    stroke-dasharray: 980;
-    stroke-dashoffset: 980;
-    filter: drop-shadow(0 0 14px rgba(255, 92, 82, 0.45));
+    stroke: rgba(255, 145, 132, 1);
+    stroke-width: 1.2;
+    stroke-dasharray: 950;
+    stroke-dashoffset: 950;
+    filter: drop-shadow(0 0 16px rgba(255, 92, 82, 0.5));
     animation: heroStrokeDraw 5s ease-in-out infinite alternate;
   }
 
   .hero-hover-reveal {
-    stroke-width: 1.05;
-    filter: drop-shadow(0 0 16px rgba(255, 107, 90, 0.42));
+    stroke-width: 1.1;
+    filter: drop-shadow(0 0 18px rgba(255, 107, 90, 0.48));
   }
 
   .hero-copy {
@@ -197,13 +197,13 @@ const {
   @media (max-width: 768px) {
     .hero-shell {
       min-height: auto;
-      padding-top: 1.5rem;
+      padding-top: 1.25rem;
       padding-bottom: 2rem;
     }
 
     .hero-title-stage {
-      height: clamp(120px, 32vw, 210px);
-      transform: translateY(-0.6rem);
+      height: clamp(118px, 31vw, 205px);
+      transform: translateY(-0.5rem);
     }
   }
 </style>
