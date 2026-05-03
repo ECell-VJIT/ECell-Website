@@ -1,4 +1,54 @@
 {
+  "administration": [
+    {
+      "id": "admin-1",
+      "name": "A. Srujana",
+      "role": "Principal",
+      "team": "administration",
+      "branch": "",
+      "year": "",
+      "roll_number": "",
+      "image": "https://res.cloudinary.com/dy8vyfooj/image/upload/v1777635263/WhatsApp_Image_2026-05-01_at_16.56.10_xydcbp.jpg",
+      "socials": {
+        "github": "",
+        "linkedin": "",
+        "instagram": ""
+      },
+      "tagline": "Enabling innovation and entrepreneurship culture across campus."
+    },    
+    {
+      "id": "admin-2",
+      "name": "Mr. R. VenkataChalam",
+      "role": "Sr. Administrative Officer",
+      "team": "administration",
+      "branch": "",
+      "year": "",
+      "roll_number": "",
+      "image": "https://res.cloudinary.com/dy8vyfooj/image/upload/v1777635237/challam_sm0vjz.jpg",
+      "socials": {
+        "github": "",
+        "linkedin": "",
+        "instagram": ""
+      },
+      "tagline": "Supporting seamless execution of events and institutional initiatives."
+    },
+    {
+      "id": "admin-3",
+      "name": "Syed Nazeer Ahmed",
+      "role": "Faculty Coordinator",
+      "team": "administration",
+      "branch": "",
+      "year": "",
+      "roll_number": "",
+      "image": "https://res.cloudinary.com/dy8vyfooj/image/upload/v1777635958/naseer_w9jnvm.jpg",
+      "socials": {
+        "github": "",
+        "linkedin": "",
+        "instagram": ""
+      },
+      "tagline": "Bridging student initiatives with mentorship and execution guidance."
+    }
+  ],
   "core": [
     {
       "id": "core-1",
@@ -8,7 +58,7 @@
       "branch": "",
       "year": "",
       "roll_number": "",
-      "image": "",
+      "image": "https://res.cloudinary.com/dy8vyfooj/image/upload/v1777634025/tania_president_abya2u.jpg",
       "socials": {
         "github": "",
         "linkedin": "",
@@ -18,13 +68,13 @@
     },
     {
       "id": "core-2",
-      "name": "Kashyap Devulapalli",
-      "role": "Vice-President",
+      "name": "Kashyap",
+      "role": "Associate President",
       "team": "core",
       "branch": "",
       "year": "",
       "roll_number": "",
-      "image": "",
+      "image": "https://res.cloudinary.com/dy8vyfooj/image/upload/v1777636294/kashyap_bqvhk5.jpg",
       "socials": {
         "github": "",
         "linkedin": "",
@@ -34,13 +84,13 @@
     },
     {
       "id": "core-3",
-      "name": "Sai Srujan Punati",
-      "role": "Technical Lead",
+      "name": "Sai Srujan",
+      "role": "Tech Lead",
       "team": "tech",
       "branch": "",
       "year": "",
       "roll_number": "",
-      "image": "",
+      "image": "https://res.cloudinary.com/dy8vyfooj/image/upload/v1777634083/saiusesgithub_o7yuxu.jpg",
       "socials": {
         "github": "",
         "linkedin": "",
@@ -50,13 +100,13 @@
     },
     {
       "id": "core-4",
-      "name": "Syed Iliyaz",
-      "role": "Digital Media Lead",
+      "name": "Iliyaz",
+      "role": "Digital Lead",
       "team": "digital",
       "branch": "",
       "year": "",
       "roll_number": "",
-      "image": "",
+      "image": "https://res.cloudinary.com/dy8vyfooj/image/upload/v1777636827/illyaz_mrs6xz.jpg",
       "socials": {
         "github": "",
         "linkedin": "",
@@ -66,13 +116,13 @@
     },
     {
       "id": "core-5",
-      "name": "Shashank Madishetty",
+      "name": "Shashank",
       "role": "Creative Lead",
       "team": "creative",
       "branch": "",
       "year": "",
       "roll_number": "",
-      "image": "",
+      "image": "https://res.cloudinary.com/dy8vyfooj/image/upload/v1777636307/shashank_d0muuh.jpg",
       "socials": {
         "github": "",
         "linkedin": "",
@@ -83,12 +133,12 @@
     {
       "id": "core-6",
       "name": "Tanvi Gorge",
-      "role": "Head of Documentation & HR",
+      "role": "HR & Documentation Lead",
       "team": "documentation",
       "branch": "",
       "year": "",
       "roll_number": "",
-      "image": "",
+      "image": "https://res.cloudinary.com/dy8vyfooj/image/upload/v1777634609/tanvi_documentation_hsxhvl.jpg",
       "socials": {
         "github": "",
         "linkedin": "",
@@ -98,13 +148,13 @@
     },
     {
       "id": "core-7",
-      "name": "Sameera Shaik",
-      "role": "Head of Marketing",
+      "name": "Sameera",
+      "role": "Marketing Lead",
       "team": "marketing",
       "branch": "",
       "year": "",
       "roll_number": "",
-      "image": "",
+      "image": "https://res.cloudinary.com/dy8vyfooj/image/upload/v1777634031/sameera_marketing_f2esuj.jpg",
       "socials": {
         "github": "",
         "linkedin": "",
@@ -115,12 +165,12 @@
     {
       "id": "core-8",
       "name": "Aldrin Paul",
-      "role": "Head of Event Management",
+      "role": "Event Management Lead",
       "team": "event_management",
       "branch": "",
       "year": "",
       "roll_number": "",
-      "image": "",
+      "image": "https://res.cloudinary.com/dy8vyfooj/image/upload/v1777636419/aldrin_th2j2s.jpg",
       "socials": {
         "github": "",
         "linkedin": "",
