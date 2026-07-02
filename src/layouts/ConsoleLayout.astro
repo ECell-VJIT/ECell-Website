@@ -4,9 +4,18 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   showNav?: boolean;
+  brandLabel?: string;
+  homeHref?: string;
+  logoutHref?: string;
 }
 
-const { title = 'Console', showNav = true } = Astro.props as Props;
+const {
+  title = 'Console',
+  showNav = true,
+  brandLabel = 'E-Cell Console',
+  homeHref = '/console',
+  logoutHref = '/console/logout',
+} = Astro.props as Props;
 ---
 
 <html lang="en">
@@ -22,12 +31,12 @@ const { title = 'Console', showNav = true } = Astro.props as Props;
     {showNav && (
       <header class="border-b border-white/10 bg-black/60">
         <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href="/console" class="font-jakarta font-semibold tracking-tight text-white">
-            E-Cell Console
+          <a href={homeHref} class="font-jakarta font-semibold tracking-tight text-white">
+            {brandLabel}
           </a>
           <nav class="flex items-center gap-5 text-sm font-inter text-gray-300">
-            <a href="/console" class="hover:text-white transition-colors">Events</a>
-            <a href="/console/logout" class="hover:text-white transition-colors">Log out</a>
+            <a href={homeHref} class="hover:text-white transition-colors">Home</a>
+            <a href={logoutHref} class="hover:text-white transition-colors">Log out</a>
           </nav>
         </div>
       </header>

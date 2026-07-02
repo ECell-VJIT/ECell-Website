@@ -3,6 +3,9 @@ import bcrypt from 'bcryptjs';
 import crypto from 'node:crypto';
 
 export const SESSION_COOKIE_NAME = 'ecell_console_session';
+// Separate cookie for /scan — same shared password, but its own session so a
+// console login doesn't imply scanner access or vice versa.
+export const SCANNER_SESSION_COOKIE_NAME = 'ecell_scanner_session';
 const SESSION_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
 
 function getSessionSecret() {
