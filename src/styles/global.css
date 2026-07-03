@@ -137,6 +137,26 @@ canvas {
   }
 }
 
+/* Reserved column where the scroll paper plane travels; empty by design. */
+.plane-lane {
+  position: relative;
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .plane-lane {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.plane-stop {
+  display: block;
+  width: 1px;
+  height: 1px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .fire-line-divider::after {
     animation: none;
