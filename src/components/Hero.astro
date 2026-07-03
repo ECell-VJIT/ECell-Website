@@ -24,7 +24,7 @@ const {
   <div class="hero-shell container mx-auto px-6 py-12 md:py-14 relative z-10">
     <div class="hero-grid flex flex-col items-center text-center">
       <div class="hero-intro max-w-5xl w-full">
-        <div class="pixel-highlight rounded-full px-3 py-1 mb-6 text-xs">
+        <div class="pixel-highlight rounded-full px-3 py-1 mb-3 text-xs">
           <span class="flex h-2 w-2 rounded-full bg-red-600 animate-pulse"></span>
           <span>{badge}</span>
         </div>
@@ -46,7 +46,7 @@ const {
           </svg>
         </div>
 
-        <p class="hero-copy text-gray-300 text-lg md:text-xl mt-5 mb-7 max-w-3xl mx-auto font-inter font-light tracking-normal leading-relaxed">
+        <p class="hero-copy text-gray-300 text-lg md:text-xl mt-1 mb-6 max-w-3xl mx-auto font-inter font-light tracking-normal leading-relaxed">
           {description}
         </p>
 
@@ -71,10 +71,11 @@ const {
 
 <style>
   .hero-shell {
-    min-height: calc(82vh - 6rem);
+    min-height: calc(100vh - 7.5rem);
     display: flex;
-    align-items: flex-start;
-    padding-top: 1.25rem;
+    align-items: center;
+    padding-top: 0;
+    padding-bottom: 5rem;
   }
 
   .hero-grid {
@@ -84,9 +85,8 @@ const {
   .hero-title-stage {
     width: min(100%, 1600px);
     margin: 0 auto;
-    height: clamp(150px, 25vw, 320px);
+    height: clamp(128px, 20vw, 260px);
     position: relative;
-    transform: translateY(-0.85rem);
   }
 
   .hero-title-svg {
@@ -98,7 +98,7 @@ const {
   .hero-hover-outline,
   .hero-hover-stroke {
     font-family: 'Notable', 'Climate Crisis', 'Prosto One', sans-serif;
-    font-size: clamp(104px, 13.5vw, 176px);
+    font-size: clamp(96px, 12.2vw, 160px);
     font-weight: 400;
     fill: transparent;
     letter-spacing: 0;
@@ -116,7 +116,6 @@ const {
     stroke-dasharray: 950;
     stroke-dashoffset: 950;
     filter: drop-shadow(0 0 16px rgba(255, 92, 82, 0.5));
-    animation: heroStrokeDraw 5s ease-in-out infinite alternate;
   }
 
   .hero-copy {
@@ -213,22 +212,42 @@ const {
       0 0 18px rgba(248, 113, 113, 0.12);
   }
 
-  @keyframes heroStrokeDraw {
-    to {
+  body:not(.loading) .hero-hover-stroke {
+    animation: heroStrokeIgnite 4.8s ease-in-out infinite;
+  }
+
+  body.loading .hero-hover-stroke {
+    animation: none;
+    stroke-dashoffset: 950;
+    opacity: 0.18;
+  }
+
+  @keyframes heroStrokeIgnite {
+    0%,
+    14% {
+      stroke-dashoffset: 950;
+      opacity: 0.18;
+    }
+    38%,
+    78% {
       stroke-dashoffset: 0;
+      opacity: 1;
+    }
+    100% {
+      stroke-dashoffset: 950;
+      opacity: 0.18;
     }
   }
 
   @media (max-width: 768px) {
     .hero-shell {
-      min-height: auto;
+      min-height: calc(100vh - 5rem);
       padding-top: 1.25rem;
-      padding-bottom: 2rem;
+      padding-bottom: 3rem;
     }
 
     .hero-title-stage {
       height: clamp(118px, 31vw, 205px);
-      transform: translateY(-0.5rem);
     }
   }
 </style>
