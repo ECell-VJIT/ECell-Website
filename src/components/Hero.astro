@@ -1,6 +1,5 @@
 ---
 interface Props {
-  badge?: string;
   title?: string;
   description?: string;
   primaryAction?: string;
@@ -10,7 +9,6 @@ interface Props {
 }
 
 const {
-  badge = 'E-Cell VJIT 2026',
   title = 'E-CELL VJIT',
   description = 'E-Cell brings together students who want to learn, build, and experiment with real-world problems. Through events, mentorship, and a strong community, it creates opportunities to move from curiosity to execution.',
   primaryAction = 'View Upcoming Events',
@@ -24,9 +22,10 @@ const {
   <div class="hero-shell container mx-auto px-6 py-12 md:py-14 relative z-10">
     <div class="hero-grid flex flex-col items-center text-center">
       <div class="hero-intro max-w-5xl w-full">
-        <div class="pixel-highlight rounded-full px-3 py-1 mb-3 text-xs">
-          <span class="flex h-2 w-2 rounded-full bg-red-600 animate-pulse"></span>
-          <span>{badge}</span>
+        <div class="hero-typewriter" aria-label="E-Cell kinetic tagline">
+          <span class="hero-typewriter-dot" aria-hidden="true"></span>
+          <span class="hero-typewriter-text" data-hero-typewriter>we build</span>
+          <span class="hero-typewriter-caret" aria-hidden="true"></span>
         </div>
 
         <h1 class="sr-only">{title}</h1>
@@ -69,6 +68,54 @@ const {
   </div>
 </div>
 
+<script is:inline>
+  (() => {
+    const target = document.querySelector('[data-hero-typewriter]');
+    if (!(target instanceof HTMLElement)) return;
+
+    const phrases = ['we build', 'we pitch', 'we launch', 'we fail forward'];
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReduced) {
+      target.textContent = phrases.join('  ▸  ');
+      return;
+    }
+
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+
+    const tick = () => {
+      const phrase = phrases[phraseIndex];
+      target.textContent = phrase.slice(0, charIndex);
+
+      if (!deleting && charIndex < phrase.length) {
+        charIndex += 1;
+        window.setTimeout(tick, 58);
+        return;
+      }
+
+      if (!deleting && charIndex === phrase.length) {
+        deleting = true;
+        window.setTimeout(tick, 1050);
+        return;
+      }
+
+      if (deleting && charIndex > 0) {
+        charIndex -= 1;
+        window.setTimeout(tick, 34);
+        return;
+      }
+
+      deleting = false;
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      window.setTimeout(tick, 220);
+    };
+
+    tick();
+  })();
+</script>
+
 <style>
   .hero-shell {
     min-height: calc(100vh - 7.5rem);
@@ -80,6 +127,50 @@ const {
 
   .hero-grid {
     width: 100%;
+  }
+
+  .hero-typewriter {
+    width: fit-content;
+    min-width: 0;
+    min-height: 2.15rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    margin-bottom: 0.75rem;
+    border-radius: 999px;
+    border: 1px solid rgba(248, 113, 113, 0.28);
+    background: rgba(127, 29, 29, 0.22);
+    color: rgb(254, 226, 226);
+    box-shadow: 0 0 18px rgba(248, 113, 113, 0.1);
+    padding: 0.34rem 0.8rem;
+    font-family: 'Pixelify Sans', ui-monospace, monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .hero-typewriter-dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    flex: 0 0 auto;
+    border-radius: 999px;
+    background: rgb(239, 68, 68);
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.78);
+  }
+
+  .hero-typewriter-text {
+    min-width: 0;
+    text-align: center;
+  }
+
+  .hero-typewriter-caret {
+    width: 0.46rem;
+    height: 1rem;
+    flex: 0 0 auto;
+    background: rgb(254, 226, 226);
+    box-shadow: 0 0 12px rgba(254, 226, 226, 0.55);
+    animation: heroCaretBlink 780ms steps(2, end) infinite;
   }
 
   .hero-title-stage {
@@ -236,6 +327,12 @@ const {
     100% {
       stroke-dashoffset: 950;
       opacity: 0.18;
+    }
+  }
+
+  @keyframes heroCaretBlink {
+    50% {
+      opacity: 0;
     }
   }
 
