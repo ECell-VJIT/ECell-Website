@@ -70,7 +70,7 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
   <section class="container mx-auto px-6 py-12 md:py-16 relative z-10 max-w-5xl">
     <a
       href={`/events/${event.slug}`}
-      class="inline-flex items-center gap-2 glass rounded-md px-4 py-2 text-sm font-inter text-gray-200 hover:text-white hover:border-red-500/30 transition-all mb-8"
+      class="event-back-link inline-flex items-center gap-2 glass px-4 py-2 text-sm font-inter text-gray-200 hover:text-white hover:border-red-500/30 transition-all mb-8"
     >
       <iconify-icon icon="solar:arrow-left-linear" width="16" height="16"></iconify-icon>
       Back to {event.title}
@@ -84,9 +84,9 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
       </p>
     </div>
 
-    <div class="registration-shell noise-overlay rounded-3xl p-5 md:p-8">
+    <div class="registration-shell noise-overlay p-5 md:p-8">
       {!canRegister && (
-        <p class="text-gray-300 font-inter">
+        <p class="registration-closed-copy">
           {deadlinePassed ? 'Registration has closed for this event.' : "Registration isn't open yet."}
         </p>
       )}
@@ -197,7 +197,7 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
 
               <div id="team-members-list" class="space-y-4">
                 {Array.from({ length: defaultTeammateCount }).map(() => (
-                  <div class="team-member-block glass noise-overlay rounded-xl p-4 relative">
+                  <div class="team-member-block glass noise-overlay p-4 relative">
                     <button type="button" class="remove-member-btn" aria-label="Remove teammate">&minus;</button>
                     <label class="flex items-center gap-2 text-xs text-gray-400 font-inter mb-3">
                       <input type="checkbox" class="same-as-me-checkbox" />
@@ -273,7 +273,10 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
               </div>
               <div id="review-panel" class="review-panel confirm-review-panel"></div>
             </div>
-            <p class="text-gray-400 font-inter text-sm">Once confirmed, individual QR tickets will be generated for every registered attendee.</p>
+            <div class="confirm-note-card">
+              <iconify-icon icon="solar:qr-code-linear" width="18" height="18"></iconify-icon>
+              <p>Once confirmed, individual QR tickets will be generated for every registered attendee.</p>
+            </div>
           </section>
 
           <div class="step-actions">
@@ -290,7 +293,7 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
 </BaseLayout>
 
 <template id="member-block-template">
-  <div class="team-member-block glass noise-overlay rounded-xl p-4 relative">
+  <div class="team-member-block glass noise-overlay p-4 relative">
     <button type="button" class="remove-member-btn" aria-label="Remove teammate">&minus;</button>
     <label class="flex items-center gap-2 text-xs text-gray-400 font-inter mb-3">
       <input type="checkbox" class="same-as-me-checkbox" />
@@ -347,6 +350,20 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
       radial-gradient(circle at 78% 12%, rgba(248, 113, 113, 0.16), transparent 32%),
       linear-gradient(145deg, rgba(24, 5, 4, 0.82), rgba(8, 2, 2, 0.92));
     box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+    clip-path: polygon(1.35rem 0, 100% 0, 100% calc(100% - 1.35rem), calc(100% - 1.35rem) 100%, 0 100%, 0 1.35rem);
+  }
+
+  .event-back-link,
+  .registration-closed-copy {
+    clip-path: polygon(0.8rem 0, 100% 0, 100% calc(100% - 0.8rem), calc(100% - 0.8rem) 100%, 0 100%, 0 0.8rem);
+  }
+
+  .registration-closed-copy {
+    border: 1px solid rgba(248, 113, 113, 0.18);
+    background: rgba(255, 255, 255, 0.035);
+    padding: 1rem;
+    color: rgb(209 213 219);
+    font-family: 'Prosto One', system-ui, sans-serif;
   }
 
   .stepper-shell {
@@ -355,8 +372,8 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
     gap: 0.65rem;
     padding: 0.45rem;
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 1.2rem;
     background: rgba(0, 0, 0, 0.26);
+    clip-path: polygon(1rem 0, 100% 0, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0 100%, 0 1rem);
   }
 
   .stepper-item {
@@ -365,7 +382,6 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
     align-items: center;
     gap: 0.65rem;
     min-width: 0;
-    border-radius: 0.9rem;
     padding: 0.7rem;
     color: rgb(156, 163, 175);
     transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
@@ -377,8 +393,8 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
     display: grid;
     place-items: center;
     flex: 0 0 auto;
-    border-radius: 999px;
     border: 1px solid rgba(255, 255, 255, 0.12);
+    clip-path: polygon(0.45rem 0, 100% 0, 100% calc(100% - 0.45rem), calc(100% - 0.45rem) 100%, 0 100%, 0 0.45rem);
     font-family: 'Pixelify Sans', ui-monospace, monospace;
   }
 
@@ -410,9 +426,9 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
   .form-step {
     display: none;
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 1.25rem;
     padding: 1.25rem;
     background: rgba(0, 0, 0, 0.22);
+    clip-path: polygon(1rem 0, 100% 0, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0 100%, 0 1rem);
   }
 
   .form-step.is-active {
@@ -440,11 +456,11 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
   .reg-input {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 0.75rem;
     padding: 0.75rem 1rem;
     color: white;
     font-family: 'Prosto One', system-ui, sans-serif;
     width: 100%;
+    clip-path: polygon(0.7rem 0, 100% 0, 100% calc(100% - 0.7rem), calc(100% - 0.7rem) 100%, 0 100%, 0 0.7rem);
   }
 
   select.reg-input {
@@ -482,11 +498,11 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
 
   .detail-input-card {
     border: 1px solid rgba(248, 113, 113, 0.16);
-    border-radius: 1.15rem;
     padding: 1rem;
     background:
       linear-gradient(135deg, rgba(127, 29, 29, 0.18), rgba(255, 255, 255, 0.025)),
       rgba(0, 0, 0, 0.16);
+    clip-path: polygon(0.95rem 0, 100% 0, 100% calc(100% - 0.95rem), calc(100% - 0.95rem) 100%, 0 100%, 0 0.95rem);
   }
 
   .detail-input-card-head {
@@ -501,10 +517,10 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
     height: 2.4rem;
     display: grid;
     place-items: center;
-    border-radius: 0.85rem;
     color: rgb(254, 202, 202);
     border: 1px solid rgba(248, 113, 113, 0.24);
     background: rgba(127, 29, 29, 0.18);
+    clip-path: polygon(0.6rem 0, 100% 0, 100% calc(100% - 0.6rem), calc(100% - 0.6rem) 100%, 0 100%, 0 0.6rem);
   }
 
   .detail-input-card-head p {
@@ -522,6 +538,7 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
 
   .team-member-block {
     border: 1px solid rgba(255, 255, 255, 0.08);
+    clip-path: polygon(0.9rem 0, 100% 0, 100% calc(100% - 0.9rem), calc(100% - 0.9rem) 100%, 0 100%, 0 0.9rem);
   }
 
   .remove-member-btn {
@@ -530,7 +547,6 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
     right: 0.6rem;
     width: 1.6rem;
     height: 1.6rem;
-    border-radius: 999px;
     border: 1px solid rgba(248, 113, 113, 0.3);
     background: rgba(127, 29, 29, 0.2);
     color: rgb(254 202 202);
@@ -539,6 +555,7 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
     display: grid;
     place-items: center;
     cursor: pointer;
+    clip-path: polygon(0.4rem 0, 100% 0, 100% calc(100% - 0.4rem), calc(100% - 0.4rem) 100%, 0 100%, 0 0.4rem);
   }
 
   .remove-member-btn:hover {
@@ -547,7 +564,6 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
 
   .add-member-btn {
     border: 1px dashed rgba(248, 113, 113, 0.35);
-    border-radius: 0.75rem;
     padding: 0.6rem 1.1rem;
     color: rgb(254 202 202);
     font-family: 'Prosto One', system-ui, sans-serif;
@@ -555,6 +571,7 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
     background: transparent;
     cursor: pointer;
     transition: background-color 150ms ease;
+    clip-path: polygon(0.7rem 0, 100% 0, 100% calc(100% - 0.7rem), calc(100% - 0.7rem) 100%, 0 100%, 0 0.7rem);
   }
 
   .add-member-btn:hover:not(:disabled) {
@@ -568,11 +585,11 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
 
   .confirm-pass-preview {
     border: 1px solid rgba(248, 113, 113, 0.2);
-    border-radius: 1.1rem;
     padding: 1rem;
     background:
       linear-gradient(135deg, rgba(127, 29, 29, 0.3), rgba(255, 255, 255, 0.04)),
       rgba(0, 0, 0, 0.24);
+    clip-path: polygon(0.95rem 0, 100% 0, 100% calc(100% - 0.95rem), calc(100% - 0.95rem) 100%, 0 100%, 0 0.95rem);
   }
 
   .confirm-pass-preview iconify-icon {
@@ -604,9 +621,15 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
     justify-content: space-between;
     gap: 1rem;
     margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid rgba(248, 113, 113, 0.16);
+    background:
+      radial-gradient(circle at 100% 0%, rgba(248, 113, 113, 0.16), transparent 38%),
+      rgba(0, 0, 0, 0.18);
+    clip-path: polygon(0.8rem 0, 100% 0, 100% calc(100% - 0.8rem), calc(100% - 0.8rem) 100%, 0 100%, 0 0.8rem);
   }
 
-  .confirm-pass-preview p {
+  .confirm-pass-head p {
     margin-bottom: 0.45rem;
     color: rgb(254, 202, 202);
     font-size: 0.68rem;
@@ -614,14 +637,22 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
 
   .review-panel {
     display: grid;
-    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+    align-items: start;
   }
 
   .review-card {
     border: 1px solid rgba(248, 113, 113, 0.16);
-    border-radius: 1rem;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.035);
+    padding: 0.85rem;
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.02)),
+      rgba(0, 0, 0, 0.2);
+    clip-path: polygon(0.85rem 0, 100% 0, 100% calc(100% - 0.85rem), calc(100% - 0.85rem) 100%, 0 100%, 0 0.85rem);
+  }
+
+  .review-card-team {
+    grid-column: 1 / -1;
   }
 
   .review-card.review-card-primary {
@@ -630,10 +661,39 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
       rgba(255, 255, 255, 0.045);
   }
 
-  .review-card h3 {
+  .review-card-heading {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .review-card-heading > span {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    flex: 0 0 auto;
+    color: rgb(254, 202, 202);
+    background: rgba(127, 29, 29, 0.28);
+    box-shadow: inset 0 0 0 1px rgba(248, 113, 113, 0.28);
+    clip-path: polygon(0.55rem 0, 100% 0, 100% calc(100% - 0.55rem), calc(100% - 0.55rem) 100%, 0 100%, 0 0.55rem);
+  }
+
+  .review-card-heading p,
+  .teammate-review-card > p {
+    margin: 0 0 0.18rem;
+    color: rgb(252, 165, 165);
+    font-family: 'Pixelify Sans', ui-monospace, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .review-card-heading h3 {
     color: white;
-    font-size: 1rem;
-    margin-bottom: 0.25rem;
+    font-size: 0.92rem;
+    margin: 0;
   }
 
   .review-card-subtitle {
@@ -646,12 +706,16 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
   .review-list {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.75rem;
+    gap: 0.55rem;
   }
 
   .review-field {
     margin: 0;
     min-width: 0;
+    padding: 0.62rem 0.68rem;
+    background: rgba(0, 0, 0, 0.24);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    clip-path: polygon(0.55rem 0, 100% 0, 100% calc(100% - 0.55rem), calc(100% - 0.55rem) 100%, 0 100%, 0 0.55rem);
   }
 
   .review-field span {
@@ -668,10 +732,56 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
     display: block;
     color: rgb(243, 244, 246);
     font-family: 'Prosto One', system-ui, sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.82rem;
     letter-spacing: 0;
     text-transform: none;
     overflow-wrap: anywhere;
+  }
+
+  .review-card-team {
+    background:
+      radial-gradient(circle at 100% 0%, rgba(249, 115, 22, 0.12), transparent 42%),
+      rgba(255, 255, 255, 0.035);
+  }
+
+  .teammate-review-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin-top: 0.9rem;
+  }
+
+  .teammate-review-card {
+    padding: 0.85rem;
+    border: 1px solid rgba(248, 113, 113, 0.12);
+    background: rgba(0, 0, 0, 0.16);
+    clip-path: polygon(0.7rem 0, 100% 0, 100% calc(100% - 0.7rem), calc(100% - 0.7rem) 100%, 0 100%, 0 0.7rem);
+  }
+
+  .confirm-note-card {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    width: fit-content;
+    max-width: 100%;
+    margin-top: 0.75rem;
+    padding: 0.72rem 0.9rem;
+    color: rgb(209, 213, 219);
+    border: 1px solid rgba(248, 113, 113, 0.14);
+    background: rgba(0, 0, 0, 0.2);
+    clip-path: polygon(0.65rem 0, 100% 0, 100% calc(100% - 0.65rem), calc(100% - 0.65rem) 100%, 0 100%, 0 0.65rem);
+  }
+
+  .confirm-note-card iconify-icon {
+    color: rgb(254, 202, 202);
+    flex: 0 0 auto;
+  }
+
+  .confirm-note-card p {
+    margin: 0;
+    font-family: 'Prosto One', system-ui, sans-serif;
+    font-size: 0.78rem;
+    line-height: 1.45;
   }
 
   .step-actions {
@@ -734,6 +844,11 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
   @media (max-width: 720px) {
     .stepper-shell {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .review-panel,
+    .teammate-review-grid {
+      grid-template-columns: 1fr;
     }
 
     .review-list {
@@ -849,7 +964,12 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
   }
 
   function reviewItem(label: string, value: string | null | undefined) {
-    return `<div class="review-field"><span>${label}</span><strong>${value || 'Not provided'}</strong></div>`;
+    return `
+      <div class="review-field">
+        <span>${label}</span>
+        <strong>${value || 'Not provided'}</strong>
+      </div>
+    `;
   }
 
   function renderReview() {
@@ -870,16 +990,21 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
     ].join('');
     const teamHtml = isTeamEvent
       ? `
-        <div class="review-card">
-          <h3>Team pass</h3>
-          <p class="review-card-subtitle">Tickets will be generated for the lead attendee and every listed teammate.</p>
+        <div class="review-card review-card-team">
+          <div class="review-card-heading">
+            <span><iconify-icon icon="solar:users-group-rounded-linear" width="18" height="18"></iconify-icon></span>
+            <div>
+              <p>Team pass</p>
+              <h3>Team ticket bundle</h3>
+            </div>
+          </div>
           <div class="review-list">
             ${reviewItem('Team name', getFormValue('team_name'))}
             ${reviewItem('Total tickets', String(1 + teammates.length))}
           </div>
-          ${teammates.length ? `<div class="mt-4 grid gap-3">${teammates.map((member, index) => `
-            <div class="review-card">
-              <h3>Teammate ${index + 1}</h3>
+          ${teammates.length ? `<div class="teammate-review-grid">${teammates.map((member, index) => `
+            <div class="teammate-review-card">
+              <p>Teammate ${index + 1}</p>
               <div class="review-list">
                 ${reviewItem('Name', member.name)}
                 ${reviewItem('Email', member.email)}
@@ -892,21 +1017,36 @@ const registrationSteps = isTeamEvent ? ['Details', 'Team', 'Confirm'] : ['Detai
       `
       : `
         <div class="review-card">
-          <h3>Registration type</h3>
-          <p class="review-card-subtitle">This is a solo registration. One QR ticket will be issued.</p>
+          <div class="review-card-heading">
+            <span><iconify-icon icon="solar:ticket-sale-linear" width="18" height="18"></iconify-icon></span>
+            <div>
+              <p>Solo pass</p>
+              <h3>Registration type</h3>
+            </div>
+          </div>
           <div class="review-list">${reviewItem('Ticket mode', 'Solo pass')}</div>
         </div>
       `;
 
     reviewPanel.innerHTML = `
       <div class="review-card review-card-primary">
-        <h3>Personal details</h3>
-        <p class="review-card-subtitle">Used for ticket delivery and check-in verification.</p>
+        <div class="review-card-heading">
+          <span><iconify-icon icon="solar:user-rounded-linear" width="18" height="18"></iconify-icon></span>
+          <div>
+            <p>Personal</p>
+            <h3>Contact details</h3>
+          </div>
+        </div>
         <div class="review-list">${personalHtml}</div>
       </div>
       <div class="review-card">
-        <h3>College details</h3>
-        <p class="review-card-subtitle">Shown to the organizing team for attendee verification.</p>
+        <div class="review-card-heading">
+          <span><iconify-icon icon="solar:buildings-2-linear" width="18" height="18"></iconify-icon></span>
+          <div>
+            <p>College</p>
+            <h3>Academic details</h3>
+          </div>
+        </div>
         <div class="review-list">${collegeHtml}</div>
       </div>
       ${teamHtml}
