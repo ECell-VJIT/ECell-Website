@@ -39,9 +39,9 @@ const { eventTitle } = Astro.props;
     </div>
 
     <div id="ticket-state" class="hidden">
-      <div class="text-center mb-8">
-        <span class="events-ghost-label mx-auto mb-5">Registration confirmed</span>
-        <h1 id="confirmation-heading" class="text-3xl md:text-4xl font-jakarta font-semibold tracking-tight mb-3"></h1>
+      <div class="confirmation-header text-center mb-8">
+        <span class="events-ghost-label mx-auto">Registration confirmed</span>
+        <h1 id="confirmation-heading" class="text-3xl md:text-4xl font-jakarta font-semibold tracking-tight"></h1>
         <p id="confirmation-subtext" class="text-gray-300 font-inter"></p>
         <p id="email-status" class="text-xs text-gray-500 font-inter mt-3"></p>
       </div>
@@ -136,6 +136,21 @@ const { eventTitle } = Astro.props;
     background: rgba(127, 29, 29, 0.14);
     margin: 0 auto;
     clip-path: polygon(0.55rem 0, 100% 0, 100% calc(100% - 0.55rem), calc(100% - 0.55rem) 100%, 0 100%, 0 0.55rem);
+  }
+
+  .confirmation-header {
+    display: grid;
+    justify-items: center;
+    gap: 1rem;
+  }
+
+  .confirmation-header h1 {
+    margin: 0;
+    line-height: 1.08;
+  }
+
+  .confirmation-header p {
+    margin: 0;
   }
 
   .ticket-wallet-grid {

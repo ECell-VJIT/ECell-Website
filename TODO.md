@@ -82,7 +82,7 @@ WEBSITE -
 
 Replace dummy data with actual data
 
-certificate generation + feedback after event
+
 UPDATE admin panel
 
 domain setup
@@ -113,3 +113,162 @@ update and test admin dashboard
 
 
 - Mobile scanner app (Flutter) as an alternative to the web scanner
+
+
+
+-----
+
+certificate generation + feedback after event architecture
+
+**Best Flow**
+1. **Event happens**
+   - Admin marks event as `completed`.
+   - Console unlocks a “Post-event” panel for that event.
+
+2. **Admin creates feedback form**
+   - Basic fields:
+     - Overall rating
+     - Session quality
+     - Speaker/mentor rating
+     - Organization rating
+     - What did you learn?
+     - What can be improved?
+     - Would you attend again?
+     - Testimonial permission checkbox
+   - Optional custom questions per event.
+   - Admin can set:
+     - Feedback deadline
+     - Certificate availability
+     - Certificate template
+
+3. **Feedback link goes live**
+   - Public link:
+     - `/events/[slug]/feedback`
+   - Student enters:
+     - registered email
+   - System verifies they were registered.
+   - also checks attendance if you track scanned QR check-ins. (yep thtats important , only give it for present attendees , not for every participant)
+
+4. **Student submits feedback**
+   - If valid:
+     - Feedback is saved.
+     - Certificate is generated instantly.
+   - If already submitted:
+     - Show existing certificate/download link.
+   - If not eligible:
+     - “No eligible registration found” or “Attendance not marked.”
+
+5. **Certificate generation**
+   - Certificate should use:
+     - Student name
+     - Event name
+     - Event date
+     - Organizer name
+     - Certificate ID
+   - Generated as PDF.
+   - Stored or regenerated on demand.
+
+6. **Certificate delivery**
+   - Confirmation page:
+     - “Thanks for your feedback”
+     - Certificate preview/download
+     - Optional “Share on LinkedIn” button
+   - Email:
+     - Send certificate PDF or certificate download link.
+
+7. **Admin analytics**
+   - Console shows:
+     - Number of feedback responses
+     - Average rating
+     - Common improvement themes
+     - Testimonials
+     - Export CSV
+     - individual answer.
+
+**Database Shape**
+You’d probably want:
+
+`event_feedback_forms`
+- `id`
+- `event_id`
+- `is_enabled`
+- `certificate_enabled`
+- `feedback_required_for_certificate`
+- `deadline`
+- `questions jsonb`
+- `created_at`
+
+`event_feedback_responses`
+- `id`
+- `event_id`
+- `registration_id`
+- `ticket_id`
+- `rating_overall`
+- `rating_content`
+- `rating_speaker`
+- `rating_organization`
+- `answers jsonb`
+- `testimonial`
+- `allow_testimonial`
+- `created_at`
+
+`certificates`
+- `id`
+- `event_id`
+- `registration_id`
+- `feedback_response_id`
+- `certificate_id`
+- `pdf_url`
+- `issued_at`
+
+Maybe add to `events`:
+- `feedback_open`
+- `certificate_enabled`
+- `certificate_template`
+- `certificate_signatory_name`
+- `certificate_signatory_title`
+
+**Eligibility Logic**
+
+   - Must be registered
+   - Must be checked in/scanned
+   - Must submit feedback
+   - Then certificate unlocks
+
+
+For team events:
+- Each attendee should submit individual feedback.
+- Each attendee gets their own certificate.
+- Team leader should not generate certificates for everyone automatically.
+
+**Admin UX**
+Inside console event detail:
+
+Tabs:
+- Details
+- Registrations
+- Attendance
+- Feedback
+- Certificates
+
+Feedback tab:
+- Enable feedback
+- Edit questions
+- Responses table
+- Export CSV
+
+Certificates tab:
+- Enable certificates
+- Pick template
+- Preview with dummy name
+- Generate missing certificates
+
+
+VERIFICATION OF CERTIFICATES STRICTLY NOT NEEDED
+
+
+should i even store the certificates ,
+like once i have a proper template, is it possible to generate certificate on the fly whenever needed?
+just place in name and event name stuff etc 
+
+possible using vercel serverless?

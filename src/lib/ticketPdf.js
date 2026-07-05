@@ -1,3 +1,4 @@
+import fontkit from '@pdf-lib/fontkit';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import QRCode from 'qrcode';
 
@@ -64,9 +65,47 @@ function fitText(font, text, size, maxWidth) {
   return `${truncated}...`;
 }
 
+async function fetchBytes(path, options = {}) {
+  const url = options.baseUrl ? new URL(path, options.baseUrl).toString() : path;
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`Could not load ${path}`);
+  return response.arrayBuffer();
+}
+
+async function loadFonts(pdfDoc, options = {}) {
+  pdfDoc.registerFontkit(fontkit);
+
+  const helveticaBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+  const helvetica = await pdfDoc.embedFont(StandardFonts.Helvetica);
+  const courierBold = await pdfDoc.embedFont(StandardFonts.CourierBold);
+
+  try {
+    const [prostoBytes, pixelBytes] = await Promise.all([
+      fetchBytes('/fonts/ProstoOne-Regular.ttf', options),
+      fetchBytes('/fonts/PixelifySans.ttf', options),
+    ]);
+
+    const prosto = await pdfDoc.embedFont(prostoBytes);
+    const pixel = await pdfDoc.embedFont(pixelBytes);
+    return {
+      display: prosto,
+      regular: prosto,
+      bold: prosto,
+      pixel,
+    };
+  } catch {
+    return {
+      display: helveticaBold,
+      regular: helvetica,
+      bold: helveticaBold,
+      pixel: courierBold,
+    };
+  }
+}
+
 async function drawTicketPage(pdfDoc, fonts, registration) {
   const page = pdfDoc.addPage([PAGE_WIDTH, PAGE_HEIGHT]);
-  const { bold, regular } = fonts;
+  const { bold, display, pixel, regular } = fonts;
   const event = registration.events ?? {};
 
   page.drawRectangle({ x: 0, y: 0, width: PAGE_WIDTH, height: PAGE_HEIGHT, color: BLACK });
@@ -95,9 +134,9 @@ async function drawTicketPage(pdfDoc, fonts, registration) {
 
   page.drawText('E-CELL VJIT PASS', {
     x: contentX,
-    y: topY,
-    size: 10,
-    font: bold,
+    y: topY - 4,
+    size: 16,
+    font: pixel,
     color: SOFT_WHITE,
   });
 
@@ -114,13 +153,13 @@ async function drawTicketPage(pdfDoc, fonts, registration) {
     opacity: 0.78,
   });
   page.drawCircle({ x: liveX + 15, y: liveY + 15, size: 4.5, color: GREEN });
-  page.drawText('LIVE', { x: liveX + 25, y: liveY + 11, size: 8, font: bold, color: WHITE });
+  page.drawText('LIVE', { x: liveX + 25, y: liveY + 10, size: 9, font: pixel, color: WHITE });
 
-  page.drawText(fitText(bold, String(event.title ?? 'Event').toUpperCase(), 34, 560), {
+  page.drawText(fitText(display, String(event.title ?? 'Event').toUpperCase(), 40, 560), {
     x: contentX,
-    y: topY - 50,
-    size: 34,
-    font: bold,
+    y: topY - 58,
+    size: 40,
+    font: display,
     color: WHITE,
   });
 
@@ -129,11 +168,11 @@ async function drawTicketPage(pdfDoc, fonts, registration) {
     : '';
   const meta = fitText(regular, [dateStr, event.time, event.venue].filter(Boolean).join(' - '), 14, 560);
 
-  page.drawText(fitText(bold, registration.name ?? 'Attendee', 42, 560), {
+  page.drawText(fitText(display, registration.name ?? 'Attendee', 48, 560), {
     x: contentX,
     y: CARD_Y + 252,
-    size: 42,
-    font: bold,
+    size: 48,
+    font: display,
     color: WHITE,
   });
   page.drawText(meta, { x: contentX, y: CARD_Y + 218, size: 14, font: bold, color: SOFT_WHITE });
@@ -176,24 +215,23 @@ async function drawTicketPage(pdfDoc, fonts, registration) {
   ];
 
   for (const field of fields) {
-    page.drawText(field.label, { x: field.x, y: field.y, size: 9, font: bold, color: MUTED_RED });
-    page.drawText(fitText(bold, field.value, 13, field.width), {
+    page.drawText(field.label, { x: field.x, y: field.y, size: 11, font: pixel, color: MUTED_RED });
+    page.drawText(fitText(regular, field.value, 14, field.width), {
       x: field.x,
       y: field.y - 28,
-      size: 13,
-      font: bold,
+      size: 14,
+      font: regular,
       color: WHITE,
     });
   }
 }
 
-export async function generateTicketsPdfBytes(registrations) {
+export async function generateTicketsPdfBytes(registrations, options = {}) {
   const pdfDoc = await PDFDocument.create();
-  const bold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-  const regular = await pdfDoc.embedFont(StandardFonts.Helvetica);
+  const fonts = await loadFonts(pdfDoc, options);
 
   for (const registration of registrations) {
-    await drawTicketPage(pdfDoc, { bold, regular }, registration);
+    await drawTicketPage(pdfDoc, fonts, registration);
   }
 
   return pdfDoc.save();
