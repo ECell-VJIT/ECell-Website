@@ -21,10 +21,6 @@ const { navLinks = [
   <div class="navbar-rim noise-overlay">
     <span class="navbar-frame-line navbar-frame-top" aria-hidden="true"></span>
     <span class="navbar-frame-line navbar-frame-bottom" aria-hidden="true"></span>
-    <span class="navbar-corner navbar-corner-tl" aria-hidden="true"></span>
-    <span class="navbar-corner navbar-corner-tr" aria-hidden="true"></span>
-    <span class="navbar-corner navbar-corner-bl" aria-hidden="true"></span>
-    <span class="navbar-corner navbar-corner-br" aria-hidden="true"></span>
     <div class="navbar-glow" aria-hidden="true"></div>
     <div class="relative z-10 px-3 sm:px-4 md:px-5 py-3 md:py-4">
       <div class="navbar-row flex items-center justify-between gap-3 md:gap-4">
@@ -180,28 +176,6 @@ const { navLinks = [
       0 18px 52px rgba(0, 0, 0, 0.32);
   }
 
-  .navbar-center::before,
-  .navbar-center::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    width: 0.48rem;
-    height: 0.48rem;
-    border-radius: 999px;
-    background: rgba(248, 113, 113, 0.7);
-    box-shadow: 0 0 14px rgba(248, 113, 113, 0.52);
-    transform: translateY(-50%);
-    pointer-events: none;
-  }
-
-  .navbar-center::before {
-    left: 0.78rem;
-  }
-
-  .navbar-center::after {
-    right: 0.78rem;
-  }
-
   .navbar-glow {
     position: absolute;
     inset: 0;
@@ -228,46 +202,6 @@ const { navLinks = [
   .navbar-frame-bottom {
     bottom: 0;
     opacity: 0.55;
-  }
-
-  .navbar-corner {
-    position: absolute;
-    z-index: 2;
-    width: 1.45rem;
-    height: 1.45rem;
-    border-color: rgba(254, 202, 202, 0.44);
-    pointer-events: none;
-    filter: drop-shadow(0 0 10px rgba(248, 113, 113, 0.28));
-  }
-
-  .navbar-corner-tl {
-    top: 0.72rem;
-    left: 0.78rem;
-    border-top: 1px solid;
-    border-left: 1px solid;
-  }
-
-  .navbar-corner-tr {
-    top: 0.72rem;
-    right: 0.78rem;
-    border-top: 1px solid;
-    border-right: 1px solid;
-  }
-
-  .navbar-corner-bl {
-    bottom: 0.72rem;
-    left: 0.78rem;
-    border-bottom: 1px solid;
-    border-left: 1px solid;
-    opacity: 0.62;
-  }
-
-  .navbar-corner-br {
-    bottom: 0.72rem;
-    right: 0.78rem;
-    border-bottom: 1px solid;
-    border-right: 1px solid;
-    opacity: 0.62;
   }
 
   .navbar-brand {
@@ -513,9 +447,5 @@ const { navLinks = [
       right: 4rem;
     }
 
-    .navbar-corner {
-      width: 1rem;
-      height: 1rem;
-    }
   }
 </style>
