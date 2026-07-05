@@ -170,10 +170,9 @@ const stats = [
   const checkpoints = Array.from(document.querySelectorAll<HTMLElement>('[data-achievement-checkpoint]'));
 
   if (timeline && rail && progress && checkpoints.length) {
-    let progressFrame = 0;
-
     const updateProgress = () => {
-      progressFrame = 0;
+      // Fill the rail from its top down to wherever the vertical centre of the
+      // viewport currently sits — so the colour always reaches mid-screen.
       const rect = rail.getBoundingClientRect();
       const viewportCenter = window.innerHeight * 0.5;
       const fill = Math.min(Math.max(viewportCenter - rect.top, 0), rect.height);
@@ -184,10 +183,14 @@ const stats = [
       timeline.classList.toggle('has-progress', fill > 4);
     };
 
-    const requestProgressUpdate = () => {
-      if (progressFrame) return;
-      progressFrame = window.requestAnimationFrame(updateProgress);
-    };
+    // This site scrolls inside <body>, so window 'scroll' events don't fire
+    // reliably. A rAF loop (paused when the tab is hidden) always reads the
+    // latest position via getBoundingClientRect.
+    let rafId = 0;
+    const loop = () => { updateProgress(); rafId = requestAnimationFrame(loop); };
+    const start = () => { if (!rafId) rafId = requestAnimationFrame(loop); };
+    const stop = () => { cancelAnimationFrame(rafId); rafId = 0; };
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -203,9 +206,7 @@ const stats = [
 
     checkpoints.forEach((checkpoint) => observer.observe(checkpoint));
     updateProgress();
-    window.addEventListener('scroll', requestProgressUpdate, { passive: true });
-    window.addEventListener('resize', requestProgressUpdate);
-    document.addEventListener('astro:page-load', updateProgress);
+    start();
   }
 </script>
 
