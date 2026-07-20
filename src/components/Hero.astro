@@ -27,15 +27,24 @@ const {
         <div class="hero-title-stage" data-hero-hover>
           <svg width="100%" height="100%" viewBox="0 0 1600 360" xmlns="http://www.w3.org/2000/svg" class="hero-title-svg" role="img" aria-label={title}>
             <defs>
-              <linearGradient id="heroTextGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="#fb7185" />
-                <stop offset="50%" stop-color="#ef4444" />
-                <stop offset="100%" stop-color="#fb923c" />
+              <linearGradient id="heroFillGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#fffdfd" />
+                <stop offset="55%" stop-color="#ffece7" />
+                <stop offset="100%" stop-color="#ffcfc4" />
               </linearGradient>
+              <clipPath id="heroTitleClip">
+                <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" class="hero-title-text">{title}</text>
+              </clipPath>
             </defs>
 
-            <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" class="hero-hover-outline">{title}</text>
-            <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" class="hero-hover-stroke">{title}</text>
+            <g clip-path="url(#heroTitleClip)" class="hero-fluid-layer">
+              <g class="hero-fluid-rise">
+                <path class="hero-fluid-wave hero-fluid-wave-back" d="M0 60 Q80 24 160 60 T320 60 T480 60 T640 60 T800 60 T960 60 T1120 60 T1280 60 T1440 60 T1600 60 T1760 60 T1920 60 T2080 60 T2240 60 T2400 60 T2560 60 T2720 60 T2880 60 T3040 60 T3200 60 V360 H0 Z" />
+                <path class="hero-fluid-wave hero-fluid-wave-front" d="M0 60 Q80 24 160 60 T320 60 T480 60 T640 60 T800 60 T960 60 T1120 60 T1280 60 T1440 60 T1600 60 T1760 60 T1920 60 T2080 60 T2240 60 T2400 60 T2560 60 T2720 60 T2880 60 T3040 60 T3200 60 V360 H0 Z" />
+              </g>
+            </g>
+
+            <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle" class="hero-title-text hero-hover-outline">{title}</text>
           </svg>
         </div>
 
@@ -86,27 +95,36 @@ const {
     height: 100%;
   }
 
-  .hero-hover-outline,
-  .hero-hover-stroke {
+  .hero-title-text {
     font-family: var(--font-hero);
     font-size: clamp(96px, 12.2vw, 160px);
     font-weight: 400;
-    fill: transparent;
     letter-spacing: 0;
-    paint-order: stroke fill;
   }
 
   .hero-hover-outline {
-    stroke: rgba(255, 240, 240, 0.52);
+    fill: transparent;
+    stroke: rgba(255, 240, 240, 0.55);
     stroke-width: 0.8;
+    paint-order: stroke fill;
   }
 
-  .hero-hover-stroke {
-    stroke: rgba(255, 145, 132, 1);
-    stroke-width: 1.2;
-    stroke-dasharray: 950;
-    stroke-dashoffset: 950;
-    filter: drop-shadow(0 0 16px rgba(255, 92, 82, 0.5));
+  .hero-fluid-layer {
+    filter: drop-shadow(0 0 18px rgba(255, 120, 100, 0.3));
+  }
+
+  .hero-fluid-rise {
+    transform: translateY(340px);
+  }
+
+  .hero-fluid-wave {
+    fill: url(#heroFillGradient);
+    animation: heroWaveDrift 7s linear infinite;
+  }
+
+  .hero-fluid-wave-back {
+    opacity: 0.5;
+    animation: heroWaveDriftBack 11s linear infinite;
   }
 
   .hero-copy {
@@ -122,30 +140,52 @@ const {
     min-width: min(100%, 17rem);
   }
 
-  body:not(.loading) .hero-hover-stroke {
-    animation: heroStrokeIgnite 4.8s ease-in-out infinite;
+  body:not(.loading) .hero-fluid-rise {
+    animation: heroFluidCycle 10s cubic-bezier(0.33, 1, 0.68, 1) 0.15s infinite;
   }
 
-  body.loading .hero-hover-stroke {
-    animation: none;
-    stroke-dashoffset: 950;
-    opacity: 0.18;
-  }
-
-  @keyframes heroStrokeIgnite {
-    0%,
-    14% {
-      stroke-dashoffset: 950;
-      opacity: 0.18;
+  @keyframes heroFluidCycle {
+    0% {
+      transform: translateY(340px);
     }
-    38%,
-    78% {
-      stroke-dashoffset: 0;
-      opacity: 1;
+    20% {
+      transform: translateY(0);
+    }
+    76% {
+      transform: translateY(0);
     }
     100% {
-      stroke-dashoffset: 950;
-      opacity: 0.18;
+      transform: translateY(340px);
+    }
+  }
+
+  @keyframes heroWaveDrift {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-640px);
+    }
+  }
+
+  @keyframes heroWaveDriftBack {
+    from {
+      transform: translate(-160px, -14px);
+    }
+    to {
+      transform: translate(-800px, -14px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-fluid-rise,
+    .hero-fluid-wave,
+    .hero-fluid-wave-back {
+      animation: none;
+    }
+
+    .hero-fluid-rise {
+      transform: translateY(0);
     }
   }
 
