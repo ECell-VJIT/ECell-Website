@@ -24,8 +24,7 @@ const { navLinks = [
     <div class="relative z-10 px-3 sm:px-4 md:px-5 py-3 md:py-4">
       <div class="navbar-row flex items-center justify-between gap-3 md:gap-4">
         <a href="/" class="navbar-brand group min-w-0">
-          <span class="navbar-brand-main">E-CELL</span>
-          <span class="navbar-brand-sub">VJIT</span>
+          <img src="https://res.cloudinary.com/dy8vyfooj/image/upload/v1777634092/Ecell-logo_gbkmxc.jpg" alt="E-Cell VJIT" class="navbar-brand-logo" />
         </a>
 
         <div class="hidden lg:flex navbar-center items-center gap-1.5 xl:gap-2">
@@ -227,28 +226,17 @@ const { navLinks = [
     box-shadow: 0 0 14px rgba(248, 113, 113, 0.42);
   }
 
-  .navbar-brand-main {
-    font-family: var(--font-pixel);
-    font-size: clamp(1.35rem, 2vw, 1.85rem);
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-shadow: 0 0 18px rgba(248, 113, 113, 0.28);
-    transition: color 180ms ease, text-shadow 180ms ease;
+  .navbar-brand-logo {
+    display: block;
+    height: clamp(2.5rem, 4vw, 3.25rem);
+    width: auto;
+    border-radius: 0.4rem;
+    filter: drop-shadow(0 0 14px rgba(248, 113, 113, 0.28));
+    transition: filter 180ms ease;
   }
 
-  .navbar-brand-sub {
-    width: fit-content;
-    margin-left: 0.08rem;
-    font-family: var(--font-pixel);
-    font-size: 0.74rem;
-    font-weight: 600;
-    letter-spacing: 0.34em;
-    color: rgb(254 202 202 / 0.68);
-  }
-
-  .navbar-brand:hover .navbar-brand-main {
-    color: rgb(254 226 226);
-    text-shadow: 0 0 22px rgba(248, 113, 113, 0.44);
+  .navbar-brand:hover .navbar-brand-logo {
+    filter: drop-shadow(0 0 20px rgba(248, 113, 113, 0.44));
   }
 
   .navbar-brand:hover {
