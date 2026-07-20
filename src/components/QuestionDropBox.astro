@@ -78,7 +78,7 @@ const targets = ['Founders', 'Mentors', 'E-Cell'];
   .qb-label {
     display: block;
     margin-bottom: 0.4rem;
-    font-family: 'Pixelify Sans', ui-monospace, monospace;
+    font-family: var(--font-pixel);
     font-size: 0.62rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
@@ -90,7 +90,7 @@ const targets = ['Founders', 'Mentors', 'E-Cell'];
     border: 1px solid rgba(248, 113, 113, 0.22);
     background: rgba(10, 3, 2, 0.55);
     color: #fff;
-    font-family: 'Prosto One', system-ui, sans-serif;
+    font-family: var(--font-display);
     font-size: 0.9rem;
     padding: 0.6rem 0.85rem;
     resize: vertical;
@@ -102,7 +102,7 @@ const targets = ['Founders', 'Mentors', 'E-Cell'];
   .qb-target {
     border-radius: 999px;
     padding: 0.4rem 0.9rem;
-    font-family: 'Pixelify Sans', ui-monospace, monospace;
+    font-family: var(--font-pixel);
     font-size: 0.62rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -124,7 +124,7 @@ const targets = ['Founders', 'Mentors', 'E-Cell'];
     clip-path: polygon(0.72rem 0, 100% 0, 100% calc(100% - 0.72rem), calc(100% - 0.72rem) 100%, 0 100%, 0 0.72rem);
     border: 0;
     padding: 0.65rem 1.3rem;
-    font-family: 'Prosto One', system-ui, sans-serif;
+    font-family: var(--font-display);
     font-size: 0.9rem;
     color: rgb(254 226 226);
     white-space: nowrap;
@@ -138,7 +138,7 @@ const targets = ['Founders', 'Mentors', 'E-Cell'];
 
   .qb-boxwrap { position: relative; display: flex; flex-direction: column; align-items: center; padding-top: 1rem; }
   .qb-box { width: min(16rem, 80%); height: auto; filter: drop-shadow(0 16px 26px rgba(0, 0, 0, 0.45)); }
-  .qb-box-label { font-family: 'Pixelify Sans', ui-monospace, monospace; font-size: 12px; letter-spacing: 2px; fill: rgba(254, 202, 202, 0.55); }
+  .qb-box-label { font-family: var(--font-pixel); font-size: 12px; letter-spacing: 2px; fill: rgba(254, 202, 202, 0.55); }
   .qb-flag, .qb-flag-pole { transform-box: fill-box; transform-origin: bottom left; transition: transform 500ms cubic-bezier(0.2, 0.9, 0.2, 1); }
   .qb-boxwrap.is-dropping .qb-flag { transform: rotate(-38deg) translateY(-2px); }
   .qb-count { margin-top: 0.5rem; font-size: 0.6rem; letter-spacing: 0.1em; color: rgba(254, 202, 202, 0.6); }
@@ -182,7 +182,7 @@ const targets = ['Founders', 'Mentors', 'E-Cell'];
     margin-bottom: 0.5rem;
     padding: 0.15rem 0.55rem;
     border-radius: 999px;
-    font-family: 'Pixelify Sans', ui-monospace, monospace;
+    font-family: var(--font-pixel);
     font-size: 0.52rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -190,8 +190,8 @@ const targets = ['Founders', 'Mentors', 'E-Cell'];
     border: 1px solid rgba(248, 113, 113, 0.3);
     background: rgba(127, 29, 29, 0.25);
   }
-  .qb-qtext { margin: 0 0 0.4rem; font-family: 'Prosto One', system-ui, sans-serif; font-size: 0.95rem; line-height: 1.3; color: #fff; word-break: break-word; }
-  .qb-qname { margin: 0; font-family: 'Pixelify Sans', ui-monospace, monospace; font-size: 0.58rem; color: rgba(252, 165, 165, 0.7); }
+  .qb-qtext { margin: 0 0 0.4rem; font-family: var(--font-display); font-size: 0.95rem; line-height: 1.3; color: #fff; word-break: break-word; }
+  .qb-qname { margin: 0; font-family: var(--font-pixel); font-size: 0.58rem; color: rgba(252, 165, 165, 0.7); }
 
   @media (prefers-reduced-motion: reduce) {
     .qb-boxwrap.is-dropping .qb-note { animation: none; }
