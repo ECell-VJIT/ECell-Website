@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+  SITE FONTS — change them here and they update everywhere.
+  If you switch to a font that isn't loaded yet, also update the Google Fonts
+  <link> in src/layouts/BaseLayout.astro so the new font actually loads.
+  (PDF tickets and emails embed their own fonts separately.)
+*/
+:root {
+  /* Main display/body font (currently the rounded "Prosto One") */
+  --font-display: 'Prosto One', system-ui, sans-serif;
+  /* Accent/label font (currently the pixelated "Pixelify Sans") */
+  --font-pixel: 'Pixelify Sans', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  /* Big hero/footer wordmark font */
+  --font-hero: 'Notable', 'Climate Crisis', var(--font-display);
+}
+
 html,
 body {
   margin: 0;
@@ -14,7 +29,7 @@ body {
 body {
   background: #000;
   color: #fff;
-  font-family: 'Prosto One', system-ui, sans-serif;
+  font-family: var(--font-display);
 }
 
 canvas {
@@ -49,15 +64,15 @@ canvas {
 }
 
 .font-inter {
-  font-family: 'Prosto One', system-ui, sans-serif;
+  font-family: var(--font-display);
 }
 
 .font-jakarta {
-  font-family: 'Prosto One', system-ui, sans-serif;
+  font-family: var(--font-display);
 }
 
 .font-pixel {
-  font-family: 'Pixelify Sans', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-family: var(--font-pixel);
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
@@ -69,7 +84,7 @@ canvas {
   border: 1px solid rgba(248, 113, 113, 0.28);
   background: rgba(127, 29, 29, 0.22);
   color: rgb(254 226 226);
-  font-family: 'Pixelify Sans', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-family: var(--font-pixel);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   box-shadow: 0 0 18px rgba(248, 113, 113, 0.1);
@@ -91,7 +106,7 @@ canvas {
   background: rgba(10, 2, 2, 0.2);
   border: 0;
   clip-path: polygon(1rem 0, 100% 0, 100% calc(100% - 1rem), calc(100% - 1rem) 100%, 0 100%, 0 1rem);
-  font-family: 'Prosto One', system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 0.95rem;
   line-height: 1;
   text-align: center;
