@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 450" role="img" aria-label="Recruitment achievement image">
+  <defs>
+    <radialGradient id="g" cx=".5" cy=".45" r=".78">
+      <stop stop-color="#fecaca" stop-opacity=".28"/>
+      <stop offset=".5" stop-color="#7f1d1d" stop-opacity=".54"/>
+      <stop offset="1" stop-color="#030101"/>
+    </radialGradient>
+  </defs>
+  <rect width="900" height="450" fill="#050101"/>
+  <rect width="900" height="450" fill="url(#g)"/>
+  <circle cx="342" cy="194" r="54" fill="#fee2e2" opacity=".9"/>
+  <circle cx="450" cy="174" r="66" fill="#fb923c" opacity=".82"/>
+  <circle cx="560" cy="194" r="54" fill="#fee2e2" opacity=".9"/>
+  <path d="M226 334c20-72 72-108 156-108s136 36 156 108" fill="none" stroke="#fee2e2" stroke-width="16" stroke-linecap="round" opacity=".78"/>
+  <path d="M362 334c22-88 82-132 178-132s156 44 178 132" fill="none" stroke="#fb923c" stroke-width="16" stroke-linecap="round" opacity=".72"/>
+  <text x="72" y="390" fill="#fee2e2" font-family="Arial, sans-serif" font-size="38" font-weight="700">RECRUITMENT</text>
+</svg>
