@@ -46,32 +46,25 @@
 
 <script>
   (() => {
+    const overlay = document.getElementById('scroll-plane-overlay');
     const plane = document.getElementById('scroll-plane');
     const trailPath = document.getElementById('scroll-trail-path');
     const revealPath = document.getElementById('scroll-trail-reveal');
     const trailMask = document.getElementById('scroll-trail-mask');
     const trailViewport = document.getElementById('scroll-trail-viewport');
-    if (!plane || !(trailPath instanceof SVGPathElement) || !(revealPath instanceof SVGPathElement) || !trailMask || !trailViewport) return;
+    if (!overlay || !plane || !(trailPath instanceof SVGPathElement) || !(revealPath instanceof SVGPathElement) || !trailMask || !trailViewport) return;
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const desktop = window.matchMedia('(min-width: 1024px)');
 
-    // The plane glyph's nose points at -45deg (up-right); this offset aligns
-    // it with the direction it is actually moving (so it flips in reverse).
     const NOSE_OFFSET_DEG = 45;
     const PLANE_HALF = 32;
     const ANCHOR_VIEWPORT_RATIO = 0.55;
 
-    // This site scrolls inside <body> (global CSS pins html/body to 100vh),
-    // so window.scrollY is always 0. Track scroll via <main>'s viewport
-    // offset instead — works no matter which element is the scroll container.
     const mainEl = document.querySelector('main') || document.body;
-    const scrollOffset = () => -mainEl.getBoundingClientRect().top;
 
+    let cachedScrollY = 0;
     let totalLength = 0;
-    // Waypoints pairing a page Y (section anchor) with the arc length where
-    // the path passes it — scroll interpolates between them linearly, which
-    // keeps the plane's speed along the path consistent.
     let marks: { arc: number; y: number }[] = [];
     let currentS = -1;
     let rotation = 135;
@@ -80,32 +73,36 @@
     let rafId = 0;
     let running = false;
     let lastFrame = 0;
+    let resizeObserver: ResizeObserver | null = null;
 
     const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 
-    // One flowing curve: vertical past each section's lane centre, then two
-    // broad cubics sweeping horizontally through the inter-section gap and
-    // curling into the next lane. Tangents match everywhere, so there are no
-    // corners anywhere on the route.
+    const updateCachedScroll = () => {
+      cachedScrollY = -mainEl.getBoundingClientRect().top;
+    };
+
+    const scrollHandler = () => {
+      updateCachedScroll();
+    };
+
     const buildRoute = () => {
-      const mainTop = mainEl.getBoundingClientRect().top;
+      if (!overlay.isConnected) return;
+      updateCachedScroll();
       const lanes = [...document.querySelectorAll('[data-plane-stop]')]
         .map((el) => {
           const lane = el.closest('.plane-lane') || el;
           const rect = lane.getBoundingClientRect();
           return {
             x: rect.left + rect.width / 2,
-            top: rect.top - mainTop,
-            bottom: rect.bottom - mainTop,
-            c: (rect.top + rect.bottom) / 2 - mainTop,
+            top: rect.top + cachedScrollY,
+            bottom: rect.bottom + cachedScrollY,
+            c: (rect.top + rect.bottom) / 2 + cachedScrollY,
           };
         })
         .filter((lane) => lane.bottom > lane.top)
         .sort((a, b) => a.top - b.top);
       if (lanes.length < 2) return;
 
-      // Start offscreen on the right, then enter into the first real lane.
-      // Everything after this uses the existing route/animation logic.
       const firstLane = lanes[0];
       const entryY = firstLane.top - Math.min(240, window.innerHeight * 0.28);
       lanes.unshift({
@@ -142,7 +139,6 @@
       revealPath.setAttribute('stroke-dasharray', String(totalLength));
       marks = nextMarks;
 
-      // Keep progress stable across re-measures (fonts/images/layout shifts).
       if (prevTotal > 0 && totalLength > 0 && currentS >= 0) {
         currentS = (currentS / prevTotal) * totalLength;
       }
@@ -163,24 +159,21 @@
     };
 
     const frame = (now: number) => {
-      if (!running) return;
+      if (!running || !overlay.isConnected) return;
       const dt = Math.min(0.05, (now - lastFrame) / 1000 || 0.016);
       lastFrame = now;
 
       if (totalLength > 0 && marks.length >= 2) {
-        const scroll = scrollOffset();
+        const scroll = cachedScrollY;
         const targetS = arcForAnchor(scroll + window.innerHeight * ANCHOR_VIEWPORT_RATIO);
         if (currentS < 0) currentS = targetS;
         currentS += (targetS - currentS) * (1 - Math.exp(-dt * 7));
 
-        // The dotted trail ends exactly at the plane, both ways: it extends
-        // as the plane advances and retracts when the plane flies back up.
         revealPath.setAttribute('stroke-dashoffset', String(clamp(totalLength - currentS, 0, totalLength)));
         trailViewport.setAttribute('transform', `translate(0, ${-scroll})`);
 
         const pos = trailPath.getPointAtLength(clamp(currentS, 0, totalLength));
 
-        // Face the direction of actual movement, so reversing flips the nose.
         if (lastPos) {
           const vx = pos.x - lastPos.x;
           const vy = pos.y - lastPos.y;
@@ -194,7 +187,6 @@
         }
         lastPos = { x: pos.x, y: pos.y };
 
-        // Fade in as the route's start scrolls into view from the bottom.
         const fadeTarget = clamp((scroll + window.innerHeight - marks[0].y) / 220, 0, 1);
         opacity += (fadeTarget - opacity) * (1 - Math.exp(-dt * 7));
 
@@ -209,6 +201,7 @@
       if (running) return;
       running = true;
       lastFrame = performance.now();
+      updateCachedScroll();
       buildRoute();
       rafId = requestAnimationFrame(frame);
     };
@@ -216,7 +209,7 @@
     const stop = () => {
       running = false;
       cancelAnimationFrame(rafId);
-      plane.style.opacity = '0';
+      if (plane) plane.style.opacity = '0';
     };
 
     const syncActive = () => {
@@ -230,18 +223,19 @@
       window.clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(buildRoute, 150);
     }, { passive: true });
-    window.addEventListener('load', buildRoute);
-    document.addEventListener('visibilitychange', syncActive);
+    window.addEventListener('load', buildRoute, { passive: true });
+    document.addEventListener('visibilitychange', syncActive, { passive: true });
     desktop.addEventListener('change', syncActive);
     reducedMotion.addEventListener('change', syncActive);
+    window.addEventListener('scroll', scrollHandler, { passive: true });
 
-    // Re-measure when late-loading content (fonts, images) shifts the layout.
     if ('ResizeObserver' in window) {
       let observeTimer = 0;
-      new ResizeObserver(() => {
+      resizeObserver = new ResizeObserver(() => {
         window.clearTimeout(observeTimer);
         observeTimer = window.setTimeout(buildRoute, 120);
-      }).observe(mainEl);
+      });
+      resizeObserver.observe(mainEl);
     }
 
     syncActive();

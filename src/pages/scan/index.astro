@@ -69,6 +69,21 @@ import ConsoleLayout from '../../layouts/ConsoleLayout.astro';
     border: 1px solid rgba(239, 68, 68, 0.35);
     color: rgb(254 202 202);
   }
+
+  @media (max-width: 480px) {
+    #reader {
+      max-width: 100%;
+    }
+    #result-banner {
+      padding: 1.25rem;
+    }
+    #result-details {
+      padding: 1rem;
+    }
+    #detail-name {
+      font-size: 1.05rem;
+    }
+  }
 </style>
 
 <script>

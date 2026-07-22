@@ -197,4 +197,18 @@ const teamLinks = [
   .team-domain-link {
     clip-path: polygon(0.7rem 0, 100% 0, 100% calc(100% - 0.7rem), calc(100% - 0.7rem) 100%, 0 100%, 0 0.7rem);
   }
+
+  @media (max-width: 640px) {
+    .team-domain-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+    }
+    .team-domain-thumb img {
+      object-fit: cover;
+    }
+
+    .team-domain-card {
+      padding: 1rem;
+    }
+  }
 </style>

@@ -407,6 +407,47 @@ const registrationStatusFor = (event: Record<string, any>) =>
     }
   }
 
+  @media (max-width: 640px) {
+    .event-card-copy {
+      padding: 0.85rem;
+      min-height: 11rem;
+    }
+
+    .event-card-copy h3 {
+      font-size: 1.1rem;
+    }
+
+    .event-card-copy .gap-2 {
+      gap: 0.35rem;
+    }
+
+    .events-stage {
+      clip-path: polygon(0.85rem 0, 100% 0, 100% calc(100% - 0.85rem), calc(100% - 0.85rem) 100%, 0 100%, 0 0.85rem);
+    }
+
+    .events-stage-inner {
+      clip-path: polygon(0.65rem 0, 100% 0, 100% calc(100% - 0.65rem), calc(100% - 0.65rem) 100%, 0 100%, 0 0.65rem);
+    }
+
+    .events-card-grid {
+      gap: 0.85rem;
+    }
+
+    .event-poster-fallback {
+      padding: 0.85rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .event-card-cut {
+      clip-path: polygon(0.85rem 0, 100% 0, 100% calc(100% - 0.85rem), calc(100% - 0.85rem) 100%, 0 100%, 0 0.85rem);
+    }
+
+    .event-poster-fallback strong {
+      font-size: 1rem;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .events-orbit-one,
     .events-orbit-two {

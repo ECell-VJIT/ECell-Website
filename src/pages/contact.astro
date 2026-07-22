@@ -310,6 +310,31 @@ const normalizeSocialUrl = (url: string | undefined, platform: 'github' | 'linke
     }
   }
 
+  @media (max-width: 420px) {
+    .contact-lead-card {
+      grid-template-columns: 1fr;
+      text-align: center;
+      justify-items: center;
+      min-height: auto;
+      padding: 1.25rem 1rem;
+    }
+    .contact-lead-photo {
+      width: 5rem;
+      aspect-ratio: 0.86;
+    }
+    .contact-lead-body h3 {
+      font-size: 1rem;
+    }
+    .contact-channel-card {
+      min-height: 5.5rem;
+      padding: 0.85rem;
+    }
+    .contact-channel-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .contact-lead-card {
       animation: none;

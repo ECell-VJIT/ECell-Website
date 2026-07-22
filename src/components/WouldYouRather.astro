@@ -193,6 +193,11 @@ const dilemmas = [
     .wyr-deck { height: 26rem; }
   }
 
+  @media (max-width: 420px) {
+    .wyr-deck { height: 22rem; }
+    .wyr-option { font-size: 0.85rem; padding: 0.65rem; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .wyr-card { transition: opacity 200ms ease; }
     .wyr-card.is-gone-a, .wyr-card.is-gone-b { transform: none; }
@@ -264,17 +269,21 @@ const dilemmas = [
     stage.addEventListener('pointerdown', (e) => {
       if (idx >= total) return;
       dragging = true; startX = e.clientX;
-    });
+    }, { passive: true });
     stage.addEventListener('pointerup', (e) => {
       if (!dragging) return;
       dragging = false;
       const dx = e.clientX - startX;
       if (Math.abs(dx) > 60) choose(dx < 0 ? 'a' : 'b');
-    });
+    }, { passive: true });
 
     replayBtn?.addEventListener('click', () => {
       idx = 0; picks = { a: 0, b: 0 };
-      cards.forEach((c) => { c.classList.remove('is-gone-a', 'is-gone-b'); c.querySelectorAll('.is-picked').forEach((s) => s.classList.remove('is-picked')); });
+      cards.forEach((c) => {
+        c.classList.remove('is-gone-a', 'is-gone-b');
+        const picked = c.querySelector('.is-picked');
+        if (picked) picked.classList.remove('is-picked');
+      });
       if (doneEl) doneEl.hidden = true;
       paint();
     });

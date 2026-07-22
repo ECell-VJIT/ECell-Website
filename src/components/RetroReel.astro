@@ -205,8 +205,7 @@ const items = (reel || []).filter(Boolean);
       chEl.textContent = 'CH ' + String((idx % Math.max(1, list.length)) + 1).padStart(2, '0');
       updateAudioUI();
       screen.classList.remove('is-switching');
-      void screen.offsetWidth;
-      screen.classList.add('is-switching');
+      requestAnimationFrame(() => requestAnimationFrame(() => screen.classList.add('is-switching')));
     };
 
     const schedule = () => {
@@ -653,6 +652,13 @@ const items = (reel || []).filter(Boolean);
     100% { opacity: 1; filter: none; }
   }
   @keyframes reelFlash { 0% { opacity: 0; } 9% { opacity: 0.5; } 100% { opacity: 0; } }
+
+  @media (max-width: 640px) {
+    .reel-set { padding: 1rem; }
+    .reel-screen { aspect-ratio: 4/3; }
+    .reel-controls { gap: 0.5rem; flex-wrap: wrap; justify-content: center; }
+    .reel-channel-btn { padding: 0.4rem 0.65rem; font-size: 0.7rem; }
+  }
 
   @media (prefers-reduced-motion: reduce) {
     .reel-static,

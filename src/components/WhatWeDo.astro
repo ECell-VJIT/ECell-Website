@@ -86,6 +86,24 @@ const { domains = [
     }
   }
 
+  @media (max-width: 640px) {
+    #domains h2 {
+      font-size: 1.75rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .domains-grid {
+      gap: 0.75rem;
+    }
+    .domain-card {
+      padding: 0.85rem;
+    }
+    .domain-card h3 {
+      font-size: 1rem;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .domain-card:hover {
       transform: none;

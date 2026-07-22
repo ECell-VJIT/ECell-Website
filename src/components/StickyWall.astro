@@ -200,7 +200,7 @@ const swatches = ['amber', 'rose', 'orange', 'lime', 'sky', 'violet'];
     user-select: none;
     touch-action: none;
     transition: box-shadow 150ms ease;
-    will-change: left, top;
+    will-change: transform;
   }
   .sticky:active { cursor: grabbing; }
   .sticky.is-dragging {
@@ -252,6 +252,28 @@ const swatches = ['amber', 'rose', 'orange', 'lime', 'sky', 'violet'];
 
   @media (max-width: 640px) {
     .sticky { width: 7.5rem; min-height: 7rem; }
+
+    .sticky-form {
+      padding: 1rem;
+    }
+
+    .sticky-form .grid {
+      gap: 0.75rem;
+    }
+
+    .sticky-submit {
+      width: 100%;
+      padding: 0.8rem;
+    }
+
+    .sticky-input {
+      padding: 0.75rem 0.85rem;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .sticky { width: 6rem; min-height: 6rem; padding: 0.5rem; }
+    .sticky p { font-size: 0.7rem; }
   }
 </style>
 
@@ -279,10 +301,11 @@ const swatches = ['amber', 'rose', 'orange', 'lime', 'sky', 'violet'];
     let selectedColor = 'amber';
 
     // ── Colour picker ───────────────────────────────────────────
-    swatchWrap?.querySelectorAll<HTMLButtonElement>('[data-color]').forEach((btn) => {
+    const colorBtns = swatchWrap?.querySelectorAll<HTMLButtonElement>('[data-color]');
+    colorBtns?.forEach((btn) => {
       btn.addEventListener('click', () => {
         selectedColor = btn.dataset.color || 'amber';
-        swatchWrap.querySelectorAll('[data-color]').forEach((b) =>
+        colorBtns.forEach((b) =>
           b.setAttribute('aria-checked', b === btn ? 'true' : 'false'));
       });
     });
@@ -317,14 +340,16 @@ const swatches = ['amber', 'rose', 'orange', 'lime', 'sky', 'violet'];
       const bw = board.clientWidth;
       noteW = bw < 480 ? 120 : 136;
 
-      // Measure the tallest note so every cell clears the tallest one.
+      // Set width on all elements first (no reads between writes)
+      els.forEach((el) => { el.style.width = `${noteW}px`; });
+      // Now read heights in a separate pass to avoid layout thrashing
       let maxH = 0;
-      els.forEach((el) => { el.style.width = `${noteW}px`; maxH = Math.max(maxH, el.offsetHeight); });
+      els.forEach((el) => { maxH = Math.max(maxH, el.offsetHeight); });
 
       const padSide = 14;
       const padTop = 20;
       const padBot = 22;
-      const gapX = bw < 480 ? 24 : 48; // extra room inside each cell = jitter range
+      const gapX = bw < 480 ? 24 : 48;
       const gapY = 46;
       const cellW = noteW + gapX;
       const cellH = maxH + gapY;
@@ -333,9 +358,6 @@ const swatches = ['amber', 'rose', 'orange', 'lime', 'sky', 'violet'];
       const cols = Math.max(1, Math.floor(usableW / cellW));
       const offX = padSide + Math.max(0, (usableW - cols * cellW) / 2);
 
-      // Build enough rows to fill the section height, then scatter notes into
-      // random cells across the WHOLE grid — so rows AND columns both vary and
-      // the notes aren't all stuck in the top row.
       const targetH = Math.max(34 * 16, Math.round(window.innerHeight * 0.62));
       const rowsToFill = Math.max(1, Math.floor((targetH - padTop - padBot) / cellH));
       const rows = Math.max(rowsToFill, Math.ceil(els.length / cols));
@@ -348,9 +370,6 @@ const swatches = ['amber', 'rose', 'orange', 'lime', 'sky', 'violet'];
         return arr;
       };
 
-      // Pick a distinct cell per note. When rows ≥ notes, give each note its
-      // own row (random column) so a few notes still span the full height;
-      // otherwise scatter across random cells of the whole grid.
       const chosen: number[] = [];
       if (els.length <= rows) {
         const rowPool = shuffle(Array.from({ length: rows }, (_, i) => i));
@@ -368,9 +387,11 @@ const swatches = ['amber', 'rose', 'orange', 'lime', 'sky', 'violet'];
         const row = Math.floor(cell / cols);
         const jx = Math.random() * (cellW - noteW);
         const jy = Math.random() * (cellH - el.offsetHeight);
-        el.style.left = `${offX + col * cellW + jx}px`;
-        el.style.top = `${padTop + row * cellH + jy}px`;
-        // Slight tilt, both directions.
+        const tx = offX + col * cellW + jx;
+        const ty = padTop + row * cellH + jy;
+        el.dataset.tx = String(tx);
+        el.dataset.ty = String(ty);
+        el.style.transform = `translate(${tx}px, ${ty}px)`;
         el.style.setProperty('--rot', `${(Math.random() * 12 - 6).toFixed(2)}deg`);
       });
 
@@ -379,30 +400,29 @@ const swatches = ['amber', 'rose', 'orange', 'lime', 'sky', 'violet'];
 
     // ── Dragging (client-only, resets on refresh) ───────────────
     const wireDrag = (el: HTMLElement) => {
-      let startX = 0, startY = 0, baseL = 0, baseT = 0, dragging = false;
+      let startX = 0, startY = 0, baseTx = 0, baseTy = 0, dragging = false;
       el.addEventListener('pointerdown', (e) => {
         dragging = true;
         el.classList.add('is-dragging');
         el.style.zIndex = String(++topZ);
         startX = e.clientX; startY = e.clientY;
-        baseL = parseFloat(el.style.left) || 0;
-        baseT = parseFloat(el.style.top) || 0;
+        baseTx = parseFloat(el.dataset.tx || '0');
+        baseTy = parseFloat(el.dataset.ty || '0');
         el.setPointerCapture(e.pointerId);
-      });
+      }, { passive: true });
       el.addEventListener('pointermove', (e) => {
         if (!dragging) return;
-        const nx = baseL + (e.clientX - startX);
-        const ny = baseT + (e.clientY - startY);
-        el.style.left = `${Math.max(-noteW * 0.4, Math.min(board.clientWidth - noteW * 0.6, nx))}px`;
-        el.style.top = `${Math.max(0, ny)}px`;
-      });
-      const end = (e: PointerEvent) => {
+        const nx = baseTx + (e.clientX - startX);
+        const ny = baseTy + (e.clientY - startY);
+        el.style.transform = `translate(${Math.max(-noteW * 0.4, Math.min(board.clientWidth - noteW * 0.6, nx))}px, ${Math.max(0, ny)}px)`;
+      }, { passive: true });
+      const end = () => {
+        if (!dragging) return;
         dragging = false;
         el.classList.remove('is-dragging');
-        try { el.releasePointerCapture(e.pointerId); } catch {}
       };
-      el.addEventListener('pointerup', end);
-      el.addEventListener('pointercancel', end);
+      el.addEventListener('pointerup', end, { passive: true });
+      el.addEventListener('pointercancel', end, { passive: true });
     };
 
     const setState = (msg: string | null) => {
@@ -446,7 +466,7 @@ const swatches = ['amber', 'rose', 'orange', 'lime', 'sky', 'violet'];
     window.addEventListener('resize', () => {
       window.clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(() => { if (els.length) layout(); }, 180);
-    });
+    }, { passive: true });
 
     // ── Submit ──────────────────────────────────────────────────
     form.addEventListener('submit', async (e) => {

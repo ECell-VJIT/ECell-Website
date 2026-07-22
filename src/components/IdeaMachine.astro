@@ -171,6 +171,12 @@ const {
     .im-lever { justify-self: center; height: 6rem; }
   }
 
+  @media (max-width: 420px) {
+    .im-machine { padding: 1rem; }
+    .im-idea { font-size: 1.1rem; }
+    .im-reel { min-height: 2.5rem; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .im-lever-arm, .im-reel.is-spinning .im-word { transition: none; filter: none; }
     .im-machine.is-revealed .im-idea { animation: none; }

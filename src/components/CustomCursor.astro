@@ -48,8 +48,7 @@
       if (!enabled) return;
       dot.classList.add('is-pressed');
       pulse.classList.remove('is-clicking');
-      void pulse.offsetWidth;
-      pulse.classList.add('is-clicking');
+      requestAnimationFrame(() => requestAnimationFrame(() => pulse.classList.add('is-clicking')));
     }, { passive: true });
 
     window.addEventListener('pointerup', () => {
@@ -60,14 +59,14 @@
       visible = false;
       dot.classList.remove('is-visible', 'is-pressed');
       pulse.classList.remove('is-visible', 'is-clicking');
-    });
+    }, { passive: true });
 
     document.addEventListener('mouseenter', () => {
       if (!enabled) return;
       dot.classList.add('is-visible');
       pulse.classList.add('is-visible');
       visible = true;
-    });
+    }, { passive: true });
 
     finePointer.addEventListener('change', setEnabled);
     reducedMotion.addEventListener('change', setEnabled);

@@ -152,6 +152,16 @@ const {
   }
   .wl-reason { margin: 0 0 0.4rem; font-size: 0.85rem; line-height: 1.4; color: rgb(209 213 219); word-break: break-word; }
   .wl-meta { margin: 0; font-family: var(--font-pixel); font-size: 0.62rem; letter-spacing: 0.06em; color: rgba(252, 165, 165, 0.7); }
+
+  @media (max-width: 640px) {
+    .wl-list { grid-template-columns: 1fr; }
+    .wl-form { flex-direction: column; gap: 0.75rem; }
+    .wl-form input { width: 100%; box-sizing: border-box; padding: 0.75rem; }
+    .wl-submit { width: 100%; padding: 0.8rem; }
+    .wl-card { padding: 0.85rem; }
+    .wl-vote { width: 2.75rem; }
+    .wl-title { font-size: 0.95rem; }
+  }
 </style>
 
 <script>

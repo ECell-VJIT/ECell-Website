@@ -193,6 +193,16 @@ const targets = ['Founders', 'Mentors', 'E-Cell'];
   .qb-qtext { margin: 0 0 0.4rem; font-family: var(--font-display); font-size: 0.95rem; line-height: 1.3; color: #fff; word-break: break-word; }
   .qb-qname { margin: 0; font-family: var(--font-pixel); font-size: 0.58rem; color: rgba(252, 165, 165, 0.7); }
 
+  @media (max-width: 640px) {
+    .qb-form { grid-template-columns: 1fr; padding: 1rem; }
+    .qb-input { padding: 0.75rem; }
+    .qb-target { padding: 0.5rem 0.75rem; font-size: 0.78rem; }
+    .qb-targets { gap: 0.4rem; }
+    .qb-submit { width: 100%; padding: 0.8rem; }
+    .qb-notes-list { grid-template-columns: 1fr; }
+    .qb-note { padding: 0.85rem; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .qb-boxwrap.is-dropping .qb-note { animation: none; }
     .qb-flag, .qb-flag-pole { transition: none; }
@@ -219,11 +229,12 @@ const targets = ['Founders', 'Mentors', 'E-Cell'];
     interface Item { id: string; question: string; target: string; name: string | null; }
     let target = 'Founders';
     let count = 0;
-
-    targetsWrap?.querySelectorAll<HTMLButtonElement>('[data-target]').forEach((btn) => {
+    const targetBtns = targetsWrap?.querySelectorAll<HTMLButtonElement>('[data-target]');
+    targetBtns?.forEach((btn) => {
       btn.addEventListener('click', () => {
         target = btn.dataset.target || 'Founders';
-        targetsWrap.querySelectorAll('[data-target]').forEach((b) => b.setAttribute('aria-checked', b === btn ? 'true' : 'false'));
+        targetBtns.forEach((b) =>
+          b.setAttribute('aria-checked', b === btn ? 'true' : 'false'));
       });
     });
 
@@ -254,8 +265,7 @@ const targets = ['Founders', 'Mentors', 'E-Cell'];
     const playDrop = () => {
       if (!boxwrap) return;
       boxwrap.classList.remove('is-dropping');
-      void boxwrap.offsetWidth;
-      boxwrap.classList.add('is-dropping');
+      requestAnimationFrame(() => requestAnimationFrame(() => boxwrap.classList.add('is-dropping')));
       window.setTimeout(() => boxwrap.classList.remove('is-dropping'), 800);
     };
 

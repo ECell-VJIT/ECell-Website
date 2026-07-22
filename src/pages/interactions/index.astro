@@ -165,6 +165,14 @@ import interactions from '../../data/interactions.js';
     .ix-row { gap: 1rem; padding: 1.3rem 1rem; }
   }
 
+  @media (max-width: 420px) {
+    .ix-index { font-size: 0.75rem; min-width: 1.6rem; }
+    .ix-title { font-size: 0.9rem; }
+    .ix-tagline { font-size: 0.72rem; }
+    .ix-row { gap: 0.75rem; padding: 1rem 0.85rem; }
+    .ix-go { width: 1.6rem; height: 1.6rem; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .ix-item { animation: none; opacity: 1; }
     .ix-row, .ix-fill, .ix-watermark, .ix-index, .ix-main, .ix-go { transition: none; }

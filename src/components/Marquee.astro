@@ -118,6 +118,16 @@ const style = pinned
     to   { transform: translate3d(-50%, 0, 0); }
   }
 
+  @media (max-width: 480px) {
+    .marquee-item {
+      font-size: 0.7rem;
+      padding-inline: 1rem;
+    }
+    .marquee {
+      padding-block: 0.5rem;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .marquee-track {
       animation: none;

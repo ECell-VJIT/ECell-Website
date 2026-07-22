@@ -124,6 +124,11 @@ const terms = [
     to { opacity: 1; transform: none; }
   }
 
+  @media (max-width: 640px) {
+    .gl-grid { grid-template-columns: 1fr; }
+    .gl-card { min-height: 8rem; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .gl-card { animation: none; }
     .gl-inner { transition: none; }

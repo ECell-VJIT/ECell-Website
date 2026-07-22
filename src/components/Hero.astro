@@ -197,7 +197,25 @@ const {
     }
 
     .hero-title-stage {
-      height: clamp(118px, 31vw, 205px);
+      height: clamp(90px, 28vw, 180px);
+    }
+
+    .hero-copy {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .hero-title-stage {
+      height: clamp(70px, 24vw, 140px);
+    }
+
+    .hero-actions {
+      gap: 0.75rem;
+    }
+
+    .hero-action {
+      min-width: 100%;
     }
   }
 </style>

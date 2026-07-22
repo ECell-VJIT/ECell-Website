@@ -445,6 +445,42 @@ const chiefGuest =
       grid-template-columns: minmax(18rem, 0.7fr) minmax(0, 1fr);
     }
   }
+
+  @media (max-width: 640px) {
+    .event-detail-poster {
+      min-height: 12rem;
+    }
+
+    .event-detail-copy h1 {
+      font-size: clamp(1.8rem, 10vw, 2.8rem);
+    }
+
+    .event-countdown-grid {
+      gap: 0.5rem;
+    }
+
+    .countdown-box {
+      min-width: 58px;
+      padding: 0.5rem 0.4rem;
+    }
+
+    .countdown-box span {
+      font-size: 1.1rem;
+    }
+
+    .event-detail-actions {
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .hero-action {
+      width: 100%;
+    }
+
+    .event-content-card {
+      padding: 1rem;
+    }
+  }
 </style>
 
 <script>

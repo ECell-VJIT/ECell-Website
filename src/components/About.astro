@@ -103,6 +103,16 @@ const flagships = ['PitchQuest', 'E-Conclave', 'Startup Bootcamps', 'Mentorship 
     }
   }
 
+  @media (max-width: 640px) {
+    #about h2 {
+      font-size: 1.75rem;
+    }
+
+    .about-content .mt-8.grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
   .orbit-stage {
     position: relative;
     width: 150px;
@@ -168,6 +178,12 @@ const flagships = ['PitchQuest', 'E-Conclave', 'Startup Bootcamps', 'Mentorship 
 
   @keyframes orbitCounterSpin {
     to { transform: rotate(-360deg); }
+  }
+
+  @media (max-width: 480px) {
+    .about-content .grid-cols-1\:lg\:grid-cols-2 {
+      gap: 0.75rem;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

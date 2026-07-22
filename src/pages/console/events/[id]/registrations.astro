@@ -23,7 +23,7 @@ const { data: registrations, error } = await supabaseAdmin
     <>
       <div class="flex items-center justify-between mb-6 flex-wrap gap-3">
         <h1 class="text-2xl font-jakarta font-semibold tracking-tight">{event.title} — Registrations ({(registrations ?? []).length})</h1>
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-3 flex-wrap">
           <input
             id="search-input"
             type="text"
@@ -124,6 +124,10 @@ const { data: registrations, error } = await supabaseAdmin
     color: white;
     font-family: var(--font-display);
     font-size: 0.85rem;
+  }
+
+  @media (max-width: 640px) {
+    .admin-input { width: 100%; }
   }
 </style>
 
