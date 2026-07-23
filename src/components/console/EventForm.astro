@@ -61,7 +61,7 @@ function nameField(value: unknown) {
         <option value="upcoming" selected={event.status === 'upcoming'}>upcoming</option>
         <option value="past" selected={event.status === 'past'}>past</option>
       </select>
-      <label class="flex items-center gap-2 text-sm text-gray-300">
+      <label class="flex items-center gap-2 text-sm text-gray-300 min-h-[44px]">
         <input type="checkbox" name="is_featured" value="true" checked={event.is_featured ?? false} />
         Featured
       </label>
@@ -71,7 +71,7 @@ function nameField(value: unknown) {
   <section>
     <h2 class="text-sm uppercase tracking-[0.2em] text-red-200/80 mb-4">Registration</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      <label class="flex items-center gap-2 text-sm text-gray-300">
+      <label class="flex items-center gap-2 text-sm text-gray-300 min-h-[44px]">
         <input type="checkbox" name="registration_open" value="true" checked={event.registration_open ?? true} />
         Registration open
       </label>
@@ -89,7 +89,7 @@ function nameField(value: unknown) {
   <section>
     <h2 class="text-sm uppercase tracking-[0.2em] text-red-200/80 mb-4">Team Settings</h2>
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-      <label class="flex items-center gap-2 text-sm text-gray-300">
+      <label class="flex items-center gap-2 text-sm text-gray-300 min-h-[44px]">
         <input type="checkbox" name="is_team_event" value="true" checked={event.is_team_event ?? false} />
         Team event
       </label>
@@ -101,7 +101,7 @@ function nameField(value: unknown) {
   <section>
     <h2 class="text-sm uppercase tracking-[0.2em] text-red-200/80 mb-4">Payment</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-      <label class="flex items-center gap-2 text-sm text-gray-300">
+      <label class="flex items-center gap-2 text-sm text-gray-300 min-h-[44px]">
         <input type="checkbox" name="is_paid" value="true" checked={event.is_paid ?? false} />
         Paid event
       </label>
@@ -147,7 +147,7 @@ function nameField(value: unknown) {
     </div>
   </section>
 
-  <button type="submit" class="rounded-full bg-red-500 hover:bg-red-400 transition-colors text-white font-inter font-medium py-3">
+  <button type="submit" class="rounded-full bg-red-500 hover:bg-red-400 transition-colors text-white font-inter font-medium py-3 min-h-[44px]">
     {submitLabel}
   </button>
 </form>
@@ -167,5 +167,11 @@ function nameField(value: unknown) {
   .admin-input:focus {
     outline: none;
     border-color: rgba(248, 113, 113, 0.5);
+  }
+
+  @media (max-width: 768px) {
+    .admin-input {
+      font-size: 1rem;
+    }
   }
 </style>

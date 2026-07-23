@@ -119,18 +119,18 @@ const chiefGuest =
           </div>
         )}
 
-        <div class="event-detail-actions">
+        <div class="event-detail-actions max-md:flex-col">
           {canRegister ? (
-            <a href={`/events/${event.slug}/registration`} class="hero-action stroke-button stroke-button-strong">
+            <a href={`/events/${event.slug}/registration`} class="hero-action stroke-button stroke-button-strong max-md:w-full max-md:justify-center">
               <iconify-icon icon="solar:rocket-linear" width="20" height="20"></iconify-icon>
               Register
             </a>
           ) : (
-            <span class="event-closed-pill">
+            <span class="event-closed-pill max-md:w-full max-md:justify-center">
               {getRegistrationStatusLabel(registrationStatus)}
             </span>
           )}
-          <a href="#details" id="know-more-link" class="hero-action stroke-button stroke-button-muted">
+          <a href="#details" id="know-more-link" class="hero-action stroke-button stroke-button-muted max-md:w-full max-md:justify-center">
             <iconify-icon icon="solar:round-alt-arrow-down-linear" width="20" height="20"></iconify-icon>
             Know more
           </a>

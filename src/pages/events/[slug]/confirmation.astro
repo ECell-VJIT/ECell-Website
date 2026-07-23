@@ -26,9 +26,9 @@ const eventTitle = event?.title ?? 'Event';
     </div>
 
     <div id="error-state" class="text-center hidden">
-      <h1 class="text-3xl font-jakarta font-semibold tracking-tight mb-3">We couldn't find that registration</h1>
+      <h1 class="text-3xl max-md:text-2xl font-jakarta font-semibold tracking-tight mb-3">We couldn't find that registration</h1>
       <p class="text-gray-300 font-inter mb-6">The link looks incomplete or incorrect.</p>
-      <a href="/events" class="hero-action stroke-button stroke-button-strong">
+      <a href="/events" class="hero-action stroke-button stroke-button-strong max-md:w-full max-md:justify-center">
         Back to Events
       </a>
     </div>
@@ -42,7 +42,7 @@ const eventTitle = event?.title ?? 'Event';
       </div>
 
       <div id="download-all-wrap" class="text-center mb-6 hidden">
-        <button id="download-all-btn" class="download-btn download-btn-primary">
+        <button id="download-all-btn" class="download-btn download-btn-primary min-h-[44px]">
           <iconify-icon icon="solar:download-linear" width="18" height="18"></iconify-icon>
           Download all tickets
         </button>
@@ -100,13 +100,13 @@ const eventTitle = event?.title ?? 'Event';
         <span>Ticket ID</span>
         <strong class="ticket-id-text"></strong>
       </div>
-      <button class="download-btn download-btn-secondary download-single-btn">
+      <button class="download-btn download-btn-secondary download-single-btn min-h-[44px]">
         <iconify-icon icon="solar:download-linear" width="16" height="16"></iconify-icon>
         Download ticket
       </button>
       <div class="whatsapp-join-wrap hidden">
         <p class="whatsapp-join-copy"></p>
-        <a class="whatsapp-join-btn" target="_blank" rel="noopener noreferrer">
+        <a class="whatsapp-join-btn min-h-[44px]" target="_blank" rel="noopener noreferrer">
           <iconify-icon icon="mdi:whatsapp" width="17" height="17"></iconify-icon>
           Join WhatsApp group
         </a>

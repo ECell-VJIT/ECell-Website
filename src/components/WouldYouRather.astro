@@ -193,6 +193,11 @@ const dilemmas = [
     .wyr-deck { height: 26rem; }
   }
 
+  @media (max-width: 480px) {
+    .wyr-side { min-height: 44px; }
+    .wyr-replay { min-height: 44px; min-width: 44px; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .wyr-card { transition: opacity 200ms ease; }
     .wyr-card.is-gone-a, .wyr-card.is-gone-b { transform: none; }

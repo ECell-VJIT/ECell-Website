@@ -15,12 +15,12 @@ import ConsoleLayout from '../../layouts/ConsoleLayout.astro';
     </div>
 
     <div id="result-view" class="hidden">
-      <div id="result-banner" class="rounded-2xl p-6 text-center mb-4">
+      <div id="result-banner" class="rounded-2xl p-6 max-md:p-4 text-center mb-4">
         <p id="result-status" class="text-lg font-jakarta font-semibold mb-1"></p>
         <p id="result-subtext" class="text-sm font-inter opacity-80"></p>
       </div>
 
-      <div id="result-details" class="glass noise-overlay rounded-2xl p-6 hidden">
+      <div id="result-details" class="glass noise-overlay rounded-2xl p-6 max-md:p-4 hidden">
         <p class="text-xs uppercase tracking-[0.2em] text-red-200/80 mb-1">Attendee</p>
         <p id="detail-name" class="text-lg font-jakarta font-semibold mb-3"></p>
 
@@ -35,7 +35,7 @@ import ConsoleLayout from '../../layouts/ConsoleLayout.astro';
 
       <button
         id="scan-another-btn"
-        class="w-full mt-5 rounded-full bg-red-500 hover:bg-red-400 transition-colors text-white font-inter font-medium py-3"
+        class="w-full mt-5 rounded-full bg-red-500 hover:bg-red-400 transition-colors text-white font-inter font-medium py-3 min-h-[44px]"
       >
         Scan another
       </button>

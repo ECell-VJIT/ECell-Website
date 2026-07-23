@@ -253,6 +253,14 @@ const swatches = ['amber', 'rose', 'orange', 'lime', 'sky', 'violet'];
   @media (max-width: 640px) {
     .sticky { width: 7.5rem; min-height: 7rem; }
   }
+
+  @media (max-width: 480px) {
+    .sticky-form > .grid { display: flex; flex-direction: column; gap: 0.75rem; }
+    .sticky-label { font-size: 0.7rem; }
+    .sticky-input { font-size: 1rem; min-height: 44px; padding: 0.75rem; }
+    .sticky-submit { width: 100%; min-height: 44px; font-size: 1rem; justify-content: center; }
+    .sticky-swatch { width: 2rem; height: 2rem; min-width: 44px; min-height: 44px; }
+  }
 </style>
 
 <script>
