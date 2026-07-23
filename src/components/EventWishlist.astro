@@ -97,6 +97,8 @@ const {
   .wl-submit:disabled { opacity: 0.6; cursor: progress; }
   .wl-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
 
+  .wl-form > .grid { gap: 1rem; }
+
   .wl-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
@@ -152,6 +154,13 @@ const {
   }
   .wl-reason { margin: 0 0 0.4rem; font-size: 0.85rem; line-height: 1.4; color: rgb(209 213 219); word-break: break-word; }
   .wl-meta { margin: 0; font-family: var(--font-pixel); font-size: 0.62rem; letter-spacing: 0.06em; color: rgba(252, 165, 165, 0.7); }
+
+  @media (max-width: 480px) {
+    .wl-form > .grid { display: flex; flex-direction: column; gap: 0.75rem; }
+    .wl-label { font-size: 0.7rem; }
+    .wl-input { font-size: 1rem; min-height: 44px; padding: 0.75rem; }
+    .wl-submit { width: 100%; min-height: 44px; font-size: 1rem; justify-content: center; }
+  }
 </style>
 
 <script>

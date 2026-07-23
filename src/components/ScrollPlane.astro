@@ -8,7 +8,7 @@
 // position — scrolling up reverses the plane and retracts the trail with it.
 ---
 
-<div id="scroll-plane-overlay" class="pointer-events-none fixed inset-0 z-[5] hidden lg:block" aria-hidden="true">
+<div id="scroll-plane-overlay" class="pointer-events-none fixed inset-0 z-[5]" aria-hidden="true">
   <svg id="scroll-plane-trail" class="absolute inset-0 h-full w-full" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <mask id="scroll-trail-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="4000" height="20000">
@@ -54,7 +54,6 @@
     if (!plane || !(trailPath instanceof SVGPathElement) || !(revealPath instanceof SVGPathElement) || !trailMask || !trailViewport) return;
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const desktop = window.matchMedia('(min-width: 1024px)');
 
     // The plane glyph's nose points at -45deg (up-right); this offset aligns
     // it with the direction it is actually moving (so it flips in reverse).
@@ -80,6 +79,7 @@
     let rafId = 0;
     let running = false;
     let lastFrame = 0;
+    let isMobile = window.innerWidth < 1024;
 
     const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 
@@ -90,7 +90,20 @@
     const buildRoute = () => {
       const mainTop = mainEl.getBoundingClientRect().top;
       const lanes = [...document.querySelectorAll('[data-plane-stop]')]
-        .map((el) => {
+        .map((el, i) => {
+          if (isMobile) {
+            const section = el.closest('section');
+            if (!section) return null;
+            const sr = section.getBoundingClientRect();
+            const frac = i % 2 === 0 ? 0.08 : 0.92;
+            const x = sr.left + sr.width * frac;
+            return {
+              x,
+              top: sr.top - mainTop,
+              bottom: sr.bottom - mainTop,
+              c: (sr.top + sr.bottom) / 2 - mainTop,
+            };
+          }
           const lane = el.closest('.plane-lane') || el;
           const rect = lane.getBoundingClientRect();
           return {
@@ -100,7 +113,7 @@
             c: (rect.top + rect.bottom) / 2 - mainTop,
           };
         })
-        .filter((lane) => lane.bottom > lane.top)
+        .filter((lane) => lane !== null && lane.bottom > lane.top)
         .sort((a, b) => a.top - b.top);
       if (lanes.length < 2) return;
 
@@ -108,8 +121,9 @@
       // Everything after this uses the existing route/animation logic.
       const firstLane = lanes[0];
       const entryY = firstLane.top - Math.min(240, window.innerHeight * 0.28);
+      isMobile = window.innerWidth < 1024;
       lanes.unshift({
-        x: window.innerWidth + 180,
+        x: window.innerWidth + (isMobile ? 60 : 180),
         top: entryY,
         bottom: entryY,
         c: entryY,
@@ -126,11 +140,14 @@
         const b = lanes[i + 1];
         const crossY = (a.bottom + b.top) / 2;
         const midX = (a.x + b.x) / 2;
-        const spread = Math.abs(a.x - b.x) * 0.3;
+        const spreadScale = isMobile ? 0.5 : 0.3;
+        const kScale = isMobile ? 0.65 : 0.6;
+        const kMin = isMobile ? 45 : 60;
+        const spread = Math.abs(a.x - b.x) * spreadScale;
         const c1x = midX + (a.x > midX ? spread : -spread);
         const c2x = midX + (b.x > midX ? spread : -spread);
-        const k1 = Math.max(60, (crossY - a.c) * 0.6);
-        const k2 = Math.max(60, (b.c - crossY) * 0.6);
+        const k1 = Math.max(kMin, (crossY - a.c) * kScale);
+        const k2 = Math.max(kMin, (b.c - crossY) * kScale);
         d += ` C ${a.x} ${a.c + k1}, ${c1x} ${crossY}, ${midX} ${crossY}`;
         d += ` C ${c2x} ${crossY}, ${b.x} ${b.c - k2}, ${b.x} ${b.c}`;
         trailPath.setAttribute('d', d);
@@ -195,7 +212,7 @@
         lastPos = { x: pos.x, y: pos.y };
 
         // Fade in as the route's start scrolls into view from the bottom.
-        const fadeTarget = clamp((scroll + window.innerHeight - marks[0].y) / 220, 0, 1);
+        const fadeTarget = clamp((scroll + window.innerHeight - marks[0].y) / (isMobile ? 100 : 220), 0, 1);
         opacity += (fadeTarget - opacity) * (1 - Math.exp(-dt * 7));
 
         plane.style.opacity = String(opacity);
@@ -220,19 +237,19 @@
     };
 
     const syncActive = () => {
-      const active = desktop.matches && !reducedMotion.matches && !document.hidden;
+      const active = !reducedMotion.matches && !document.hidden;
       if (active) start();
       else stop();
     };
 
     let resizeTimer = 0;
     window.addEventListener('resize', () => {
+      isMobile = window.innerWidth < 1024;
       window.clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(buildRoute, 150);
     }, { passive: true });
     window.addEventListener('load', buildRoute);
     document.addEventListener('visibilitychange', syncActive);
-    desktop.addEventListener('change', syncActive);
     reducedMotion.addEventListener('change', syncActive);
 
     // Re-measure when late-loading content (fonts, images) shifts the layout.

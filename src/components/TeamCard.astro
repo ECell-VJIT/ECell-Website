@@ -96,7 +96,7 @@ const badgeClass = isPresident
 
 <article
   class:list={[
-    'team-card-reveal team-card-tilt team-card-shell p-6 h-full flex flex-col transition-all duration-300 relative',
+    'team-card-reveal team-card-tilt team-card-shell p-6 max-md:p-4 h-full flex flex-col transition-all duration-300 relative',
     accentClass
   ]}
   style={`--card-delay:${Math.max(index, 0) * 85}ms;`}
@@ -131,7 +131,7 @@ const badgeClass = isPresident
     </div>
   </div>
 
-  <h3 class="text-xl font-jakarta font-semibold mb-1 text-white">{name}</h3>
+  <h3 class="text-xl max-md:text-lg font-jakarta font-semibold mb-1 text-white">{name}</h3>
 
   {branchYear && <p class="text-gray-400 font-inter text-sm mb-3">{branchYear}</p>}
 

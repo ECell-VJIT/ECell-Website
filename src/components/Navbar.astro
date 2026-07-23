@@ -22,7 +22,7 @@ const { navLinks = [
     <span class="navbar-frame-line navbar-frame-bottom" aria-hidden="true"></span>
     <div class="navbar-glow" aria-hidden="true"></div>
     <div class="relative z-10 px-3 sm:px-4 md:px-5 py-3 md:py-4">
-      <div class="navbar-row flex items-center justify-between gap-3 md:gap-4">
+      <div class="navbar-row flex items-center justify-between gap-1 md:gap-4">
         <a href="/" class="navbar-brand group min-w-0">
           <img src="https://res.cloudinary.com/dy8vyfooj/image/upload/v1777634092/Ecell-logo_gbkmxc.jpg" alt="E-Cell VJIT" class="navbar-brand-logo" />
         </a>
@@ -33,7 +33,7 @@ const { navLinks = [
           ))}
         </div>
 
-        <div class="flex items-center gap-2 sm:gap-2.5">
+        <div class="flex items-center gap-1.5 sm:gap-2.5">
           <a href="/interactions" class="navbar-cta hidden md:inline-flex items-center gap-1.5 stroke-button stroke-button-strong">
             Interactions
             <iconify-icon icon="solar:cursor-linear" width="15" height="15"></iconify-icon>
@@ -41,26 +41,26 @@ const { navLinks = [
 
           <button
             type="button"
-            class="mobile-toggle inline-flex lg:hidden items-center justify-center p-2.5 text-white"
+            class="mobile-toggle inline-flex lg:hidden items-center justify-center min-w-[44px] min-h-[44px] p-2.5 text-white"
             aria-expanded="false"
             aria-controls="mobile-menu"
             data-mobile-toggle
           >
             <span class="sr-only">Toggle navigation menu</span>
-            <iconify-icon icon="solar:menu-dots-bold" width="18" height="18"></iconify-icon>
+            <iconify-icon icon="solar:menu-dots-bold" width="20" height="20"></iconify-icon>
           </button>
         </div>
       </div>
 
-      <div id="mobile-menu" class="mobile-panel lg:hidden" data-mobile-menu hidden>
+      <div id="mobile-menu" class="mobile-panel lg:hidden" data-mobile-menu>
         <div class="mobile-panel-shell mt-3 p-2.5">
-          <div class="grid gap-2 sm:grid-cols-2">
+          <div class="grid gap-2">
             {navLinks.map((link) => (
               <a href={link.href} class="mobile-link">{link.label}</a>
             ))}
           </div>
-          <div class="mt-2.5 flex flex-col sm:flex-row gap-2">
-            <a href="/interactions" class="mobile-link mobile-link-cta">
+          <div class="mt-2.5">
+            <a href="/interactions" class="mobile-link mobile-link-cta w-full">
               Interactions
               <iconify-icon icon="solar:cursor-linear" width="15" height="15"></iconify-icon>
             </a>
@@ -82,8 +82,8 @@ const { navLinks = [
 
     const setOpen = (open) => {
       toggle.setAttribute('aria-expanded', String(open));
-      menu.hidden = !open;
       menu.classList.toggle('is-open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
     };
 
     toggle.addEventListener('click', () => {
@@ -92,7 +92,7 @@ const { navLinks = [
     });
 
     document.addEventListener('click', (event) => {
-      if (menu.hidden) return;
+      if (!menu.classList.contains('is-open')) return;
       const target = event.target;
       if (!(target instanceof Node)) return;
       if (menu.contains(target) || toggle.contains(target)) return;
@@ -101,6 +101,10 @@ const { navLinks = [
 
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape') setOpen(false);
+    });
+
+    document.querySelectorAll('.mobile-link').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
     });
   })();
 </script>
@@ -343,6 +347,16 @@ const { navLinks = [
 
   .mobile-panel {
     overflow: hidden;
+    max-height: 0;
+    transition: max-height 320ms cubic-bezier(0.2, 0.9, 0.2, 1), opacity 240ms ease, transform 240ms ease;
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  .mobile-panel.is-open {
+    max-height: 600px;
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .mobile-panel-shell {
@@ -354,15 +368,12 @@ const { navLinks = [
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
   }
 
-  .mobile-panel.is-open {
-    animation: navbarDrop 240ms ease-out both;
-  }
-
   .mobile-link {
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
     gap: 0.75rem;
+    min-height: 2.75rem;
     clip-path: polygon(0.75rem 0, 100% 0, 100% calc(100% - 0.75rem), calc(100% - 0.75rem) 100%, 0 100%, 0 0.75rem);
     border: 1px solid rgba(255, 255, 255, 0.08);
     background: rgba(255, 255, 255, 0.03);
@@ -371,6 +382,11 @@ const { navLinks = [
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: rgb(226 232 240 / 0.9);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-link:active {
+    transform: scale(0.98);
   }
 
   .mobile-link-emphasis {
@@ -421,6 +437,10 @@ const { navLinks = [
     .navbar-pulse,
     .mobile-panel.is-open {
       animation: none;
+    }
+
+    .mobile-panel {
+      transition: none;
     }
   }
 

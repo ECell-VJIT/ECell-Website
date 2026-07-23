@@ -200,4 +200,29 @@ const {
       height: clamp(118px, 31vw, 205px);
     }
   }
+
+  @media (max-width: 480px) {
+    .hero-title-stage {
+      height: clamp(72px, 24vw, 130px);
+    }
+
+    .hero-actions {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-action {
+      min-width: min(100%, 16rem);
+    }
+
+    .hero-copy {
+      font-size: 0.92rem;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .hero-title-stage {
+      height: clamp(60px, 20vw, 100px);
+    }
+  }
 </style>

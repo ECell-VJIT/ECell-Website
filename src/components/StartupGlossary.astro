@@ -124,6 +124,12 @@ const terms = [
     to { opacity: 1; transform: none; }
   }
 
+  @media (max-width: 480px) {
+    .gl-card { height: 9rem; }
+    .gl-term { font-size: 1.6rem; }
+    .gl-def { font-size: 0.78rem; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .gl-card { animation: none; }
     .gl-inner { transition: none; }
